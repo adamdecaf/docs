@@ -1,0 +1,4523 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Open Source Financial Technology Micro Services">
+      
+      
+        <link rel="canonical" href="https://docs.moov.io/icl/file-structure/">
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.0">
+    
+    
+      
+        <title>ICL File Structure - Moov Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.0284f74d.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.01803549.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#e91e63">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-118148273-1", "moov.io")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="pink" data-md-color-accent="indigo">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#file-structure-and-record-types" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://docs.moov.io/" title="Moov Documentation" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              Moov Documentation
+            </span>
+            <span class="md-header-nav__topic">
+              
+                ICL File Structure
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/moov-io/docs/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    moov-io/docs
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../.." title="Introduction" class="md-tabs__link">
+          Introduction
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../ach/" title="ACH" class="md-tabs__link">
+          ACH
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../fed/" title="FED" class="md-tabs__link">
+          FED
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../" title="Image Cash Letter" class="md-tabs__link md-tabs__link--active">
+          Image Cash Letter
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../ofac/" title="OFAC" class="md-tabs__link">
+          OFAC
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../wire/" title="WIRE" class="md-tabs__link">
+          WIRE
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../tutorials/local-dev/" title="Tutorials" class="md-tabs__link">
+          Tutorials
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://docs.moov.io/" title="Moov Documentation" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Moov Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/moov-io/docs/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    moov-io/docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-1" type="checkbox" id="nav-1">
+    
+    <label class="md-nav__link" for="nav-1">
+      Introduction
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-1">
+        Introduction
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Welcome" class="md-nav__link">
+      Welcome
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      ACH
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        ACH
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ach/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-2" type="checkbox" id="nav-2-2">
+    
+    <label class="md-nav__link" for="nav-2-2">
+      Tutorials
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-2">
+        Tutorials
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ach/merging-files/" title="Merging ACH Files" class="md-nav__link">
+      Merging ACH Files
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-3" type="checkbox" id="nav-2-3">
+    
+    <label class="md-nav__link" for="nav-2-3">
+      ACH Developers
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-3">
+        ACH Developers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ach/intro/" title="Intro to ACH" class="md-nav__link">
+      Intro to ACH
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ach/file-structure/" title="ACH File Structure" class="md-nav__link">
+      ACH File Structure
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ach/sec-codes-table/" title="Picking an SEC Code" class="md-nav__link">
+      Picking an SEC Code
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      FED
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        FED
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../fed/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../fed/file-structure/" title="FED File Structure" class="md-nav__link">
+      FED File Structure
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+    
+    <label class="md-nav__link" for="nav-4">
+      Image Cash Letter
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Image Cash Letter
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        ICL File Structure
+      </label>
+    
+    <a href="./" title="ICL File Structure" class="md-nav__link md-nav__link--active">
+      ICL File Structure
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#file-structure-and-record-types" title="File Structure and Record Types" class="md-nav__link">
+    File Structure and Record Types
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#x9-data-types" title="X9 Data Types" class="md-nav__link">
+    X9 Data Types
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#alphabetic-a" title="Alphabetic (A)" class="md-nav__link">
+    Alphabetic (A)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#numeric-n" title="Numeric (N)" class="md-nav__link">
+    Numeric (N)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#blank-b" title="Blank (B)" class="md-nav__link">
+    Blank (B)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#special-characters-s" title="Special characters (S)" class="md-nav__link">
+    Special characters (S)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alphameric-an" title="Alphameric (AN)" class="md-nav__link">
+    Alphameric (AN)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alphamericspecial-ans" title="Alphameric/special (ANS)" class="md-nav__link">
+    Alphameric/special (ANS)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#x9100-1872016" title="X9.100-187–2016" class="md-nav__link">
+    X9.100-187–2016
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#special-micr-line-data-types" title="Special MICR line data types" class="md-nav__link">
+    Special MICR line data types
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fill-data" title="Fill data" class="md-nav__link">
+    Fill data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-justification" title="Data justification" class="md-nav__link">
+    Data justification
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#right-justification" title="Right justification" class="md-nav__link">
+    Right justification
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#left-justification" title="Left justification" class="md-nav__link">
+    Left justification
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#general-field-format" title="General Field Format" class="md-nav__link">
+    General Field Format
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#amount-fields" title="Amount Fields" class="md-nav__link">
+    Amount Fields
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#user-fields" title="User Fields" class="md-nav__link">
+    User Fields
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#annotated-image-cash-letter-record-formats" title="Annotated Image Cash Letter Record Formats" class="md-nav__link">
+    Annotated Image Cash Letter Record Formats
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-file-header-record" title="01 File Header Record" class="md-nav__link">
+    01 File Header Record
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-cash-letter-header-record" title="10 Cash Letter Header Record" class="md-nav__link">
+    10 Cash Letter Header Record
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#20-bundle-header-record" title="20 Bundle Header Record" class="md-nav__link">
+    20 Bundle Header Record
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-check-detail-record" title="25 Check Detail Record" class="md-nav__link">
+    25 Check Detail Record
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26-check-detail-addendum-a-record" title="26 Check Detail Addendum A Record" class="md-nav__link">
+    26 Check Detail Addendum A Record
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#27-check-detail-addendum-b-record" title="27 Check Detail Addendum B Record" class="md-nav__link">
+    27 Check Detail Addendum B Record
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#28-check-detail-addendum-c-record" title="28 Check Detail Addendum C Record" class="md-nav__link">
+    28 Check Detail Addendum C Record
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#31-return-detail-record" title="31 Return Detail  Record" class="md-nav__link">
+    31 Return Detail  Record
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-return-detail-addendum-a-record" title="32 Return Detail Addendum A Record" class="md-nav__link">
+    32 Return Detail Addendum A Record
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-return-detail-addendum-b-record" title="33 Return Detail Addendum B Record" class="md-nav__link">
+    33 Return Detail Addendum B Record
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-return-detail-addendum-c-record" title="34 Return Detail Addendum C Record" class="md-nav__link">
+    34 Return Detail Addendum C Record
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-return-detail-addendum-d-record" title="35 Return Detail Addendum D Record" class="md-nav__link">
+    35 Return Detail Addendum D Record
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#50-image-view-detail-record" title="50 Image View Detail Record" class="md-nav__link">
+    50 Image View Detail Record
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-image-view-data-record" title="52 Image View Data Record" class="md-nav__link">
+    52 Image View Data Record
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-image-view-analysis-record" title="54 Image View Analysis Record" class="md-nav__link">
+    54 Image View Analysis Record
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-credit-item-record" title="62 Credit Item Record" class="md-nav__link">
+    62 Credit Item Record
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#68-user-general-format-record" title="68 User General Format Record" class="md-nav__link">
+    68 User General Format Record
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#68-user-payee-endorsement-record" title="68 User Payee Endorsement Record" class="md-nav__link">
+    68 User Payee Endorsement Record
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#70-bundle-control-record" title="70 Bundle Control Record" class="md-nav__link">
+    70 Bundle Control Record
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#85-routing-number-summary" title="85 Routing Number Summary" class="md-nav__link">
+    85 Routing Number Summary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#90-cash-letter-control-record" title="90 Cash Letter Control Record" class="md-nav__link">
+    90 Cash Letter Control Record
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#99-file-control-record" title="99 File Control Record" class="md-nav__link">
+    99 File Control Record
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      OFAC
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        OFAC
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ofac/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ofac/file-structure/" title="OFAC File Structure" class="md-nav__link">
+      OFAC File Structure
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      WIRE
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        WIRE
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../wire/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../wire/fedWireMessage-Structure/" title="WIRE Fed Wire Message Structure" class="md-nav__link">
+      WIRE Fed Wire Message Structure
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../wire/DateMMDD/" title="Date" class="md-nav__link">
+      Date
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../wire/TimeHHMM/" title="Time" class="md-nav__link">
+      Time
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../wire/address/" title="Address" class="md-nav__link">
+      Address
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../wire/remittanceData/" title="Remittance Data" class="md-nav__link">
+      Remittance Data
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Tutorials
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        Tutorials
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/local-dev/" title="Local Dev with Moov" class="md-nav__link">
+      Local Dev with Moov
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#file-structure-and-record-types" title="File Structure and Record Types" class="md-nav__link">
+    File Structure and Record Types
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#x9-data-types" title="X9 Data Types" class="md-nav__link">
+    X9 Data Types
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#alphabetic-a" title="Alphabetic (A)" class="md-nav__link">
+    Alphabetic (A)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#numeric-n" title="Numeric (N)" class="md-nav__link">
+    Numeric (N)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#blank-b" title="Blank (B)" class="md-nav__link">
+    Blank (B)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#special-characters-s" title="Special characters (S)" class="md-nav__link">
+    Special characters (S)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alphameric-an" title="Alphameric (AN)" class="md-nav__link">
+    Alphameric (AN)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alphamericspecial-ans" title="Alphameric/special (ANS)" class="md-nav__link">
+    Alphameric/special (ANS)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#x9100-1872016" title="X9.100-187–2016" class="md-nav__link">
+    X9.100-187–2016
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#special-micr-line-data-types" title="Special MICR line data types" class="md-nav__link">
+    Special MICR line data types
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fill-data" title="Fill data" class="md-nav__link">
+    Fill data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-justification" title="Data justification" class="md-nav__link">
+    Data justification
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#right-justification" title="Right justification" class="md-nav__link">
+    Right justification
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#left-justification" title="Left justification" class="md-nav__link">
+    Left justification
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#general-field-format" title="General Field Format" class="md-nav__link">
+    General Field Format
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#amount-fields" title="Amount Fields" class="md-nav__link">
+    Amount Fields
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#user-fields" title="User Fields" class="md-nav__link">
+    User Fields
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#annotated-image-cash-letter-record-formats" title="Annotated Image Cash Letter Record Formats" class="md-nav__link">
+    Annotated Image Cash Letter Record Formats
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-file-header-record" title="01 File Header Record" class="md-nav__link">
+    01 File Header Record
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-cash-letter-header-record" title="10 Cash Letter Header Record" class="md-nav__link">
+    10 Cash Letter Header Record
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#20-bundle-header-record" title="20 Bundle Header Record" class="md-nav__link">
+    20 Bundle Header Record
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25-check-detail-record" title="25 Check Detail Record" class="md-nav__link">
+    25 Check Detail Record
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26-check-detail-addendum-a-record" title="26 Check Detail Addendum A Record" class="md-nav__link">
+    26 Check Detail Addendum A Record
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#27-check-detail-addendum-b-record" title="27 Check Detail Addendum B Record" class="md-nav__link">
+    27 Check Detail Addendum B Record
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#28-check-detail-addendum-c-record" title="28 Check Detail Addendum C Record" class="md-nav__link">
+    28 Check Detail Addendum C Record
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#31-return-detail-record" title="31 Return Detail  Record" class="md-nav__link">
+    31 Return Detail  Record
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-return-detail-addendum-a-record" title="32 Return Detail Addendum A Record" class="md-nav__link">
+    32 Return Detail Addendum A Record
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-return-detail-addendum-b-record" title="33 Return Detail Addendum B Record" class="md-nav__link">
+    33 Return Detail Addendum B Record
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-return-detail-addendum-c-record" title="34 Return Detail Addendum C Record" class="md-nav__link">
+    34 Return Detail Addendum C Record
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-return-detail-addendum-d-record" title="35 Return Detail Addendum D Record" class="md-nav__link">
+    35 Return Detail Addendum D Record
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#50-image-view-detail-record" title="50 Image View Detail Record" class="md-nav__link">
+    50 Image View Detail Record
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-image-view-data-record" title="52 Image View Data Record" class="md-nav__link">
+    52 Image View Data Record
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-image-view-analysis-record" title="54 Image View Analysis Record" class="md-nav__link">
+    54 Image View Analysis Record
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-credit-item-record" title="62 Credit Item Record" class="md-nav__link">
+    62 Credit Item Record
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#68-user-general-format-record" title="68 User General Format Record" class="md-nav__link">
+    68 User General Format Record
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#68-user-payee-endorsement-record" title="68 User Payee Endorsement Record" class="md-nav__link">
+    68 User Payee Endorsement Record
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#70-bundle-control-record" title="70 Bundle Control Record" class="md-nav__link">
+    70 Bundle Control Record
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#85-routing-number-summary" title="85 Routing Number Summary" class="md-nav__link">
+    85 Routing Number Summary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#90-cash-letter-control-record" title="90 Cash Letter Control Record" class="md-nav__link">
+    90 Cash Letter Control Record
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#99-file-control-record" title="99 File Control Record" class="md-nav__link">
+    99 File Control Record
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/moov-io/docs/edit/master/docs/icl/file-structure.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                  <h1>ICL File Structure</h1>
+                
+                <h2 id="file-structure-and-record-types">File Structure and Record Types<a class="headerlink" href="#file-structure-and-record-types" title="Permanent link">&para;</a></h2>
+<p>The following record types are established for Electronic Exchange:</p>
+<ul>
+<li>01 File Header Record</li>
+<li>10 Cash Letter Header Record</li>
+<li>20 Bundle Header Record</li>
+<li>25 Check Detail Record</li>
+<li>26 Check Detail Addendum A Record</li>
+<li>27 Check Detail Addendum B Record</li>
+<li>28 Check Detail Addendum C record</li>
+<li>31 Return Record</li>
+<li>32 Return Addendum A Record</li>
+<li>33 Return Addendum B Record</li>
+<li>34 Return Addendum C Record</li>
+<li>35 Return Addendum D Record</li>
+<li>50 Image View Detail Record</li>
+<li>52 Image View Data Record</li>
+<li>54 Image View Analysis Record</li>
+<li>62 Credit Record (Currently in Development )</li>
+<li>68 User Record (Currently in Development )</li>
+<li>70 Bundle Control Record</li>
+<li>85 Routing Number Summary Record (Currently in Development)</li>
+<li>90 Cash Letter Control Record</li>
+<li>99 File Control Record</li>
+</ul>
+<h2 id="x9-data-types">X9 Data Types<a class="headerlink" href="#x9-data-types" title="Permanent link">&para;</a></h2>
+<h3 id="alphabetic-a">Alphabetic (A)<a class="headerlink" href="#alphabetic-a" title="Permanent link">&para;</a></h3>
+<p>The alphabetic characters are the upper case letters A through Z; the lower case letters a through z, and the blank (space) character. When lower case letters are used, they shall be interpreted to have the same meaning as their respective upper case letters, e.g., no distinction shall be made between the upper case letter A and the lower case letter a.</p>
+<h3 id="numeric-n">Numeric (N)<a class="headerlink" href="#numeric-n" title="Permanent link">&para;</a></h3>
+<p>The numeric characters are the numbers zero (0) through nine (9).</p>
+<h3 id="blank-b">Blank (B)<a class="headerlink" href="#blank-b" title="Permanent link">&para;</a></h3>
+<p>The blank character is defined in ASCII with the hexadecimal value ‘20’ and in EBCDIC with the hexadecimal value ‘40’; also referred to as a space.</p>
+<h3 id="special-characters-s">Special characters (S)<a class="headerlink" href="#special-characters-s" title="Permanent link">&para;</a></h3>
+<p>Special characters are any of the printable characters listed in the table below. (IBM Corporation EBCDIC code page: Code Page CPGID 00037)</p>
+<table>
+<thead>
+<tr>
+<th align="center">Special Printable</th>
+<th align="center">Character ASCII hex</th>
+<th align="center">EBCDIC hex</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">!</td>
+<td align="center">21</td>
+<td align="center">5A</td>
+</tr>
+<tr>
+<td align="center">"</td>
+<td align="center">22</td>
+<td align="center">7F</td>
+</tr>
+<tr>
+<td align="center">#</td>
+<td align="center">23</td>
+<td align="center">7B</td>
+</tr>
+<tr>
+<td align="center">$</td>
+<td align="center">24</td>
+<td align="center">5B</td>
+</tr>
+<tr>
+<td align="center">%</td>
+<td align="center">25</td>
+<td align="center">6C</td>
+</tr>
+<tr>
+<td align="center">&amp;</td>
+<td align="center">26</td>
+<td align="center">50</td>
+</tr>
+<tr>
+<td align="center">'</td>
+<td align="center">27</td>
+<td align="center">7D</td>
+</tr>
+<tr>
+<td align="center">(</td>
+<td align="center">28</td>
+<td align="center">4D</td>
+</tr>
+<tr>
+<td align="center">)</td>
+<td align="center">29</td>
+<td align="center">5D</td>
+</tr>
+<tr>
+<td align="center">*</td>
+<td align="center">2A</td>
+<td align="center">5C</td>
+</tr>
+<tr>
+<td align="center">+</td>
+<td align="center">2B</td>
+<td align="center">4E</td>
+</tr>
+<tr>
+<td align="center">,</td>
+<td align="center">2C</td>
+<td align="center">6B</td>
+</tr>
+<tr>
+<td align="center">-</td>
+<td align="center">2D</td>
+<td align="center">60</td>
+</tr>
+<tr>
+<td align="center">.</td>
+<td align="center">2E</td>
+<td align="center">4B</td>
+</tr>
+<tr>
+<td align="center">/</td>
+<td align="center">2F</td>
+<td align="center">61</td>
+</tr>
+<tr>
+<td align="center">:</td>
+<td align="center">3A</td>
+<td align="center">7A</td>
+</tr>
+<tr>
+<td align="center">;</td>
+<td align="center">3B</td>
+<td align="center">5E</td>
+</tr>
+<tr>
+<td align="center">&lt;</td>
+<td align="center">3C</td>
+<td align="center">4C</td>
+</tr>
+<tr>
+<td align="center">=</td>
+<td align="center">3D</td>
+<td align="center">7E</td>
+</tr>
+<tr>
+<td align="center">&gt;</td>
+<td align="center">3E</td>
+<td align="center">6E</td>
+</tr>
+<tr>
+<td align="center">?</td>
+<td align="center">3F</td>
+<td align="center">6F</td>
+</tr>
+<tr>
+<td align="center">@</td>
+<td align="center">40</td>
+<td align="center">7C</td>
+</tr>
+<tr>
+<td align="center">[</td>
+<td align="center">5B</td>
+<td align="center">BA</td>
+</tr>
+<tr>
+<td align="center">\</td>
+<td align="center">5C</td>
+<td align="center">E0</td>
+</tr>
+<tr>
+<td align="center">]</td>
+<td align="center">5D</td>
+<td align="center">BB</td>
+</tr>
+<tr>
+<td align="center">^</td>
+<td align="center">5E</td>
+<td align="center">B0</td>
+</tr>
+<tr>
+<td align="center">_</td>
+<td align="center">5F</td>
+<td align="center">6D</td>
+</tr>
+<tr>
+<td align="center">`</td>
+<td align="center">60</td>
+<td align="center">79</td>
+</tr>
+<tr>
+<td align="center">{</td>
+<td align="center">7B</td>
+<td align="center">C0</td>
+</tr>
+<tr>
+<td align="center">Bar</td>
+<td align="center">7C</td>
+<td align="center">4F</td>
+</tr>
+<tr>
+<td align="center">}</td>
+<td align="center">7D</td>
+<td align="center">D0</td>
+</tr>
+<tr>
+<td align="center">~</td>
+<td align="center">7E</td>
+<td align="center">A1</td>
+</tr>
+</tbody>
+</table>
+<h3 id="alphameric-an">Alphameric (AN)<a class="headerlink" href="#alphameric-an" title="Permanent link">&para;</a></h3>
+<p>An alphameric character is any of the alphabetic or numeric characters.</p>
+<h3 id="alphamericspecial-ans">Alphameric/special (ANS)<a class="headerlink" href="#alphamericspecial-ans" title="Permanent link">&para;</a></h3>
+<p>An Alphameric/special character is any one of the alphabetic, numeric, or special characters.</p>
+<h3 id="x9100-1872016">X9.100-187–2016<a class="headerlink" href="#x9100-1872016" title="Permanent link">&para;</a></h3>
+<p>Numericblank (NB): A numericblank character is any one of the numeric characters or the blank character. Blanks shall not be embedded within the numeric digits. Blanks may be used only to fill out a field when the numeric value length is shorter than the actual field length. Leading zeros may be present but shall not be removed or added. Numericblank fields, when present, shall contain at least one numeric character and shall not be all blanks.</p>
+<p>Numeric/special (NS): A numeric/special is any one of the numeric characters or special characters.</p>
+<p>Binary: The binary data type is composed of a sequence of bytes where each byte ranges in value from binary 00000000 to 11111111 (8-bit encoding). The syntax, semantics, and number of bytes in the string are specified in the standard for each occurrence of the binary data type.</p>
+<h3 id="special-micr-line-data-types">Special MICR line data types<a class="headerlink" href="#special-micr-line-data-types" title="Permanent link">&para;</a></h3>
+<p>The MICR line on a check is composed of a series of symbols. The MICR symbols for numbers shall be represented by the numeric values zero (0) through nine (9).</p>
+<p>However, the MICR symbols for delineation of data on the MICR line do not have any graphic equivalents. Therefore, certain special characters shall be used to interpret these MICR symbols. These special characters shall have these special meanings only when used in fields directly read from the MICR line. When these same special characters are used elsewhere in other fields they shall represent their actual value.</p>
+<p>Asterisk (*): The asterisk character shall be used to represent the presence of MICR when the processing system cannot interpret the MICR as a specific valid MICR character.</p>
+<p>Dash (-): The dash character shall be used to represent the presence of the MICR symbol for a dash.</p>
+<p>Forward slash (/): The forward slash character shall be used to represent the presence of the MICR symbol for ‘On-Us’.</p>
+<p>Numericblank/special MICR (NBSM): A numericblank/special MICR character is any one of the numeric characters, the blank character, the dash character, or asterisk character.</p>
+<p>Numericblank/special MICR On-Us (NBSMOS): A numericblank/special MICR On-Us character is any one of the numeric characters, the blank character, the asterisk character, the dash character, or the forward slash character.</p>
+<h3 id="fill-data">Fill data<a class="headerlink" href="#fill-data" title="Permanent link">&para;</a></h3>
+<p>Fill data are any characters used to fill up unused bytes in a field. Fill characters shall be blanks or zeros.</p>
+<h3 id="data-justification">Data justification<a class="headerlink" href="#data-justification" title="Permanent link">&para;</a></h3>
+<p>Justification is the act of aligning data as it is placed into a field, based on its right or leftmost character.</p>
+<h3 id="right-justification">Right justification<a class="headerlink" href="#right-justification" title="Permanent link">&para;</a></h3>
+<p>A field is right justified when the data is aligned based on its rightmost character.</p>
+<h3 id="left-justification">Left justification<a class="headerlink" href="#left-justification" title="Permanent link">&para;</a></h3>
+<p>A field is left justified when the data is aligned based on its leftmost character.</p>
+<h3 id="general-field-format">General Field Format<a class="headerlink" href="#general-field-format" title="Permanent link">&para;</a></h3>
+<p>The following shall apply to all fields on all records in the standard:</p>
+<ul>
+<li>
+<p>A field defined as alphameric (AN), alphabetic (A), Alphameric/special (ANS), or numericblank (NB) shall be left justified and blank filled.</p>
+</li>
+<li>
+<p>A field defined as numeric (N) shall be right justified and zero filled</p>
+</li>
+<li>
+<p>A field defined as numericblank/special MICR (NBSM) or numericblank/special MICR On-Us (NBSMOS) shall be right justified and blank filled</p>
+</li>
+<li>
+<p>A field defined as numeric/special (NS) shall be left justified and blank filled.</p>
+</li>
+<li>
+<p>A field defined as special (S) shall be left justified and blank filled.</p>
+</li>
+<li>
+<p>If a field is mandatory or conditional and not blank, and has predefined values, it shall contain one of these predefined values or it is invalid.</p>
+</li>
+<li>
+<p>If a field is conditional and not used then it shall contain all blanks regardless of the data type.</p>
+</li>
+<li>
+<p>Fixed length fields that are conditional and are not used shall be filled with Blanks.  Variable length
+  fields that are not used (i.e. size =0) are omitted.</p>
+</li>
+</ul>
+<h3 id="amount-fields">Amount Fields<a class="headerlink" href="#amount-fields" title="Permanent link">&para;</a></h3>
+<p>All amounts fields have two implied decimal points, e.g., $1,234.67 is entered as 0000123467.</p>
+<h3 id="user-fields">User Fields<a class="headerlink" href="#user-fields" title="Permanent link">&para;</a></h3>
+<p>Most records of the file provide for User Fields. Users of the standard utilize these fields at their discretion. The standard does not define particular uses for, or the internal contents of, these fields. In many cases, the user fields within the records are more than one character in length. Users are free to use the field as a single field or divide it into multiple fields.</p>
+<h3 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h3>
+<p>M - Mandatory
+C - Conditional</p>
+<h2 id="annotated-image-cash-letter-record-formats">Annotated Image Cash Letter Record Formats<a class="headerlink" href="#annotated-image-cash-letter-record-formats" title="Permanent link">&para;</a></h2>
+<h3 id="01-file-header-record">01 File Header Record<a class="headerlink" href="#01-file-header-record" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th align="center">Field</th>
+<th align="center">Position</th>
+<th align="center">Size</th>
+<th align="center">Type</th>
+<th align="left">Field Name</th>
+<th align="center">Usage - M, C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><em>1</em></td>
+<td align="center">01–02</td>
+<td align="center">2</td>
+<td align="center">N</td>
+<td align="left">Record Type</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>2</em></td>
+<td align="center">03–04</td>
+<td align="center">2</td>
+<td align="center">N</td>
+<td align="left">Standard Level</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>3</em></td>
+<td align="center">05–05</td>
+<td align="center">1</td>
+<td align="center">A</td>
+<td align="left">Test File Indicator</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>4</em></td>
+<td align="center">06–14</td>
+<td align="center">9</td>
+<td align="center">N</td>
+<td align="left">Immediate Destination Routing Number</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>5</em></td>
+<td align="center">15-23</td>
+<td align="center">9</td>
+<td align="center">N</td>
+<td align="left">Immediate Origin Routing Number</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>6</em></td>
+<td align="center">24–31</td>
+<td align="center">8</td>
+<td align="center">N</td>
+<td align="left">File Creation Date</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>7</em></td>
+<td align="center">32–35</td>
+<td align="center">4</td>
+<td align="center">N</td>
+<td align="left">File Creation Time</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>8</em></td>
+<td align="center">36–36</td>
+<td align="center">1</td>
+<td align="center">A</td>
+<td align="left">Resend Indicator</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>9</em></td>
+<td align="center">37–54</td>
+<td align="center">18</td>
+<td align="center">ANS</td>
+<td align="left">Immediate Destination Name</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>10</em></td>
+<td align="center">55–72</td>
+<td align="center">18</td>
+<td align="center">ANS</td>
+<td align="left">Immediate Origin Name</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>11</em></td>
+<td align="center">73–73</td>
+<td align="center">1</td>
+<td align="center">AN</td>
+<td align="left">File ID Modifier</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>12</em></td>
+<td align="center">74–75</td>
+<td align="center">2</td>
+<td align="center">A</td>
+<td align="left">Country Code</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>13</em></td>
+<td align="center">76–79</td>
+<td align="center">4</td>
+<td align="center">ANS</td>
+<td align="left">User Field</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>14</em></td>
+<td align="center">80-80</td>
+<td align="center">1</td>
+<td align="center">AN</td>
+<td align="left">Companion Document Indicator</td>
+<td align="center">C</td>
+</tr>
+</tbody>
+</table>
+<h3 id="10-cash-letter-header-record">10 Cash Letter Header Record<a class="headerlink" href="#10-cash-letter-header-record" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th align="center">Field</th>
+<th align="center">Position</th>
+<th align="center">Size</th>
+<th align="center">Type</th>
+<th align="left">Field Name</th>
+<th align="center">Usage - M, C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><em>1</em></td>
+<td align="center">01–02</td>
+<td align="center">2</td>
+<td align="center">N</td>
+<td align="left">Record Type</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>2</em></td>
+<td align="center">03–04</td>
+<td align="center">2</td>
+<td align="center">N</td>
+<td align="left">Collection Type Indicator</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>3</em></td>
+<td align="center">05–13</td>
+<td align="center">9</td>
+<td align="center">N</td>
+<td align="left">Destination Routing Number</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>4</em></td>
+<td align="center">14–22</td>
+<td align="center">9</td>
+<td align="center">N</td>
+<td align="left">ECE Institution Routing Number</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>5</em></td>
+<td align="center">23-30</td>
+<td align="center">8</td>
+<td align="center">N</td>
+<td align="left">Cash Letter Business Date</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>6</em></td>
+<td align="center">31–38</td>
+<td align="center">8</td>
+<td align="center">N</td>
+<td align="left">Cash Letter Creation Date</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>7</em></td>
+<td align="center">39-42</td>
+<td align="center">4</td>
+<td align="center">N</td>
+<td align="left">Cash Letter Creation Time</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>8</em></td>
+<td align="center">43-43</td>
+<td align="center">1</td>
+<td align="center">A</td>
+<td align="left">Cash Letter Record Type Indicator</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>9</em></td>
+<td align="center">44–44</td>
+<td align="center">1</td>
+<td align="center">AN</td>
+<td align="left">Cash Letter Documentation Type Indicator</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>10</em></td>
+<td align="center">45-52</td>
+<td align="center">8</td>
+<td align="center">AN</td>
+<td align="left">Cash Letter ID</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>11</em></td>
+<td align="center">53-66</td>
+<td align="center">14</td>
+<td align="center">ANS</td>
+<td align="left">Originator Contact Name</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>12</em></td>
+<td align="center">67-76</td>
+<td align="center">10</td>
+<td align="center">N</td>
+<td align="left">Originator Contact Phone Number</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>13</em></td>
+<td align="center">77-77</td>
+<td align="center">1</td>
+<td align="center">AN</td>
+<td align="left">Fed Work Type</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>14</em></td>
+<td align="center">78-78</td>
+<td align="center">1</td>
+<td align="center">A</td>
+<td align="left">Returns Indicator</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>15</em></td>
+<td align="center">79-79</td>
+<td align="center">1</td>
+<td align="center">ANS</td>
+<td align="left">User Field</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>16</em></td>
+<td align="center">80-80</td>
+<td align="center">1</td>
+<td align="center">B</td>
+<td align="left">Reserved</td>
+<td align="center">M</td>
+</tr>
+</tbody>
+</table>
+<h3 id="20-bundle-header-record">20 Bundle Header Record<a class="headerlink" href="#20-bundle-header-record" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th align="center">Field</th>
+<th align="center">Position</th>
+<th align="center">Size</th>
+<th align="center">Type</th>
+<th align="left">Field Name</th>
+<th align="center">Usage - M, C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><em>1</em></td>
+<td align="center">01–02</td>
+<td align="center">2</td>
+<td align="center">N</td>
+<td align="left">Record Type</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>2</em></td>
+<td align="center">03–04</td>
+<td align="center">2</td>
+<td align="center">N</td>
+<td align="left">Collection Type Indicator</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>3</em></td>
+<td align="center">05–13</td>
+<td align="center">9</td>
+<td align="center">N</td>
+<td align="left">Destination Routing Number</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>4</em></td>
+<td align="center">14–22</td>
+<td align="center">9</td>
+<td align="center">N</td>
+<td align="left">ECE Institution Routing Number</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>5</em></td>
+<td align="center">23–30</td>
+<td align="center">8</td>
+<td align="center">N</td>
+<td align="left">Bundle Business Date</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>6</em></td>
+<td align="center">31–38</td>
+<td align="center">8</td>
+<td align="center">N</td>
+<td align="left">Bundle Creation Date</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>7</em></td>
+<td align="center">39–48</td>
+<td align="center">10</td>
+<td align="center">AN</td>
+<td align="left">Bundle ID</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>8</em></td>
+<td align="center">49–52</td>
+<td align="center">4</td>
+<td align="center">NB</td>
+<td align="left">Bundle Sequence Number</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>9</em></td>
+<td align="center">53–54</td>
+<td align="center">2</td>
+<td align="center">AN</td>
+<td align="left">Cycle Number</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>10</em></td>
+<td align="center">55–63</td>
+<td align="center">9</td>
+<td align="center">B</td>
+<td align="left">Reserved</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>11</em></td>
+<td align="center">64–68</td>
+<td align="center">5</td>
+<td align="center">ANS</td>
+<td align="left">User Field</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>12</em></td>
+<td align="center">69–80</td>
+<td align="center">12</td>
+<td align="center">B</td>
+<td align="left">Reserved</td>
+<td align="center">M</td>
+</tr>
+</tbody>
+</table>
+<h3 id="25-check-detail-record">25 Check Detail Record<a class="headerlink" href="#25-check-detail-record" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th align="center">Field</th>
+<th align="center">Position</th>
+<th align="center">Size</th>
+<th align="center">Type</th>
+<th align="left">Field Name</th>
+<th align="center">Usage - M, C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><em>1</em></td>
+<td align="center">01–02</td>
+<td align="center">2</td>
+<td align="center">N</td>
+<td align="left">Record Type</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>2</em></td>
+<td align="center">03–17</td>
+<td align="center">15</td>
+<td align="center">NBSM</td>
+<td align="left">Auxiliary On-Us</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>3</em></td>
+<td align="center">18–18</td>
+<td align="center">1</td>
+<td align="center">NS</td>
+<td align="left">External Processing Code</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>4</em></td>
+<td align="center">19–26</td>
+<td align="center">8</td>
+<td align="center">N</td>
+<td align="left">Payor Bank Routing Number</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>5</em></td>
+<td align="center">27–27</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">Payor Bank Routing Number Check Digit</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>6</em></td>
+<td align="center">28–47</td>
+<td align="center">20</td>
+<td align="center">NBSMOS</td>
+<td align="left">On-Us</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>7</em></td>
+<td align="center">48–57</td>
+<td align="center">10</td>
+<td align="center">N</td>
+<td align="left">Item Amount</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>8</em></td>
+<td align="center">58–72</td>
+<td align="center">15</td>
+<td align="center">NB</td>
+<td align="left">ECE Institution Item Sequence Number</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>9</em></td>
+<td align="center">73–73</td>
+<td align="center">1</td>
+<td align="center">AN</td>
+<td align="left">Documentation Type Indicator</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>10</em></td>
+<td align="center">74–74</td>
+<td align="center">1</td>
+<td align="center">AN</td>
+<td align="left">Return Acceptance Indicator</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>11</em></td>
+<td align="center">75–75</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">MICR Valid Indicator</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>12</em></td>
+<td align="center">76–76</td>
+<td align="center">1</td>
+<td align="center">A</td>
+<td align="left">BOFD Indicator</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>13</em></td>
+<td align="center">77–78</td>
+<td align="center">2</td>
+<td align="center">N</td>
+<td align="left">Check Detail Record Addendum Count</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>14</em></td>
+<td align="center">79–79</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">Correction Indicator</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>15</em></td>
+<td align="center">80-80</td>
+<td align="center">1</td>
+<td align="center">AN</td>
+<td align="left">Archive Type Indicator</td>
+<td align="center">C</td>
+</tr>
+</tbody>
+</table>
+<h3 id="26-check-detail-addendum-a-record">26 Check Detail Addendum A Record<a class="headerlink" href="#26-check-detail-addendum-a-record" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th align="center">Field</th>
+<th align="center">Position</th>
+<th align="center">Size</th>
+<th align="center">Type</th>
+<th align="left">Field Name</th>
+<th align="center">Usage - M, C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><em>1</em></td>
+<td align="center">01–02</td>
+<td align="center">2</td>
+<td align="center">N</td>
+<td align="left">Record Type</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>2</em></td>
+<td align="center">03–03</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">Check Detail Addendum A Record Number</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>3</em></td>
+<td align="center">04–12</td>
+<td align="center">9</td>
+<td align="center">N</td>
+<td align="left">Return Location Routing Number</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>4</em></td>
+<td align="center">13–20</td>
+<td align="center">8</td>
+<td align="center">N</td>
+<td align="left">BOFD / Endorsement Date</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>5</em></td>
+<td align="center">21–35</td>
+<td align="center">15</td>
+<td align="center">NB</td>
+<td align="left">BOFD Item Sequence Number</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>6</em></td>
+<td align="center">36–53</td>
+<td align="center">18</td>
+<td align="center">ANS</td>
+<td align="left">Deposit Account Number at BOFD</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>7</em></td>
+<td align="center">54–58</td>
+<td align="center">5</td>
+<td align="center">ANS</td>
+<td align="left">BOFD Deposit Branch</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>8</em></td>
+<td align="center">59–73</td>
+<td align="center">15</td>
+<td align="center">ANS</td>
+<td align="left">Payee Name</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>9</em></td>
+<td align="center">74-74</td>
+<td align="center">1</td>
+<td align="center">A</td>
+<td align="left">Truncation Indicator</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>10</em></td>
+<td align="center">75-75</td>
+<td align="center">1</td>
+<td align="center">AN</td>
+<td align="left">BOFD Conversion Indicator</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>11</em></td>
+<td align="center">76-76</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">BOFD Correction Indicator</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>12</em></td>
+<td align="center">77-77</td>
+<td align="center">1</td>
+<td align="center">ANS</td>
+<td align="left">User Field</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>13</em></td>
+<td align="center">78-80</td>
+<td align="center">3</td>
+<td align="center">B</td>
+<td align="left">Reserved</td>
+<td align="center">M</td>
+</tr>
+</tbody>
+</table>
+<h3 id="27-check-detail-addendum-b-record">27 Check Detail Addendum B Record<a class="headerlink" href="#27-check-detail-addendum-b-record" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th align="center">Field</th>
+<th align="center">Position</th>
+<th align="center">Size</th>
+<th align="center">Type</th>
+<th align="left">Field Name</th>
+<th align="center">Usage - M, C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><em>1</em></td>
+<td align="center">01-02</td>
+<td align="center">2</td>
+<td align="center">N</td>
+<td align="left">Record Type</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>2</em></td>
+<td align="center">03–03</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">Image Reference Key Indicator</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>3</em></td>
+<td align="center">04–18</td>
+<td align="center">15</td>
+<td align="center">NB</td>
+<td align="left">Microfilm Archive Sequence Number</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>4</em></td>
+<td align="center">19–22</td>
+<td align="center">4</td>
+<td align="center">N</td>
+<td align="left">Length of Image Reference Key</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>5</em></td>
+<td align="center">23–(22+X)</td>
+<td align="center">Variable X: X = value in Length of Image Reference Key</td>
+<td align="center">ANS</td>
+<td align="left">Image Reference Key</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>6</em></td>
+<td align="center">(23+X)–(37+X)</td>
+<td align="center">15</td>
+<td align="center">ANS</td>
+<td align="left">Description</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>7</em></td>
+<td align="center">(38+X)–(41+X)</td>
+<td align="center">4</td>
+<td align="center">ANS</td>
+<td align="left">User Field</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>8</em></td>
+<td align="center">(42+X)–(46+X)</td>
+<td align="center">5</td>
+<td align="center">B</td>
+<td align="left">Reserved</td>
+<td align="center">M</td>
+</tr>
+</tbody>
+</table>
+<h3 id="28-check-detail-addendum-c-record">28 Check Detail Addendum C Record<a class="headerlink" href="#28-check-detail-addendum-c-record" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th align="center">Field</th>
+<th align="center">Position</th>
+<th align="center">Size</th>
+<th align="center">Type</th>
+<th align="left">Field Name</th>
+<th align="center">Usage - M, C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><em>1</em></td>
+<td align="center">01–02</td>
+<td align="center">2</td>
+<td align="center">N</td>
+<td align="left">Record Type</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>2</em></td>
+<td align="center">03–04</td>
+<td align="center">2</td>
+<td align="center">N</td>
+<td align="left">Check Detail Addendum C Record Number</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>3</em></td>
+<td align="center">05–13</td>
+<td align="center">8</td>
+<td align="center">N</td>
+<td align="left">Endorsing Bank Routing Number</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>4</em></td>
+<td align="center">14–21</td>
+<td align="center">9</td>
+<td align="center">N</td>
+<td align="left">BOFD / Endorsement Business Date</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>5</em></td>
+<td align="center">22–36</td>
+<td align="center">15</td>
+<td align="center">NB</td>
+<td align="left">Endorsing Bank Item Sequence Number</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>6</em></td>
+<td align="center">37–37</td>
+<td align="center">1</td>
+<td align="center">A</td>
+<td align="left">Truncation Indicator</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>7</em></td>
+<td align="center">38–38</td>
+<td align="center">1</td>
+<td align="center">AN</td>
+<td align="left">Endorsing Bank Conversion Indicator</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>8</em></td>
+<td align="center">39–39</td>
+<td align="center">1</td>
+<td align="center">A</td>
+<td align="left">Endorsing Bank Correction Indicator</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>9</em></td>
+<td align="center">40–40</td>
+<td align="center">1</td>
+<td align="center">AN</td>
+<td align="left">Return Reason</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>10</em></td>
+<td align="center">41–59</td>
+<td align="center">19</td>
+<td align="center">ANS</td>
+<td align="left">User Field</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>11</em></td>
+<td align="center">60–60</td>
+<td align="center">1</td>
+<td align="center">AN</td>
+<td align="left">Endorsing Bank Identifier</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>12</em></td>
+<td align="center">61–80</td>
+<td align="center">20</td>
+<td align="center">B</td>
+<td align="left">Reserved</td>
+<td align="center">M</td>
+</tr>
+</tbody>
+</table>
+<h3 id="31-return-detail-record">31 Return Detail  Record<a class="headerlink" href="#31-return-detail-record" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th align="center">Field</th>
+<th align="center">Position</th>
+<th align="center">Size</th>
+<th align="center">Type</th>
+<th align="left">Field Name</th>
+<th align="center">Usage - M, C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><em>1</em></td>
+<td align="center">01–02</td>
+<td align="center">2</td>
+<td align="center">N</td>
+<td align="left">Record Type</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>2</em></td>
+<td align="center">03–10</td>
+<td align="center">8</td>
+<td align="center">N</td>
+<td align="left">Payor Bank Routing Number</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>3</em></td>
+<td align="center">11-11</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">Payor Bank Routing Number Check Digit</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>4</em></td>
+<td align="center">12–31</td>
+<td align="center">20</td>
+<td align="center">NBSMOS</td>
+<td align="left">On-Us</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>5</em></td>
+<td align="center">32-41</td>
+<td align="center">10</td>
+<td align="center">N</td>
+<td align="left">Item Amount</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>6</em></td>
+<td align="center">42-42</td>
+<td align="center">1</td>
+<td align="center">AN</td>
+<td align="left">Return Reason</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>7</em></td>
+<td align="center">43–44</td>
+<td align="center">2</td>
+<td align="center">N</td>
+<td align="left">Return Record Addendum Count</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>8</em></td>
+<td align="center">45-45</td>
+<td align="center">1</td>
+<td align="center">AN</td>
+<td align="left">Return Documentation Type Indicator</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>9</em></td>
+<td align="center">46-53</td>
+<td align="center">8</td>
+<td align="center">N</td>
+<td align="left">Forward Bundle Date</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>10</em></td>
+<td align="center">54–68</td>
+<td align="center">15</td>
+<td align="center">NB</td>
+<td align="left">ECE Institution Item Sequence Number</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>11</em></td>
+<td align="center">69-69</td>
+<td align="center">1</td>
+<td align="center">NS</td>
+<td align="left">External Processing Code</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>12</em></td>
+<td align="center">70–70</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">Return Notification Indicator</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>13</em></td>
+<td align="center">71–71</td>
+<td align="center">2</td>
+<td align="center">AN</td>
+<td align="left">Archive Type Indicator</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>14</em></td>
+<td align="center">72–72</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">Number of Times Returned</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>15</em></td>
+<td align="center">73-80</td>
+<td align="center">8</td>
+<td align="center">B</td>
+<td align="left">Reserved</td>
+<td align="center">M</td>
+</tr>
+</tbody>
+</table>
+<h3 id="32-return-detail-addendum-a-record">32 Return Detail Addendum A Record<a class="headerlink" href="#32-return-detail-addendum-a-record" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th align="center">Field</th>
+<th align="center">Position</th>
+<th align="center">Size</th>
+<th align="center">Type</th>
+<th align="left">Field Name</th>
+<th align="center">Usage - M, C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><em>1</em></td>
+<td align="center">01–02</td>
+<td align="center">2</td>
+<td align="center">N</td>
+<td align="left">Record Type</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>2</em></td>
+<td align="center">03–03</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">Return Detail Addendum A Record Number</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>3</em></td>
+<td align="center">04–12</td>
+<td align="center">9</td>
+<td align="center">N</td>
+<td align="left">Return Location Routing Number</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>4</em></td>
+<td align="center">13–20</td>
+<td align="center">8</td>
+<td align="center">N</td>
+<td align="left">BOFD / Endorsement Date</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>5</em></td>
+<td align="center">21–35</td>
+<td align="center">15</td>
+<td align="center">NB</td>
+<td align="left">BOFD Item Sequence Number</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>6</em></td>
+<td align="center">36–53</td>
+<td align="center">18</td>
+<td align="center">ANS</td>
+<td align="left">Deposit Account Number at BOFD</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>7</em></td>
+<td align="center">54–58</td>
+<td align="center">5</td>
+<td align="center">ANS</td>
+<td align="left">BOFD Deposit Branch</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>8</em></td>
+<td align="center">59–73</td>
+<td align="center">15</td>
+<td align="center">ANS</td>
+<td align="left">Payee Name</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>9</em></td>
+<td align="center">74-74</td>
+<td align="center">1</td>
+<td align="center">A</td>
+<td align="left">Truncation Indicator</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>10</em></td>
+<td align="center">75-75</td>
+<td align="center">1</td>
+<td align="center">AN</td>
+<td align="left">BOFD Conversion Indicator</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>11</em></td>
+<td align="center">76-76</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">BOFD Correction Indicator</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>12</em></td>
+<td align="center">77-77</td>
+<td align="center">1</td>
+<td align="center">ANS</td>
+<td align="left">User Field</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>13</em></td>
+<td align="center">78-80</td>
+<td align="center">3</td>
+<td align="center">B</td>
+<td align="left">Reserved</td>
+<td align="center">M</td>
+</tr>
+</tbody>
+</table>
+<h3 id="33-return-detail-addendum-b-record">33 Return Detail Addendum B Record<a class="headerlink" href="#33-return-detail-addendum-b-record" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th align="center">Field</th>
+<th align="center">Position</th>
+<th align="center">Size</th>
+<th align="center">Type</th>
+<th align="left">Field Name</th>
+<th align="center">Usage - M, C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><em>1</em></td>
+<td align="center">01-02</td>
+<td align="center">2</td>
+<td align="center">N</td>
+<td align="left">Record Type</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>2</em></td>
+<td align="center">03–20</td>
+<td align="center">18</td>
+<td align="center">N</td>
+<td align="left">Payor Bank Name</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>3</em></td>
+<td align="center">21–35</td>
+<td align="center">15</td>
+<td align="center">NBSM</td>
+<td align="left">Auxiliary On-Us</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>4</em></td>
+<td align="center">36-50</td>
+<td align="center">15</td>
+<td align="center">NB</td>
+<td align="left">Payor Bank Item Sequence Number</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>5</em></td>
+<td align="center">51-58</td>
+<td align="center">8</td>
+<td align="center">N</td>
+<td align="left">Payor Bank Business Date</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>6</em></td>
+<td align="center">59-80</td>
+<td align="center">15</td>
+<td align="center">ANS</td>
+<td align="left">Payor Account Name</td>
+<td align="center">C</td>
+</tr>
+</tbody>
+</table>
+<h3 id="34-return-detail-addendum-c-record">34 Return Detail Addendum C Record<a class="headerlink" href="#34-return-detail-addendum-c-record" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th align="center">Field</th>
+<th align="center">Position</th>
+<th align="center">Size</th>
+<th align="center">Type</th>
+<th align="left">Field Name</th>
+<th align="center">Usage - M, C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><em>1</em></td>
+<td align="center">01-02</td>
+<td align="center">2</td>
+<td align="center">N</td>
+<td align="left">Record Type</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>2</em></td>
+<td align="center">03–03</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">Image Reference Key Indicator</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>3</em></td>
+<td align="center">04–18</td>
+<td align="center">15</td>
+<td align="center">NB</td>
+<td align="left">Microfilm Archive Sequence Number</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>4</em></td>
+<td align="center">19–22</td>
+<td align="center">4</td>
+<td align="center">N</td>
+<td align="left">Length of Image Reference Key</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>5</em></td>
+<td align="center">23–(22+X)</td>
+<td align="center">Variable X: value in Length of Image Reference Key</td>
+<td align="center">ANS</td>
+<td align="left">Image Reference Key</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>6</em></td>
+<td align="center">(23+X)–(37+X)</td>
+<td align="center">15</td>
+<td align="center">ANS</td>
+<td align="left">Description</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>7</em></td>
+<td align="center">(38+X)–(41+X)</td>
+<td align="center">4</td>
+<td align="center">ANS</td>
+<td align="left">User Field</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>8</em></td>
+<td align="center">(42+X)–(46+X)</td>
+<td align="center">5</td>
+<td align="center">B</td>
+<td align="left">Reserved</td>
+<td align="center">M</td>
+</tr>
+</tbody>
+</table>
+<h3 id="35-return-detail-addendum-d-record">35 Return Detail Addendum D Record<a class="headerlink" href="#35-return-detail-addendum-d-record" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th align="center">Field</th>
+<th align="center">Position</th>
+<th align="center">Size</th>
+<th align="center">Type</th>
+<th align="left">Field Name</th>
+<th align="center">Usage - M, C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><em>1</em></td>
+<td align="center">01–02</td>
+<td align="center">2</td>
+<td align="center">N</td>
+<td align="left">Record Type</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>2</em></td>
+<td align="center">03–04</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">Return Detail Addendum D Record Number</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>3</em></td>
+<td align="center">05–13</td>
+<td align="center">9</td>
+<td align="center">N</td>
+<td align="left">Endorsing Bank Routing Number</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>4</em></td>
+<td align="center">14–21</td>
+<td align="center">8</td>
+<td align="center">N</td>
+<td align="left">BOFD / Endorsement Date</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>5</em></td>
+<td align="center">22–36</td>
+<td align="center">15</td>
+<td align="center">NB</td>
+<td align="left">Endorsing Bank Sequence Number</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>6</em></td>
+<td align="center">37–37</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">Truncation Indicator</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>7</em></td>
+<td align="center">38–38</td>
+<td align="center">1</td>
+<td align="center">AN</td>
+<td align="left">Endorsing Bank Conversion Indicator</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>8</em></td>
+<td align="center">39–39</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">Endorsing Bank Correction Indicator</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>9</em></td>
+<td align="center">40-40</td>
+<td align="center">1</td>
+<td align="center">AN</td>
+<td align="left">Return Reason</td>
+<td align="center">AN</td>
+</tr>
+<tr>
+<td align="center"><em>10</em></td>
+<td align="center">41-59</td>
+<td align="center">1</td>
+<td align="center">ANS</td>
+<td align="left">User Field</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>11</em></td>
+<td align="center">60-60</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">Endorsing Bank Identifier</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>12</em></td>
+<td align="center">61-80</td>
+<td align="center">20</td>
+<td align="center">B</td>
+<td align="left">Reserved</td>
+<td align="center">M</td>
+</tr>
+</tbody>
+</table>
+<h3 id="50-image-view-detail-record">50 Image View Detail Record<a class="headerlink" href="#50-image-view-detail-record" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th align="center">Field</th>
+<th align="center">Position</th>
+<th align="center">Size</th>
+<th align="center">Type</th>
+<th align="left">Field Name</th>
+<th align="center">Usage - M, C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><em>1</em></td>
+<td align="center">01–02</td>
+<td align="center">2</td>
+<td align="center">N</td>
+<td align="left">Record Type</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>2</em></td>
+<td align="center">03–03</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">Image Indicator</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>3</em></td>
+<td align="center">04–12</td>
+<td align="center">9</td>
+<td align="center">N</td>
+<td align="left">Image Creator Routing Number</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>4</em></td>
+<td align="center">13–20</td>
+<td align="center">8</td>
+<td align="center">N</td>
+<td align="left">Image Creator Date</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>5</em></td>
+<td align="center">21–22</td>
+<td align="center">2</td>
+<td align="center">N</td>
+<td align="left">Image View Format Indicator</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>6</em></td>
+<td align="center">23–24</td>
+<td align="center">2</td>
+<td align="center">N</td>
+<td align="left">Image View Compression Algorithm Identifier</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>7</em></td>
+<td align="center">25–31</td>
+<td align="center">7</td>
+<td align="center">N</td>
+<td align="left">Image View Data Size</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>8</em></td>
+<td align="center">32–32</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">View Side Indicator</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>9</em></td>
+<td align="center">33–34</td>
+<td align="center">2</td>
+<td align="center">N</td>
+<td align="left">View Descriptor</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>10</em></td>
+<td align="center">35–35</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">Digital Signature Indicator</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>11</em></td>
+<td align="center">36–37</td>
+<td align="center">2</td>
+<td align="center">N</td>
+<td align="left">Digital Signature Method</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>12</em></td>
+<td align="center">38–42</td>
+<td align="center">5</td>
+<td align="center">N</td>
+<td align="left">Security Key Size</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>13</em></td>
+<td align="center">43–49</td>
+<td align="center">7</td>
+<td align="center">N</td>
+<td align="left">Start of Protected Data</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>14</em></td>
+<td align="center">50–56</td>
+<td align="center">7</td>
+<td align="center">N</td>
+<td align="left">Length of Protected Data</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>15</em></td>
+<td align="center">57–57</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">Image Recreate Indicator</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>16</em></td>
+<td align="center">58–65</td>
+<td align="center">8</td>
+<td align="center">ANS</td>
+<td align="left">User Field</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>17</em></td>
+<td align="center">66-66</td>
+<td align="center">1</td>
+<td align="center">B</td>
+<td align="left">Reserved</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>18</em></td>
+<td align="center">67-67</td>
+<td align="center">1</td>
+<td align="center">AN</td>
+<td align="left">Override Indicator</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>19</em></td>
+<td align="center">68-80</td>
+<td align="center">13</td>
+<td align="center">B</td>
+<td align="left">Reserved</td>
+<td align="center">M</td>
+</tr>
+</tbody>
+</table>
+<h3 id="52-image-view-data-record">52 Image View Data Record<a class="headerlink" href="#52-image-view-data-record" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th align="center">Field</th>
+<th align="center">Position</th>
+<th align="center">Size</th>
+<th align="center">Type</th>
+<th align="left">Field Name</th>
+<th align="center">Usage - M, C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><em>1</em></td>
+<td align="center">01-02</td>
+<td align="center">2</td>
+<td align="center">N</td>
+<td align="left">Record Type</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>2</em></td>
+<td align="center">03-11</td>
+<td align="center">9</td>
+<td align="center">N</td>
+<td align="left">ECE Institution Routing Number</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>3</em></td>
+<td align="center">12-19</td>
+<td align="center">8</td>
+<td align="center">N</td>
+<td align="left">Bundle Business Date</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>4</em></td>
+<td align="center">20-21</td>
+<td align="center">2</td>
+<td align="center">AN</td>
+<td align="left">Cycle Number</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>5</em></td>
+<td align="center">22-36</td>
+<td align="center">15</td>
+<td align="center">NB</td>
+<td align="left">ECE Institution Item Sequence Number</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>6</em></td>
+<td align="center">37-52</td>
+<td align="center">16</td>
+<td align="center">ANS</td>
+<td align="left">Security Originator Name</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>7</em></td>
+<td align="center">53-68</td>
+<td align="center">16</td>
+<td align="center">ANS</td>
+<td align="left">Security Authenticator Name</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>8</em></td>
+<td align="center">69-84</td>
+<td align="center">16</td>
+<td align="center">ANS</td>
+<td align="left">Security Key Name</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>9</em></td>
+<td align="center">85-85</td>
+<td align="center">1</td>
+<td align="center">NB</td>
+<td align="left">Clipping Origin</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>10</em></td>
+<td align="center">86-89</td>
+<td align="center">4</td>
+<td align="center">N</td>
+<td align="left">Clipping Coordinate h1</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>11</em></td>
+<td align="center">90-93</td>
+<td align="center">4</td>
+<td align="center">N</td>
+<td align="left">Clipping Coordinate h2</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>12</em></td>
+<td align="center">94-97</td>
+<td align="center">4</td>
+<td align="center">N</td>
+<td align="left">Clipping Coordinate v1</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>13</em></td>
+<td align="center">98-101</td>
+<td align="center">4</td>
+<td align="center">N</td>
+<td align="left">Clipping Coordinate v2</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>14</em></td>
+<td align="center">102-105</td>
+<td align="center">4</td>
+<td align="center">NB</td>
+<td align="left">Length of Image Reference Key</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>15</em></td>
+<td align="center">106-(105+X)</td>
+<td align="center">Variable X Length of Image Reference Key</td>
+<td align="center">ANS</td>
+<td align="left">Image Reference Key</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>16</em></td>
+<td align="center">(106+X) -(110+X)</td>
+<td align="center">5</td>
+<td align="center">NB</td>
+<td align="left">Length of Digital Signature</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>17</em></td>
+<td align="center">(111+X) - (110+X+Y)</td>
+<td align="center">Variable Y (Length of Digital Signature)</td>
+<td align="center">Binary</td>
+<td align="left">Digital Signature</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>18</em></td>
+<td align="center">(111+X+Y) - (117+X+Y)</td>
+<td align="center">7</td>
+<td align="center">NB</td>
+<td align="left">Length of Image Data</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>19</em></td>
+<td align="center">(118+X+Y) - (117+X+Y+Z)</td>
+<td align="center">Variable Z (Length of Image Data)</td>
+<td align="center">Binary</td>
+<td align="left">Image Data</td>
+<td align="center">C</td>
+</tr>
+</tbody>
+</table>
+<h3 id="54-image-view-analysis-record">54 Image View Analysis Record<a class="headerlink" href="#54-image-view-analysis-record" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th align="center">Field</th>
+<th align="center">Position</th>
+<th align="center">Size</th>
+<th align="center">Type</th>
+<th align="left">Field Name</th>
+<th align="center">Usage - M, C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><em>1</em></td>
+<td align="center">01-02</td>
+<td align="center">2</td>
+<td align="center">N</td>
+<td align="left">Record Type</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>2</em></td>
+<td align="center">03-03</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">Global Image Quality</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>3</em></td>
+<td align="center">04-04</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">Global Image Usability</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>4</em></td>
+<td align="center">05-05</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">Imaging Bank Specific Test</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>5</em></td>
+<td align="center">06-06</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">Partial Image</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>6</em></td>
+<td align="center">07-07</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">Excessive Image Skew</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>7</em></td>
+<td align="center">08-08</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">Piggyback Image</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>8</em></td>
+<td align="center">09-09</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">Too Light Or Too Dark</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>9</em></td>
+<td align="center">10-10</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">Streaks And Or Bands</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>10</em></td>
+<td align="center">11-11</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">Below Minimum Image Size</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>11</em></td>
+<td align="center">12-12</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">Exceeds Maximum Image Size</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>12</em></td>
+<td align="center">13-25</td>
+<td align="center">13</td>
+<td align="center">B</td>
+<td align="left">Reserved</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>13</em></td>
+<td align="center">26-26</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">Image-Enabled POD</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>14</em></td>
+<td align="center">27-27</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">Source Document Bad</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>15</em></td>
+<td align="center">28-28</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">Date Usability</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>16</em></td>
+<td align="center">29-29</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">Payee Usability</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>17</em></td>
+<td align="center">30-30</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">Convenience Amount Usability</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>18</em></td>
+<td align="center">31-31</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">Amount in Words (Legal Amount) Usability</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>19</em></td>
+<td align="center">32-32</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">Signature Usability</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>20</em></td>
+<td align="center">33-33</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">Payor Name And Address Usability</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>21</em></td>
+<td align="center">34-34</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">MICR Line Usability</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>22</em></td>
+<td align="center">35-35</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">Memo Line Usability</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>23</em></td>
+<td align="center">36-36</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">Payor Bank Name And Address Usability</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>24</em></td>
+<td align="center">37-37</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">Payee Endorsement Usability</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>25</em></td>
+<td align="center">38-38</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">Bank Of First Deposit Endorsement Usability</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>26</em></td>
+<td align="center">39-39</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">Transit Endorsement Usability</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>27</em></td>
+<td align="center">40-45</td>
+<td align="center">6</td>
+<td align="center">B</td>
+<td align="left">Reserved</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>28</em></td>
+<td align="center">46-65</td>
+<td align="center">20</td>
+<td align="center">ANS</td>
+<td align="left">User Field</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>29</em></td>
+<td align="center">66-80</td>
+<td align="center">15</td>
+<td align="center">B</td>
+<td align="left">Reserved</td>
+<td align="center">M</td>
+</tr>
+</tbody>
+</table>
+<h3 id="62-credit-item-record">62 Credit Item Record<a class="headerlink" href="#62-credit-item-record" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th align="center">Field</th>
+<th align="center">Position</th>
+<th align="center">Size</th>
+<th align="center">Type</th>
+<th align="left">Field Name</th>
+<th align="center">Usage - M, C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><em>1</em></td>
+<td align="center">01-02</td>
+<td align="center">2</td>
+<td align="center">N</td>
+<td align="left">Record Type</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>2</em></td>
+<td align="center">03-17</td>
+<td align="center">15</td>
+<td align="center">NBSM</td>
+<td align="left">Auxiliary On-Us</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>3</em></td>
+<td align="center">18-18</td>
+<td align="center">1</td>
+<td align="center">NS</td>
+<td align="left">External Processing Code</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>4</em></td>
+<td align="center">19-27</td>
+<td align="center">9</td>
+<td align="center">N</td>
+<td align="left">Posting Bank Routing Number</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>5</em></td>
+<td align="center">28-47</td>
+<td align="center">20</td>
+<td align="center">NBSMOS</td>
+<td align="left">On-Us</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>6</em></td>
+<td align="center">48-61</td>
+<td align="center">14</td>
+<td align="center">N</td>
+<td align="left">Item Amount</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>7</em></td>
+<td align="center">62-76</td>
+<td align="center">15</td>
+<td align="center">NB</td>
+<td align="left">Credit Item Sequence Number</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>8</em></td>
+<td align="center">77-77</td>
+<td align="center">1</td>
+<td align="center">AN</td>
+<td align="left">Documentation Type Indicator</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>9</em></td>
+<td align="center">78-78</td>
+<td align="center">1</td>
+<td align="center">AN</td>
+<td align="left">Type of Account Code</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>10</em></td>
+<td align="center">79-80</td>
+<td align="center">2</td>
+<td align="center">N</td>
+<td align="left">Source of Work Code</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>11</em></td>
+<td align="center">81-96</td>
+<td align="center">16</td>
+<td align="center">ANS</td>
+<td align="left">User Field</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>12</em></td>
+<td align="center">97-100</td>
+<td align="center">4</td>
+<td align="center">B</td>
+<td align="left">Reserved</td>
+<td align="center">M</td>
+</tr>
+</tbody>
+</table>
+<h3 id="68-user-general-format-record">68 User General Format Record<a class="headerlink" href="#68-user-general-format-record" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th align="center">Field</th>
+<th align="center">Position</th>
+<th align="center">Size</th>
+<th align="center">Type</th>
+<th align="left">Field Name</th>
+<th align="center">Usage - M, C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><em>1</em></td>
+<td align="center">01-02</td>
+<td align="center">2</td>
+<td align="center">N</td>
+<td align="left">Record Type</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>2</em></td>
+<td align="center">03-03</td>
+<td align="center">1</td>
+<td align="center">AN</td>
+<td align="left">Owner Identifier Indicator</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>3</em></td>
+<td align="center">04-12</td>
+<td align="center">9</td>
+<td align="center">ANS</td>
+<td align="left">Owner Identifier</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>4</em></td>
+<td align="center">13-32</td>
+<td align="center">20</td>
+<td align="center">ANS</td>
+<td align="left">Owner Identifier Modifier</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>5</em></td>
+<td align="center">33-35</td>
+<td align="center">3</td>
+<td align="center">AN</td>
+<td align="left">User Record Format Type</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>6</em></td>
+<td align="center">36-38</td>
+<td align="center">3</td>
+<td align="center">N</td>
+<td align="left">Format Type Version Level</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>7</em></td>
+<td align="center">39-45</td>
+<td align="center">7</td>
+<td align="center">N</td>
+<td align="left">Length of User Data</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>8</em></td>
+<td align="center">46-(45+X)</td>
+<td align="center">X</td>
+<td align="center">user Discretion</td>
+<td align="left">User Data, X = value in Length of User Data (Field 7)</td>
+<td align="center">M</td>
+</tr>
+</tbody>
+</table>
+<h3 id="68-user-payee-endorsement-record">68 User Payee Endorsement Record<a class="headerlink" href="#68-user-payee-endorsement-record" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th align="center">Field</th>
+<th align="center">Position</th>
+<th align="center">Size</th>
+<th align="center">Type</th>
+<th align="left">Field Name</th>
+<th align="center">Usage - M, C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><em>1</em></td>
+<td align="center">01-02</td>
+<td align="center">2</td>
+<td align="center">N</td>
+<td align="left">Record Type</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>2</em></td>
+<td align="center">03-03</td>
+<td align="center">1</td>
+<td align="center">AN</td>
+<td align="left">Owner Identifier Indicator</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>3</em></td>
+<td align="center">04-12</td>
+<td align="center">9</td>
+<td align="center">ANS</td>
+<td align="left">Owner Identifier</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>4</em></td>
+<td align="center">13-32</td>
+<td align="center">20</td>
+<td align="center">ANS</td>
+<td align="left">Owner Identifier Modifier</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>5</em></td>
+<td align="center">33-35</td>
+<td align="center">3</td>
+<td align="center">AN</td>
+<td align="left">User Record Format Type</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>6</em></td>
+<td align="center">36-38</td>
+<td align="center">3</td>
+<td align="center">N</td>
+<td align="left">Format Type Version Level</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>7</em></td>
+<td align="center">39-45</td>
+<td align="center">7</td>
+<td align="center">N</td>
+<td align="left">Length of User Data</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>8</em></td>
+<td align="center">46-95</td>
+<td align="center">50</td>
+<td align="center">ANS</td>
+<td align="left">Name of Payee</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>9</em></td>
+<td align="center">96-103</td>
+<td align="center">8</td>
+<td align="center">NB</td>
+<td align="left">Endorsement Date</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>10</em></td>
+<td align="center">104-112</td>
+<td align="center">9</td>
+<td align="center">N</td>
+<td align="left">Bank Routing Number</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>11</em></td>
+<td align="center">113-132</td>
+<td align="center">20</td>
+<td align="center">ANS</td>
+<td align="left">Bank Account Number</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>12</em></td>
+<td align="center">133-152</td>
+<td align="center">20</td>
+<td align="center">ANS</td>
+<td align="left">Customer Identifier</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>13</em></td>
+<td align="center">153-202</td>
+<td align="center">50</td>
+<td align="center">ANS</td>
+<td align="left">Customer Contact Information</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>14</em></td>
+<td align="center">203-210</td>
+<td align="center">8</td>
+<td align="center">ANS</td>
+<td align="left">Store / Merchant / Processing Site Number</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>15</em></td>
+<td align="center">211-235</td>
+<td align="center">25</td>
+<td align="center">ANS</td>
+<td align="left">Internal Control / Sequence Number</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>16</em></td>
+<td align="center">236-239</td>
+<td align="center">4</td>
+<td align="center">N</td>
+<td align="left">Time</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>17</em></td>
+<td align="center">240-269</td>
+<td align="center">30</td>
+<td align="center">ANS</td>
+<td align="left">Operator Name/Initials</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>18</em></td>
+<td align="center">270-274</td>
+<td align="center">5</td>
+<td align="center">ANS</td>
+<td align="left">Operator Number</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>19</em></td>
+<td align="center">275-304</td>
+<td align="center">30</td>
+<td align="center">ANS</td>
+<td align="left">Manager / Supervisor Name / Initials</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>20</em></td>
+<td align="center">305-309</td>
+<td align="center">5</td>
+<td align="center">ANS</td>
+<td align="left">Manager / Supervisor Number</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>21</em></td>
+<td align="center">310-324</td>
+<td align="center">15</td>
+<td align="center">ANS</td>
+<td align="left">Equipment Number</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>22</em></td>
+<td align="center">325-325</td>
+<td align="center">1</td>
+<td align="center">AN</td>
+<td align="left">Endorsement Indicator</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>23</em></td>
+<td align="center">326-335</td>
+<td align="center">10</td>
+<td align="center">ANS</td>
+<td align="left">User Field</td>
+<td align="center">C</td>
+</tr>
+</tbody>
+</table>
+<h3 id="70-bundle-control-record">70 Bundle Control Record<a class="headerlink" href="#70-bundle-control-record" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th align="center">Field</th>
+<th align="center">Position</th>
+<th align="center">Size</th>
+<th align="center">Type</th>
+<th align="left">Field Name</th>
+<th align="center">Usage - M, C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><em>1</em></td>
+<td align="center">01–02</td>
+<td align="center">2</td>
+<td align="center">N</td>
+<td align="left">Record Type</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>2</em></td>
+<td align="center">03–06</td>
+<td align="center">4</td>
+<td align="center">N</td>
+<td align="left">Items Within Bundle Count</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>3</em></td>
+<td align="center">07–18</td>
+<td align="center">12</td>
+<td align="center">N</td>
+<td align="left">Bundle Total Amount</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>4</em></td>
+<td align="center">19–30</td>
+<td align="center">12</td>
+<td align="center">N</td>
+<td align="left">MICR Valid Total Amount</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>5</em></td>
+<td align="center">31–35</td>
+<td align="center">5</td>
+<td align="center">N</td>
+<td align="left">Images within Bundle Count</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>6</em></td>
+<td align="center">36–55</td>
+<td align="center">20</td>
+<td align="center">ANS</td>
+<td align="left">User Field</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>7</em></td>
+<td align="center">56–56</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">Bundle ID</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>8</em></td>
+<td align="center">57–80</td>
+<td align="center">24</td>
+<td align="center">B</td>
+<td align="left">Bundle Sequence Number</td>
+<td align="center">M</td>
+</tr>
+</tbody>
+</table>
+<h3 id="85-routing-number-summary">85 Routing Number Summary<a class="headerlink" href="#85-routing-number-summary" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th align="center">Field</th>
+<th align="center">Position</th>
+<th align="center">Size</th>
+<th align="center">Type</th>
+<th align="left">Field Name</th>
+<th align="center">Usage - M, C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><em>1</em></td>
+<td align="center">01–02</td>
+<td align="center">2</td>
+<td align="center">N</td>
+<td align="left">Record Type</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>2</em></td>
+<td align="center">03–11</td>
+<td align="center">9</td>
+<td align="center">N</td>
+<td align="left">Routing Number Within Cash Letter</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>3</em></td>
+<td align="center">12–25</td>
+<td align="center">14</td>
+<td align="center">N</td>
+<td align="left">Routing Number Total Amount</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>4</em></td>
+<td align="center">26–31</td>
+<td align="center">12</td>
+<td align="center">N</td>
+<td align="left">Routing Number Item Count</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>5</em></td>
+<td align="center">36–55</td>
+<td align="center">24</td>
+<td align="center">ANS</td>
+<td align="left">User Field</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>6</em></td>
+<td align="center">56–56</td>
+<td align="center">25</td>
+<td align="center">B</td>
+<td align="left">Reserved</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="left"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th align="center">Field</th>
+<th align="center">Position</th>
+<th align="center">Size</th>
+<th align="center">Type</th>
+<th align="left">Field Name</th>
+<th align="center">Usage - M, C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><em>1</em></td>
+<td align="center">01–02</td>
+<td align="center">2</td>
+<td align="center">N</td>
+<td align="left">Record Type</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>2</em></td>
+<td align="center">03–06</td>
+<td align="center">4</td>
+<td align="center">N</td>
+<td align="left">Items Within Bundle Count</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>3</em></td>
+<td align="center">07–18</td>
+<td align="center">12</td>
+<td align="center">N</td>
+<td align="left">Bundle Total Amount</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>4</em></td>
+<td align="center">19–30</td>
+<td align="center">12</td>
+<td align="center">N</td>
+<td align="left">MICR Valid Total Amount</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>5</em></td>
+<td align="center">31–35</td>
+<td align="center">5</td>
+<td align="center">N</td>
+<td align="left">Images within Bundle Count</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>6</em></td>
+<td align="center">36–55</td>
+<td align="center">20</td>
+<td align="center">ANS</td>
+<td align="left">User Field</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>7</em></td>
+<td align="center">56–56</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">Bundle ID</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>8</em></td>
+<td align="center">57–80</td>
+<td align="center">24</td>
+<td align="center">B</td>
+<td align="left">Bundle Sequence Number</td>
+<td align="center">M</td>
+</tr>
+</tbody>
+</table>
+<h3 id="90-cash-letter-control-record">90 Cash Letter Control Record<a class="headerlink" href="#90-cash-letter-control-record" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th align="center">Field</th>
+<th align="center">Position</th>
+<th align="center">Size</th>
+<th align="center">Type</th>
+<th align="left">Field Name</th>
+<th align="center">Usage - M, C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><em>1</em></td>
+<td align="center">01–02</td>
+<td align="center">2</td>
+<td align="center">N</td>
+<td align="left">Record Type</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>2</em></td>
+<td align="center">03-08</td>
+<td align="center">6</td>
+<td align="center">N</td>
+<td align="left">Bundle Count</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>3</em></td>
+<td align="center">09-16</td>
+<td align="center">8</td>
+<td align="center">N</td>
+<td align="left">Items Within Cash letter Count</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>4</em></td>
+<td align="center">17-30</td>
+<td align="center">14</td>
+<td align="center">N</td>
+<td align="left">Cash Letter Total Amount</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>5</em></td>
+<td align="center">31-39</td>
+<td align="center">9</td>
+<td align="center">N</td>
+<td align="left">Images Within Cash Letter Count</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>6</em></td>
+<td align="center">40–57</td>
+<td align="center">18</td>
+<td align="center">ANS</td>
+<td align="left">ECE Institution Name</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>7</em></td>
+<td align="center">58-65</td>
+<td align="center">8</td>
+<td align="center">N</td>
+<td align="left">Settlement Date</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>8</em></td>
+<td align="center">66-66</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">Credit Total Indicator</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>9</em></td>
+<td align="center">67–80</td>
+<td align="center">14</td>
+<td align="center">B</td>
+<td align="left">Reserved</td>
+<td align="center">M</td>
+</tr>
+</tbody>
+</table>
+<h3 id="99-file-control-record">99 File Control Record<a class="headerlink" href="#99-file-control-record" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th align="center">Field</th>
+<th align="center">Position</th>
+<th align="center">Size</th>
+<th align="center">Type</th>
+<th align="left">Field Name</th>
+<th align="center">Usage - M, C</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><em>1</em></td>
+<td align="center">01–02</td>
+<td align="center">2</td>
+<td align="center">N</td>
+<td align="left">Record Type</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>2</em></td>
+<td align="center">03-08</td>
+<td align="center">6</td>
+<td align="center">N</td>
+<td align="left">Cash Letter Count</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>3</em></td>
+<td align="center">09-16</td>
+<td align="center">8</td>
+<td align="center">N</td>
+<td align="left">Total Record Count</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>4</em></td>
+<td align="center">17-24</td>
+<td align="center">8</td>
+<td align="center">N</td>
+<td align="left">Total Item Count</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>5</em></td>
+<td align="center">25-40</td>
+<td align="center">16</td>
+<td align="center">N</td>
+<td align="left">File Total Amount</td>
+<td align="center">M</td>
+</tr>
+<tr>
+<td align="center"><em>6</em></td>
+<td align="center">41-54</td>
+<td align="center">14</td>
+<td align="center">ANS</td>
+<td align="left">Immediate Origin Contact Name</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>7</em></td>
+<td align="center">55-64</td>
+<td align="center">10</td>
+<td align="center">N</td>
+<td align="left">Immediate Origin Contact Phone Number</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>8</em></td>
+<td align="center">65-65</td>
+<td align="center">1</td>
+<td align="center">N</td>
+<td align="left">Credit Total Indicator</td>
+<td align="center">C</td>
+</tr>
+<tr>
+<td align="center"><em>9</em></td>
+<td align="center">66-80</td>
+<td align="center">15</td>
+<td align="center">B</td>
+<td align="left">Reserved</td>
+<td align="center">M</td>
+</tr>
+</tbody>
+</table>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../" title="Overview" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Overview
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../../ofac/" title="Overview" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Overview
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2017 - 2019 Moov Authors
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://moov.io" class="md-footer-social__link fa fa-globe"></a>
+    
+      <a href="https://github.com/moov-io" class="md-footer-social__link fa fa-github-alt"></a>
+    
+      <a href="https://twitter.com/moov_io" class="md-footer-social__link fa fa-twitter"></a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.245445c6.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="../../assets/javascript/github-buttons.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,4199 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Open Source Financial Technology Micro Services">
+      
+      
+        <link rel="canonical" href="https://docs.moov.io/wire/fedWireMessage-Structure/">
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.ico">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.0">
+    
+    
+      
+        <title>WIRE Fed Wire Message Structure - Moov Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.0284f74d.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.01803549.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#e91e63">
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.74668098.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-118148273-1", "moov.io")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="pink" data-md-color-accent="indigo">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#the-following-tags-are-mandatory-for-all-transfers" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://docs.moov.io/" title="Moov Documentation" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              Moov Documentation
+            </span>
+            <span class="md-header-nav__topic">
+              
+                WIRE Fed Wire Message Structure
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/moov-io/docs/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    moov-io/docs
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../.." title="Introduction" class="md-tabs__link">
+          Introduction
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../ach/" title="ACH" class="md-tabs__link">
+          ACH
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../fed/" title="FED" class="md-tabs__link">
+          FED
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../icl/" title="Image Cash Letter" class="md-tabs__link">
+          Image Cash Letter
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../ofac/" title="OFAC" class="md-tabs__link">
+          OFAC
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../" title="WIRE" class="md-tabs__link md-tabs__link--active">
+          WIRE
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../tutorials/local-dev/" title="Tutorials" class="md-tabs__link">
+          Tutorials
+        </a>
+      
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://docs.moov.io/" title="Moov Documentation" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    Moov Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/moov-io/docs/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    moov-io/docs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-1" type="checkbox" id="nav-1">
+    
+    <label class="md-nav__link" for="nav-1">
+      Introduction
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-1">
+        Introduction
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Welcome" class="md-nav__link">
+      Welcome
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      ACH
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        ACH
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ach/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-2" type="checkbox" id="nav-2-2">
+    
+    <label class="md-nav__link" for="nav-2-2">
+      Tutorials
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-2">
+        Tutorials
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ach/merging-files/" title="Merging ACH Files" class="md-nav__link">
+      Merging ACH Files
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-3" type="checkbox" id="nav-2-3">
+    
+    <label class="md-nav__link" for="nav-2-3">
+      ACH Developers
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-3">
+        ACH Developers
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ach/intro/" title="Intro to ACH" class="md-nav__link">
+      Intro to ACH
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ach/file-structure/" title="ACH File Structure" class="md-nav__link">
+      ACH File Structure
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ach/sec-codes-table/" title="Picking an SEC Code" class="md-nav__link">
+      Picking an SEC Code
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      FED
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        FED
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../fed/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../fed/file-structure/" title="FED File Structure" class="md-nav__link">
+      FED File Structure
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Image Cash Letter
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Image Cash Letter
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../icl/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../icl/file-structure/" title="ICL File Structure" class="md-nav__link">
+      ICL File Structure
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      OFAC
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        OFAC
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ofac/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ofac/file-structure/" title="OFAC File Structure" class="md-nav__link">
+      OFAC File Structure
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" checked>
+    
+    <label class="md-nav__link" for="nav-6">
+      WIRE
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        WIRE
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        WIRE Fed Wire Message Structure
+      </label>
+    
+    <a href="./" title="WIRE Fed Wire Message Structure" class="md-nav__link md-nav__link--active">
+      WIRE Fed Wire Message Structure
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-following-tags-are-mandatory-for-all-transfers" title="The following Tags are mandatory for all transfers:" class="md-nav__link">
+    The following Tags are mandatory for all transfers:
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sendersupplied" title="SenderSupplied" class="md-nav__link">
+    SenderSupplied
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#typesubtype" title="TypeSubType" class="md-nav__link">
+    TypeSubType
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inputmessageaccountabilitydata-imad" title="InputMessageAccountabilityData (IMAD)" class="md-nav__link">
+    InputMessageAccountabilityData (IMAD)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#amount" title="Amount" class="md-nav__link">
+    Amount
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#senderdepositoryinstitution" title="SenderDepositoryInstitution" class="md-nav__link">
+    SenderDepositoryInstitution
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#receiverdepositoryinstitution" title="ReceiverDepositoryInstitution" class="md-nav__link">
+    ReceiverDepositoryInstitution
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#businessfunctioncode" title="BusinessFunctionCode" class="md-nav__link">
+    BusinessFunctionCode
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#other-transfer-information" title="Other Transfer Information" class="md-nav__link">
+    Other Transfer Information
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#senderreference" title="SenderReference" class="md-nav__link">
+    SenderReference
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#localinstrument" title="LocalInstrument" class="md-nav__link">
+    LocalInstrument
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paymentnotification" title="PaymentNotification" class="md-nav__link">
+    PaymentNotification
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#charges" title="Charges" class="md-nav__link">
+    Charges
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instructedamount" title="InstructedAmount" class="md-nav__link">
+    InstructedAmount
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exchangerate" title="ExchangeRate" class="md-nav__link">
+    ExchangeRate
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#beneficiary-information" title="Beneficiary Information" class="md-nav__link">
+    Beneficiary Information
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#intermediaryfi" title="IntermediaryFI" class="md-nav__link">
+    IntermediaryFI
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beneficiaryfi" title="BeneficiaryFI" class="md-nav__link">
+    BeneficiaryFI
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beneficiary" title="Beneficiary" class="md-nav__link">
+    Beneficiary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beneficiaryreference" title="BeneficiaryReference" class="md-nav__link">
+    BeneficiaryReference
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accountdebiteddrawdown" title="AccountDebitedDrawdown" class="md-nav__link">
+    AccountDebitedDrawdown
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#originator-information" title="Originator Information" class="md-nav__link">
+    Originator Information
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#originator" title="Originator" class="md-nav__link">
+    Originator
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#originatoroptionf" title="OriginatorOptionF" class="md-nav__link">
+    OriginatorOptionF
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#originatorfi" title="OriginatorFI" class="md-nav__link">
+    OriginatorFI
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instructingfi" title="InstructingFI" class="md-nav__link">
+    InstructingFI
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accountcrediteddrawdown" title="AccountCreditedDrawdown" class="md-nav__link">
+    AccountCreditedDrawdown
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#originatortobeneficiary" title="OriginatorToBeneficiary" class="md-nav__link">
+    OriginatorToBeneficiary
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#financial-institution-to-financial-institution-information" title="Financial Institution to Financial Institution Information" class="md-nav__link">
+    Financial Institution to Financial Institution Information
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#receiverfi" title="ReceiverFI" class="md-nav__link">
+    ReceiverFI
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drawdowndebitaccountadvice" title="DrawdownDebitAccountAdvice" class="md-nav__link">
+    DrawdownDebitAccountAdvice
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intermediaryfi_1" title="IntermediaryFI" class="md-nav__link">
+    IntermediaryFI
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intermediaryfiadvice" title="IntermediaryFIAdvice" class="md-nav__link">
+    IntermediaryFIAdvice
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beneficiaryfi_1" title="BeneficiaryFI" class="md-nav__link">
+    BeneficiaryFI
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beneficiaryfiadvice" title="BeneficiaryFIAdvice" class="md-nav__link">
+    BeneficiaryFIAdvice
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beneficiary_1" title="Beneficiary" class="md-nav__link">
+    Beneficiary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beneficiary-advice" title="Beneficiary Advice" class="md-nav__link">
+    Beneficiary Advice
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paymentmethodtobeneficiary" title="PaymentMethodToBeneficiary" class="md-nav__link">
+    PaymentMethodToBeneficiary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#additionalfitofi" title="AdditionalFiToFi" class="md-nav__link">
+    AdditionalFiToFi
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cover-payment-information" title="Cover Payment Information" class="md-nav__link">
+    Cover Payment Information
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#currencyinstructedamount" title="CurrencyInstructedAmount" class="md-nav__link">
+    CurrencyInstructedAmount
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#orderingcustomer" title="OrderingCustomer" class="md-nav__link">
+    OrderingCustomer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#orderinginstitution" title="OrderingInstitution" class="md-nav__link">
+    OrderingInstitution
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intermediaryinstitution" title="IntermediaryInstitution" class="md-nav__link">
+    IntermediaryInstitution
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#institutionaccount" title="InstitutionAccount" class="md-nav__link">
+    InstitutionAccount
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beneficiarycustomer" title="BeneficiaryCustomer" class="md-nav__link">
+    BeneficiaryCustomer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remittance" title="Remittance" class="md-nav__link">
+    Remittance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sender-to-receiver" title="Sender to Receiver" class="md-nav__link">
+    Sender to Receiver
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unstructured-addenda" title="Unstructured Addenda" class="md-nav__link">
+    Unstructured Addenda
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relatedremittance" title="RelatedRemittance" class="md-nav__link">
+    RelatedRemittance
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#structured-remittance-information" title="Structured Remittance Information" class="md-nav__link">
+    Structured Remittance Information
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#remittanceoriginator" title="RemittanceOriginator" class="md-nav__link">
+    RemittanceOriginator
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remittancebeneficiary" title="RemittanceBeneficiary" class="md-nav__link">
+    RemittanceBeneficiary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#primaryremittancedocument" title="PrimaryRemittanceDocument" class="md-nav__link">
+    PrimaryRemittanceDocument
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actualamountpaid" title="ActualAmountPaid" class="md-nav__link">
+    ActualAmountPaid
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#grossamountofremittancedocument" title="GrossAmountOfRemittanceDocument" class="md-nav__link">
+    GrossAmountOfRemittanceDocument
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#amountnegotiateddiscount" title="AmountNegotiatedDiscount" class="md-nav__link">
+    AmountNegotiatedDiscount
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adjustment" title="Adjustment" class="md-nav__link">
+    Adjustment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dateremittancedocument" title="DateRemittanceDocument" class="md-nav__link">
+    DateRemittanceDocument
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#secondaryremittancedocument" title="SecondaryRemittanceDocument" class="md-nav__link">
+    SecondaryRemittanceDocument
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remittancefreetext" title="RemittanceFreeText" class="md-nav__link">
+    RemittanceFreeText
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#messagedisposition" title="MessageDisposition" class="md-nav__link">
+    MessageDisposition
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#receipttimestamp" title="ReceiptTimeStamp" class="md-nav__link">
+    ReceiptTimeStamp
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputmessageaccountabilitydata" title="OutputMessageAccountabilityData" class="md-nav__link">
+    OutputMessageAccountabilityData
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#errorwire" title="ErrorWire" class="md-nav__link">
+    ErrorWire
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../DateMMDD/" title="Date" class="md-nav__link">
+      Date
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../TimeHHMM/" title="Time" class="md-nav__link">
+      Time
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../address/" title="Address" class="md-nav__link">
+      Address
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../remittanceData/" title="Remittance Data" class="md-nav__link">
+      Remittance Data
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Tutorials
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        Tutorials
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../tutorials/local-dev/" title="Local Dev with Moov" class="md-nav__link">
+      Local Dev with Moov
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-following-tags-are-mandatory-for-all-transfers" title="The following Tags are mandatory for all transfers:" class="md-nav__link">
+    The following Tags are mandatory for all transfers:
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sendersupplied" title="SenderSupplied" class="md-nav__link">
+    SenderSupplied
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#typesubtype" title="TypeSubType" class="md-nav__link">
+    TypeSubType
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inputmessageaccountabilitydata-imad" title="InputMessageAccountabilityData (IMAD)" class="md-nav__link">
+    InputMessageAccountabilityData (IMAD)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#amount" title="Amount" class="md-nav__link">
+    Amount
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#senderdepositoryinstitution" title="SenderDepositoryInstitution" class="md-nav__link">
+    SenderDepositoryInstitution
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#receiverdepositoryinstitution" title="ReceiverDepositoryInstitution" class="md-nav__link">
+    ReceiverDepositoryInstitution
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#businessfunctioncode" title="BusinessFunctionCode" class="md-nav__link">
+    BusinessFunctionCode
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#other-transfer-information" title="Other Transfer Information" class="md-nav__link">
+    Other Transfer Information
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#senderreference" title="SenderReference" class="md-nav__link">
+    SenderReference
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#localinstrument" title="LocalInstrument" class="md-nav__link">
+    LocalInstrument
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paymentnotification" title="PaymentNotification" class="md-nav__link">
+    PaymentNotification
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#charges" title="Charges" class="md-nav__link">
+    Charges
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instructedamount" title="InstructedAmount" class="md-nav__link">
+    InstructedAmount
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exchangerate" title="ExchangeRate" class="md-nav__link">
+    ExchangeRate
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#beneficiary-information" title="Beneficiary Information" class="md-nav__link">
+    Beneficiary Information
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#intermediaryfi" title="IntermediaryFI" class="md-nav__link">
+    IntermediaryFI
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beneficiaryfi" title="BeneficiaryFI" class="md-nav__link">
+    BeneficiaryFI
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beneficiary" title="Beneficiary" class="md-nav__link">
+    Beneficiary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beneficiaryreference" title="BeneficiaryReference" class="md-nav__link">
+    BeneficiaryReference
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accountdebiteddrawdown" title="AccountDebitedDrawdown" class="md-nav__link">
+    AccountDebitedDrawdown
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#originator-information" title="Originator Information" class="md-nav__link">
+    Originator Information
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#originator" title="Originator" class="md-nav__link">
+    Originator
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#originatoroptionf" title="OriginatorOptionF" class="md-nav__link">
+    OriginatorOptionF
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#originatorfi" title="OriginatorFI" class="md-nav__link">
+    OriginatorFI
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instructingfi" title="InstructingFI" class="md-nav__link">
+    InstructingFI
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accountcrediteddrawdown" title="AccountCreditedDrawdown" class="md-nav__link">
+    AccountCreditedDrawdown
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#originatortobeneficiary" title="OriginatorToBeneficiary" class="md-nav__link">
+    OriginatorToBeneficiary
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#financial-institution-to-financial-institution-information" title="Financial Institution to Financial Institution Information" class="md-nav__link">
+    Financial Institution to Financial Institution Information
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#receiverfi" title="ReceiverFI" class="md-nav__link">
+    ReceiverFI
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drawdowndebitaccountadvice" title="DrawdownDebitAccountAdvice" class="md-nav__link">
+    DrawdownDebitAccountAdvice
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intermediaryfi_1" title="IntermediaryFI" class="md-nav__link">
+    IntermediaryFI
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intermediaryfiadvice" title="IntermediaryFIAdvice" class="md-nav__link">
+    IntermediaryFIAdvice
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beneficiaryfi_1" title="BeneficiaryFI" class="md-nav__link">
+    BeneficiaryFI
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beneficiaryfiadvice" title="BeneficiaryFIAdvice" class="md-nav__link">
+    BeneficiaryFIAdvice
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beneficiary_1" title="Beneficiary" class="md-nav__link">
+    Beneficiary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beneficiary-advice" title="Beneficiary Advice" class="md-nav__link">
+    Beneficiary Advice
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#paymentmethodtobeneficiary" title="PaymentMethodToBeneficiary" class="md-nav__link">
+    PaymentMethodToBeneficiary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#additionalfitofi" title="AdditionalFiToFi" class="md-nav__link">
+    AdditionalFiToFi
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cover-payment-information" title="Cover Payment Information" class="md-nav__link">
+    Cover Payment Information
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#currencyinstructedamount" title="CurrencyInstructedAmount" class="md-nav__link">
+    CurrencyInstructedAmount
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#orderingcustomer" title="OrderingCustomer" class="md-nav__link">
+    OrderingCustomer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#orderinginstitution" title="OrderingInstitution" class="md-nav__link">
+    OrderingInstitution
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intermediaryinstitution" title="IntermediaryInstitution" class="md-nav__link">
+    IntermediaryInstitution
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#institutionaccount" title="InstitutionAccount" class="md-nav__link">
+    InstitutionAccount
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#beneficiarycustomer" title="BeneficiaryCustomer" class="md-nav__link">
+    BeneficiaryCustomer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remittance" title="Remittance" class="md-nav__link">
+    Remittance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sender-to-receiver" title="Sender to Receiver" class="md-nav__link">
+    Sender to Receiver
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unstructured-addenda" title="Unstructured Addenda" class="md-nav__link">
+    Unstructured Addenda
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#relatedremittance" title="RelatedRemittance" class="md-nav__link">
+    RelatedRemittance
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#structured-remittance-information" title="Structured Remittance Information" class="md-nav__link">
+    Structured Remittance Information
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#remittanceoriginator" title="RemittanceOriginator" class="md-nav__link">
+    RemittanceOriginator
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remittancebeneficiary" title="RemittanceBeneficiary" class="md-nav__link">
+    RemittanceBeneficiary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#primaryremittancedocument" title="PrimaryRemittanceDocument" class="md-nav__link">
+    PrimaryRemittanceDocument
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actualamountpaid" title="ActualAmountPaid" class="md-nav__link">
+    ActualAmountPaid
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#grossamountofremittancedocument" title="GrossAmountOfRemittanceDocument" class="md-nav__link">
+    GrossAmountOfRemittanceDocument
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#amountnegotiateddiscount" title="AmountNegotiatedDiscount" class="md-nav__link">
+    AmountNegotiatedDiscount
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adjustment" title="Adjustment" class="md-nav__link">
+    Adjustment
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dateremittancedocument" title="DateRemittanceDocument" class="md-nav__link">
+    DateRemittanceDocument
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#secondaryremittancedocument" title="SecondaryRemittanceDocument" class="md-nav__link">
+    SecondaryRemittanceDocument
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remittancefreetext" title="RemittanceFreeText" class="md-nav__link">
+    RemittanceFreeText
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#messagedisposition" title="MessageDisposition" class="md-nav__link">
+    MessageDisposition
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#receipttimestamp" title="ReceiptTimeStamp" class="md-nav__link">
+    ReceiptTimeStamp
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#outputmessageaccountabilitydata" title="OutputMessageAccountabilityData" class="md-nav__link">
+    OutputMessageAccountabilityData
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#errorwire" title="ErrorWire" class="md-nav__link">
+    ErrorWire
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/moov-io/docs/edit/master/docs/wire/fedWireMessage-Structure.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                
+                
+                  <h1>WIRE Fed Wire Message Structure</h1>
+                
+                <h2 id="the-following-tags-are-mandatory-for-all-transfers">The following Tags are mandatory for all transfers:<a class="headerlink" href="#the-following-tags-are-mandatory-for-all-transfers" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SenderSupplied</td>
+</tr>
+<tr>
+<td>TypeSubType</td>
+</tr>
+<tr>
+<td>InputMessageAccountabilityData</td>
+</tr>
+<tr>
+<td>Amount</td>
+</tr>
+<tr>
+<td>SenderDepositoryInstitution</td>
+</tr>
+<tr>
+<td>ReceiverDepositoryInstitution</td>
+</tr>
+<tr>
+<td>BusinessFunctionCode</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sendersupplied">SenderSupplied<a class="headerlink" href="#sendersupplied" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>FormatVersion</strong></td>
+<td><strong>string</strong></td>
+<td>FormatVersion 30</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>UserRequestCorrelation</strong></td>
+<td><strong>string</strong></td>
+<td>UserRequestCorrelation</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>TestProductionCode</strong></td>
+<td><strong>string</strong></td>
+<td>TestProductionCode  * &#x60;T&#x60; - Test * &#x60;P&#x60; - Production</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>MessageDuplicationCode</strong></td>
+<td><strong>string</strong></td>
+<td>MessageDuplicationCode  * &#x60; &#x60; - Original Message * &#x60;R&#x60; - Retrieval of an original message * &#x60;P&#x60; - Resend</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="typesubtype">TypeSubType<a class="headerlink" href="#typesubtype" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>TypeCode</strong></td>
+<td><strong>string</strong></td>
+<td>TypeCode:  * &#x60;10&#x60; - Funds Transfer - A funds transfer in which the sender and/or receiver may be a bank or a third party (i.e., customer of a bank). * &#x60;15&#x60; - Foreign Transfer - A funds transfer to or from a foreign central bank or government or international organization with an account at the Federal Reserve Bank of New York. * &#x60;16&#x60; - Settlement Transfer - A funds transfer between Fedwire Funds Service participants.</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>SubTypeCode</strong></td>
+<td><strong>string</strong></td>
+<td>SubTypeCode:  * &#x60;00&#x60; - Basic Funds Transfer - A basic value funds transfer. * &#x60;01&#x60; - Request for Reversal - A non-value request for reversal of a funds transfer originated on the current business day. * &#x60;02&#x60; - Reversal of Transfer - A value reversal of a funds transfer received on the current business day.  May be used in response to a subtype code ‘01’ Request for Reversal. * &#x60;07&#x60; - Request for Reversal of a Prior Day Transfer - A non-value request for a reversal of a funds transfer originated on a prior business day. * &#x60;08&#x60; - Reversal of a Prior Day Transfer - A value reversal of a funds transfer received on a prior business day.  May be used in response to a subtype code ‘07’ Request for Reversal of a Prior Day Transfer. * &#x60;31&#x60; - Request for Credit (Drawdown) - A non-value request for the receiver to send a funds transfer to a designated party. * &#x60;32&#x60; - Funds Transfer Honoring a Request for Credit (Drawdown) -  A value funds transfer honoring a subtype 31 request for credit. * &#x60;33&#x60; -Refusal to Honor a Request for Credit (Drawdown) - A non-value message indicating refusal to honor a subtype 31 request for credit. * &#x60;90&#x60; - Service Message - A non-value message used to communicate questions and information that is not covered by a specific subtype.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="inputmessageaccountabilitydata-imad">InputMessageAccountabilityData (IMAD)<a class="headerlink" href="#inputmessageaccountabilitydata-imad" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>InputCycleDate</strong></td>
+<td><strong>string</strong></td>
+<td>InputCycleDate CCYYMMDD</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>InputSource</strong></td>
+<td><strong>string</strong></td>
+<td>InputSource</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>InputSequenceNumber</strong></td>
+<td><strong>string</strong></td>
+<td>InputSequenceNumber</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="amount">Amount<a class="headerlink" href="#amount" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Amount</strong></td>
+<td><strong>string</strong></td>
+<td>Amount 12 numeric, right-justified with leading zeros, an implied decimal point and no commas; e.g., $12,345.67 becomes 000001234567 Can be all zeros for subtype 90</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="senderdepositoryinstitution">SenderDepositoryInstitution<a class="headerlink" href="#senderdepositoryinstitution" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SenderABANumber</strong></td>
+<td><strong>string</strong></td>
+<td>SenderABANumber</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>SenderShortName</strong></td>
+<td><strong>string</strong></td>
+<td>SenderShortName</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="receiverdepositoryinstitution">ReceiverDepositoryInstitution<a class="headerlink" href="#receiverdepositoryinstitution" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ReceiverABANumber</strong></td>
+<td><strong>string</strong></td>
+<td>ReceiverABANumber</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>ReceiverShortName</strong></td>
+<td><strong>string</strong></td>
+<td>ReceiverShortName</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="businessfunctioncode">BusinessFunctionCode<a class="headerlink" href="#businessfunctioncode" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>BusinessFunctionCode</strong></td>
+<td><strong>string</strong></td>
+<td>BusinessFunctionCode * &#x60;BTR&#x60; - Bank Transfer (Beneficiary is a bank) * &#x60;DRC&#x60; - Customer or Corporate Drawdown Request * &#x60;CKS&#x60; - Check Same Day Settlement * &#x60;DRW&#x60; - Drawdown Payment * &#x60;CTP&#x60; - Customer Transfer Plus * &#x60;FFR&#x60; - Fed Funds Returned * &#x60;CTR&#x60; - Customer Transfer (Beneficiary is a not a bank) * &#x60;FFS&#x60; - Fed Funds Sold * &#x60;DEP&#x60; - Deposit to Sender’s Account * &#x60;SVC&#x60; - Service Message * &#x60;DRB&#x60; - Bank-to-Bank Drawdown Request</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>TransactionTypeCode</strong></td>
+<td><strong>string</strong></td>
+<td>TransactionTypeCode If {3600} is CTR, an optional Transaction Type Code element is permitted; however, the Transaction Type Code &amp;<a class="magiclink magiclink-github magiclink-issue" href="https://github.com/squidfunk/mkdocs-material/issues/39" title="GitHub Issue: squidfunk/mkdocs-material#39">#39</a>;COV&amp;<a class="magiclink magiclink-github magiclink-issue" href="https://github.com/squidfunk/mkdocs-material/issues/39" title="GitHub Issue: squidfunk/mkdocs-material#39">#39</a>; is not permitted.</td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h2 id="other-transfer-information">Other Transfer Information<a class="headerlink" href="#other-transfer-information" title="Permanent link">&para;</a></h2>
+<h3 id="senderreference">SenderReference<a class="headerlink" href="#senderreference" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SenderReference</strong></td>
+<td><strong>string</strong></td>
+<td>SenderReference</td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="localinstrument">LocalInstrument<a class="headerlink" href="#localinstrument" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>LocalInstrumentCode</strong></td>
+<td><strong>string</strong></td>
+<td>LocalInstrument  * &#x60;ANSI&#x60; - ANSI X12 format * &#x60;COVS&#x60; - Sequence B Cover Payment Structured * &#x60;GXML&#x60; - General XML format * &#x60;IXML&#x60; - ISO 20022 XML formaT * &#x60;NARR&#x60; - Narrative Text * &#x60;PROP&#x60; - Proprietary Local Instrument Code * &#x60;RMTS&#x60; - Remittance Information Structured * &#x60;RRMT&#x60; - Related Remittance Information * &#x60;S820&#x60; - STP 820 format * &#x60;SWIF&#x60; - SWIFT field 70 (Remittance Information) * &#x60;UEDI&#x60; - UN/EDIFACT format</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>ProprietaryCode</strong></td>
+<td><strong>string</strong></td>
+<td>ProprietaryCode</td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="paymentnotification">PaymentNotification<a class="headerlink" href="#paymentnotification" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>PaymentNotificationIndicator</strong></td>
+<td><strong>string</strong></td>
+<td>PaymentNotificationIndicator  * &#x60;0 - 6&#x60; - Reserved for market practice conventions. * &#x60;7 - 9&#x60; - Reserved for bilateral agreements between Fedwire senders and receivers.</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>ContactNotificationElectronicAddress</strong></td>
+<td><strong>string</strong></td>
+<td>ContactNotificationElectronicAddress</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>ContactName</strong></td>
+<td><strong>string</strong></td>
+<td>ContactName</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>ContactPhoneNumber</strong></td>
+<td><strong>string</strong></td>
+<td>ContactPhoneNumber</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>ContactMobileNumber</strong></td>
+<td><strong>string</strong></td>
+<td>ContactMobileNumber</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>FaxNumber</strong></td>
+<td><strong>string</strong></td>
+<td>FaxNumber</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>EndToEndIdentification</strong></td>
+<td><strong>string</strong></td>
+<td>EndToEndIdentification</td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="charges">Charges<a class="headerlink" href="#charges" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ChargeDetails</strong></td>
+<td><strong>string</strong></td>
+<td>ChargeDetails * &#x60;B&#x60; - Beneficiary * &#x60;S&#x60; - Shared</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>SendersChargesOne</strong></td>
+<td><strong>string</strong></td>
+<td>SendersChargesOne  The first three characters must contain an alpha currency code (e.g., USD).  The remaining characters for the amount must begin with at least one numeric character (0-9) and only one decimal comma marker.  $1,234.56 should be entered as USD1234,56 and $0.99 should be entered as USD0,99.</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>SendersChargesTwo</strong></td>
+<td><strong>string</strong></td>
+<td>SendersChargesTwo  The first three characters must contain an alpha currency code (e.g., USD).  The remaining characters for the amount must begin with at least one numeric character (0-9) and only one decimal comma marker.  $1,234.56 should be entered as USD1234,56 and $0.99 should be entered as USD0,99.</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>SendersChargesThree</strong></td>
+<td><strong>string</strong></td>
+<td>SendersChargesThree  The first three characters must contain an alpha currency code (e.g., USD).  The remaining characters for the amount must begin with at least one numeric character (0-9) and only one decimal comma marker.  $1,234.56 should be entered as USD1234,56 and $0.99 should be entered as USD0,99.</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>SendersChargesFour</strong></td>
+<td><strong>string</strong></td>
+<td>SendersChargesFour  The first three characters must contain an alpha currency code (e.g., USD).  The remaining characters for the amount must begin with at least one numeric character (0-9) and only one decimal comma marker.  $1,234.56 should be entered as USD1234,56 and $0.99 should be entered as USD0,99.</td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="instructedamount">InstructedAmount<a class="headerlink" href="#instructedamount" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CurrencyCode</strong></td>
+<td><strong>string</strong></td>
+<td>CurrencyCode</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>Amount</strong></td>
+<td><strong>string</strong></td>
+<td>Amount  Must begin with at least one numeric character (0-9) and contain only one decimal comma marker (e.g., $1,234.56 should be entered as 1234,56 and $0.99 should be entered as</td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="exchangerate">ExchangeRate<a class="headerlink" href="#exchangerate" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ExchangeRate</strong></td>
+<td><strong>string</strong></td>
+<td>ExchangeRate is the exchange rate  Must contain at least one numeric character and only one decimal comma marker (e.g., an exchange rate of 1.2345 should be entered as 1,2345).</td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h2 id="beneficiary-information">Beneficiary Information<a class="headerlink" href="#beneficiary-information" title="Permanent link">&para;</a></h2>
+<h3 id="intermediaryfi">IntermediaryFI<a class="headerlink" href="#intermediaryfi" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>IdentificationCode</strong></td>
+<td><strong>string</strong></td>
+<td>IdentificationCode:  * &#x60;B&#x60; - SWIFT Bank Identifier Code (BIC) * &#x60;C&#x60; - CHIPS Participant * &#x60;D&#x60; - Demand Deposit Account (DDA) Number * &#x60;F&#x60; - Fed Routing Number * &#x60;T&#x60; - SWIFT BIC or Bank Entity Identifier (BEI) and Account Number * &#x60;U&#x60; - CHIPS Identifier</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Identifier</strong></td>
+<td><strong>string</strong></td>
+<td>Identifier</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Name</strong></td>
+<td><strong>string</strong></td>
+<td>Name</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Address</strong></td>
+<td><a href="../address/"><strong>Address</strong></a></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="beneficiaryfi">BeneficiaryFI<a class="headerlink" href="#beneficiaryfi" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>IdentificationCode</strong></td>
+<td><strong>string</strong></td>
+<td>IdentificationCode:  * &#x60;B&#x60; - SWIFT Bank Identifier Code (BIC) * &#x60;C&#x60; - CHIPS Participant * &#x60;D&#x60; - Demand Deposit Account (DDA) Number * &#x60;F&#x60; - Fed Routing Number * &#x60;T&#x60; - SWIFT BIC or Bank Entity Identifier (BEI) and Account Number * &#x60;U&#x60; - CHIPS Identifier</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Identifier</strong></td>
+<td><strong>string</strong></td>
+<td>Identifier</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Name</strong></td>
+<td><strong>string</strong></td>
+<td>Name</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Address</strong></td>
+<td><a href="../address/"><strong>Address</strong></a></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="beneficiary">Beneficiary<a class="headerlink" href="#beneficiary" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>IdentificationCode</strong></td>
+<td><strong>string</strong></td>
+<td>IdentificationCode:  * &#x60;1&#x60; - Passport Number * &#x60;2&#x60; - Tax Identification Number * &#x60;3&#x60; - Driver’s License Number * &#x60;4&#x60; - Alien Registration Number * &#x60;5&#x60; - Corporate Identification * &#x60;9&#x60; - Other Identification</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Identifier</strong></td>
+<td><strong>string</strong></td>
+<td>Identifier</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Name</strong></td>
+<td><strong>string</strong></td>
+<td>Name</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Address</strong></td>
+<td><a href="../address/"><strong>Address</strong></a></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="beneficiaryreference">BeneficiaryReference<a class="headerlink" href="#beneficiaryreference" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>BeneficiaryReference</strong></td>
+<td><strong>string</strong></td>
+<td>BeneficiaryReference</td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="accountdebiteddrawdown">AccountDebitedDrawdown<a class="headerlink" href="#accountdebiteddrawdown" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>IdentificationCode</strong></td>
+<td><strong>string</strong></td>
+<td>Identification Code * &#x60;D&#x60; - Debit</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Identifier</strong></td>
+<td><strong>string</strong></td>
+<td>Identifier</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Name</strong></td>
+<td><strong>string</strong></td>
+<td>Name</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Address</strong></td>
+<td><a href="../address/"><strong>Address</strong></a></td>
+<td></td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h2 id="originator-information">Originator Information<a class="headerlink" href="#originator-information" title="Permanent link">&para;</a></h2>
+<h3 id="originator">Originator<a class="headerlink" href="#originator" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>IdentificationCode</strong></td>
+<td><strong>string</strong></td>
+<td>IdentificationCode:  * &#x60;1&#x60; - Passport Number * &#x60;2&#x60; - Tax Identification Number * &#x60;3&#x60; - Driver’s License Number * &#x60;4&#x60; - Alien Registration Number * &#x60;5&#x60; - Corporate Identification * &#x60;9&#x60; - Other Identification</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Identifier</strong></td>
+<td><strong>string</strong></td>
+<td>Identifier</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Name</strong></td>
+<td><strong>string</strong></td>
+<td>Name</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Address</strong></td>
+<td><a href="../address/"><strong>Address</strong></a></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="originatoroptionf">OriginatorOptionF<a class="headerlink" href="#originatoroptionf" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>PartyIdentifier</strong></td>
+<td><strong>string</strong></td>
+<td>PartyIdentifier  Must be one of the following two formats: 1. /Account Number (slash followed by at least one valid non-space character:  e.g., /123456)  2. Unique Identifier/ (4 character code followed by a slash and at least one valid non-space character:    e.g., SOSE/123-456-789) ARNU: Alien Registration Number CCPT: Passport Number CUST: Customer Identification Number  DRLC/    Driver’s License Number  EMPL/    Employer Number NIDN: National Identify Number  SOSE/    Social Security Number TXID: Tax Identification Number</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>Name</strong></td>
+<td><strong>string</strong></td>
+<td>Name  Format:  Must begin with Line Code 1 followed by a slash and at least one valid non-space character: e.g., 1/SMITH JOHN.</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineOne</strong></td>
+<td><strong>string</strong></td>
+<td>LineOne  Format: Must begin with one of the following Line Codes followed by a slash and at least one valid non-space character. 1 Name 2 Address 3 Country and Town 4 Date of Birth 5 Place of Birth 6 Customer Identification Number 7 National Identity Number 8 Additional Information  For example: 2/123 MAIN STREET 3/US/NEW YORK, NY 10000 7/111-22-3456</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineTwo</strong></td>
+<td><strong>string</strong></td>
+<td>LineTwo  Format: Must begin with one of the following Line Codes followed by a slash and at least one valid non-space character. 1 Name 2 Address 3 Country and Town 4 Date of Birth 5 Place of Birth 6 Customer Identification Number 7 National Identity Number 8 Additional Information  For example: 2/123 MAIN STREET 3/US/NEW YORK, NY 10000 7/111-22-3456</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineThree</strong></td>
+<td><strong>string</strong></td>
+<td>LineThree  Format: Must begin with one of the following Line Codes followed by a slash and at least one valid non-space character. 1 Name 2 Address 3 Country and Town 4 Date of Birth 5 Place of Birth 6 Customer Identification Number 7 National Identity Number 8 Additional Information  For example: 2/123 MAIN STREET 3/US/NEW YORK, NY 10000 7/111-22-3456</td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="originatorfi">OriginatorFI<a class="headerlink" href="#originatorfi" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>IdentificationCode</strong></td>
+<td><strong>string</strong></td>
+<td>IdentificationCode:  * &#x60;B&#x60; - SWIFT Bank Identifier Code (BIC) * &#x60;C&#x60; - CHIPS Participant * &#x60;D&#x60; - Demand Deposit Account (DDA) Number * &#x60;F&#x60; - Fed Routing Number * &#x60;T&#x60; - SWIFT BIC or Bank Entity Identifier (BEI) and Account Number * &#x60;U&#x60; - CHIPS Identifier</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Identifier</strong></td>
+<td><strong>string</strong></td>
+<td>Identifier</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Name</strong></td>
+<td><strong>string</strong></td>
+<td>Name</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Address</strong></td>
+<td><a href="../address/"><strong>Address</strong></a></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="instructingfi">InstructingFI<a class="headerlink" href="#instructingfi" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>IdentificationCode</strong></td>
+<td><strong>string</strong></td>
+<td>IdentificationCode:  * &#x60;B&#x60; - SWIFT Bank Identifier Code (BIC) * &#x60;C&#x60; - CHIPS Participant * &#x60;D&#x60; - Demand Deposit Account (DDA) Number * &#x60;F&#x60; - Fed Routing Number * &#x60;T&#x60; - SWIFT BIC or Bank Entity Identifier (BEI) and Account Number * &#x60;U&#x60; - CHIPS Identifier</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Identifier</strong></td>
+<td><strong>string</strong></td>
+<td>Identifier</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Name</strong></td>
+<td><strong>string</strong></td>
+<td>Name</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Address</strong></td>
+<td><a href="../address/"><strong>Address</strong></a></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="accountcrediteddrawdown">AccountCreditedDrawdown<a class="headerlink" href="#accountcrediteddrawdown" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>DrawdownCreditAccountNumber</strong></td>
+<td><strong>string</strong></td>
+<td>DrawdownCreditAccountNumber  9 character ABA</td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="originatortobeneficiary">OriginatorToBeneficiary<a class="headerlink" href="#originatortobeneficiary" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>LineOne</strong></td>
+<td><strong>string</strong></td>
+<td>LineOne</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineTwo</strong></td>
+<td><strong>string</strong></td>
+<td>LineTwo</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineThree</strong></td>
+<td><strong>string</strong></td>
+<td>LineThree</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineFour</strong></td>
+<td><strong>string</strong></td>
+<td>LineFour</td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h2 id="financial-institution-to-financial-institution-information">Financial Institution to Financial Institution Information<a class="headerlink" href="#financial-institution-to-financial-institution-information" title="Permanent link">&para;</a></h2>
+<h3 id="receiverfi">ReceiverFI<a class="headerlink" href="#receiverfi" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>LineOne</strong></td>
+<td><strong>string</strong></td>
+<td>LineOne</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineTwo</strong></td>
+<td><strong>string</strong></td>
+<td>LineTwo</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineThree</strong></td>
+<td><strong>string</strong></td>
+<td>LineThree</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineFour</strong></td>
+<td><strong>string</strong></td>
+<td>LineFour</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineFive</strong></td>
+<td><strong>string</strong></td>
+<td>LineFive</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineSix</strong></td>
+<td><strong>string</strong></td>
+<td>LineSix</td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="drawdowndebitaccountadvice">DrawdownDebitAccountAdvice<a class="headerlink" href="#drawdowndebitaccountadvice" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Name</td>
+<td>Type</td>
+<td>Description</td>
+<td>Notes</td>
+</tr>
+<tr>
+<td>------------</td>
+<td>-------------</td>
+<td>-------------</td>
+<td>-------------</td>
+</tr>
+<tr>
+<td><strong>AdviceCode</strong></td>
+<td><strong>string</strong></td>
+<td>AdviceCode  * &#x60;HLD - Hold * &#x60;LTR&#x60; - Letter * &#x60;PHN&#x60; - Phone * &#x60;TLX&#x60; - Telex * &#x60;WRE&#x60; - Wire  *</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineOne</strong></td>
+<td><strong>string</strong></td>
+<td>LineOne</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineTwo</strong></td>
+<td><strong>string</strong></td>
+<td>LineTwo</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineThree</strong></td>
+<td><strong>string</strong></td>
+<td>LineThree</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineFour</strong></td>
+<td><strong>string</strong></td>
+<td>LineFour</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineFive</strong></td>
+<td><strong>string</strong></td>
+<td>LineFive</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineSix</strong></td>
+<td><strong>string</strong></td>
+<td>LineSix</td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="intermediaryfi_1">IntermediaryFI<a class="headerlink" href="#intermediaryfi_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>LineOne</strong></td>
+<td><strong>string</strong></td>
+<td>LineOne</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineTwo</strong></td>
+<td><strong>string</strong></td>
+<td>LineTwo</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineThree</strong></td>
+<td><strong>string</strong></td>
+<td>LineThree</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineFour</strong></td>
+<td><strong>string</strong></td>
+<td>LineFour</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineFive</strong></td>
+<td><strong>string</strong></td>
+<td>LineFive</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineSix</strong></td>
+<td><strong>string</strong></td>
+<td>LineSix</td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="intermediaryfiadvice">IntermediaryFIAdvice<a class="headerlink" href="#intermediaryfiadvice" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>AdviceCode</strong></td>
+<td><strong>string</strong></td>
+<td>AdviceCode  * &#x60;HLD - Hold * &#x60;LTR&#x60; - Letter * &#x60;PHN&#x60; - Phone * &#x60;TLX&#x60; - Telex * &#x60;WRE&#x60; - Wire  *</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineOne</strong></td>
+<td><strong>string</strong></td>
+<td>LineOne</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineTwo</strong></td>
+<td><strong>string</strong></td>
+<td>LineTwo</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineThree</strong></td>
+<td><strong>string</strong></td>
+<td>LineThree</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineFour</strong></td>
+<td><strong>string</strong></td>
+<td>LineFour</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineFive</strong></td>
+<td><strong>string</strong></td>
+<td>LineFive</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineSix</strong></td>
+<td><strong>string</strong></td>
+<td>LineSix</td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="beneficiaryfi_1">BeneficiaryFI<a class="headerlink" href="#beneficiaryfi_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>LineOne</strong></td>
+<td><strong>string</strong></td>
+<td>LineOne</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineTwo</strong></td>
+<td><strong>string</strong></td>
+<td>LineTwo</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineThree</strong></td>
+<td><strong>string</strong></td>
+<td>LineThree</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineFour</strong></td>
+<td><strong>string</strong></td>
+<td>LineFour</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineFive</strong></td>
+<td><strong>string</strong></td>
+<td>LineFive</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineSix</strong></td>
+<td><strong>string</strong></td>
+<td>LineSix</td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="beneficiaryfiadvice">BeneficiaryFIAdvice<a class="headerlink" href="#beneficiaryfiadvice" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>AdviceCode</strong></td>
+<td><strong>string</strong></td>
+<td>AdviceCode  * &#x60;HLD - Hold * &#x60;LTR&#x60; - Letter * &#x60;PHN&#x60; - Phone * &#x60;TLX&#x60; - Telex * &#x60;WRE&#x60; - Wire  *</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineOne</strong></td>
+<td><strong>string</strong></td>
+<td>LineOne</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineTwo</strong></td>
+<td><strong>string</strong></td>
+<td>LineTwo</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineThree</strong></td>
+<td><strong>string</strong></td>
+<td>LineThree</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineFour</strong></td>
+<td><strong>string</strong></td>
+<td>LineFour</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineFive</strong></td>
+<td><strong>string</strong></td>
+<td>LineFive</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineSix</strong></td>
+<td><strong>string</strong></td>
+<td>LineSix</td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="beneficiary_1">Beneficiary<a class="headerlink" href="#beneficiary_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>LineOne</strong></td>
+<td><strong>string</strong></td>
+<td>LineOne</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineTwo</strong></td>
+<td><strong>string</strong></td>
+<td>LineTwo</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineThree</strong></td>
+<td><strong>string</strong></td>
+<td>LineThree</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineFour</strong></td>
+<td><strong>string</strong></td>
+<td>LineFour</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineFive</strong></td>
+<td><strong>string</strong></td>
+<td>LineFive</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineSix</strong></td>
+<td><strong>string</strong></td>
+<td>LineSix</td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="beneficiary-advice">Beneficiary Advice<a class="headerlink" href="#beneficiary-advice" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>AdviceCode</strong></td>
+<td><strong>string</strong></td>
+<td>AdviceCode  * &#x60;HLD - Hold * &#x60;LTR&#x60; - Letter * &#x60;PHN&#x60; - Phone * &#x60;TLX&#x60; - Telex * &#x60;WRE&#x60; - Wire  *</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineOne</strong></td>
+<td><strong>string</strong></td>
+<td>LineOne</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineTwo</strong></td>
+<td><strong>string</strong></td>
+<td>LineTwo</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineThree</strong></td>
+<td><strong>string</strong></td>
+<td>LineThree</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineFour</strong></td>
+<td><strong>string</strong></td>
+<td>LineFour</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineFive</strong></td>
+<td><strong>string</strong></td>
+<td>LineFive</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineSix</strong></td>
+<td><strong>string</strong></td>
+<td>LineSix</td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="paymentmethodtobeneficiary">PaymentMethodToBeneficiary<a class="headerlink" href="#paymentmethodtobeneficiary" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>PaymentMethod</strong></td>
+<td><strong>string</strong></td>
+<td>PaymentMethod</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>Additional</strong></td>
+<td><strong>string</strong></td>
+<td></td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="additionalfitofi">AdditionalFiToFi<a class="headerlink" href="#additionalfitofi" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>LineOne</strong></td>
+<td><strong>string</strong></td>
+<td>LineOne</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineTwo</strong></td>
+<td><strong>string</strong></td>
+<td>LineTwo</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineThree</strong></td>
+<td><strong>string</strong></td>
+<td>LineThree</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineFour</strong></td>
+<td><strong>string</strong></td>
+<td>LineFour</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineFive</strong></td>
+<td><strong>string</strong></td>
+<td>LineFive</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineSix</strong></td>
+<td><strong>string</strong></td>
+<td>LineSix</td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h2 id="cover-payment-information">Cover Payment Information<a class="headerlink" href="#cover-payment-information" title="Permanent link">&para;</a></h2>
+<h3 id="currencyinstructedamount">CurrencyInstructedAmount<a class="headerlink" href="#currencyinstructedamount" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SwiftFieldTag</strong></td>
+<td><strong>string</strong></td>
+<td>SwiftFieldTag</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>Amount</strong></td>
+<td><strong>string</strong></td>
+<td>Amount</td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="orderingcustomer">OrderingCustomer<a class="headerlink" href="#orderingcustomer" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SwiftFieldTag</strong></td>
+<td><strong>string</strong></td>
+<td>SwiftFieldTag</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>SwiftLineOne</strong></td>
+<td><strong>string</strong></td>
+<td>SwiftLineOne</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>SwiftLineTwo</strong></td>
+<td><strong>string</strong></td>
+<td>SwiftLineTwo</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>SwiftLineThree</strong></td>
+<td><strong>string</strong></td>
+<td>SwiftLineThree</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>SwiftLineFour</strong></td>
+<td><strong>string</strong></td>
+<td>SwiftLineFour</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>SwiftLineFive</strong></td>
+<td><strong>string</strong></td>
+<td>SwiftLineFive</td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="orderinginstitution">OrderingInstitution<a class="headerlink" href="#orderinginstitution" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SwiftFieldTag</strong></td>
+<td><strong>string</strong></td>
+<td>SwiftFieldTag</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>SwiftLineOne</strong></td>
+<td><strong>string</strong></td>
+<td>SwiftLineOne</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>SwiftLineTwo</strong></td>
+<td><strong>string</strong></td>
+<td>SwiftLineTwo</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>SwiftLineThree</strong></td>
+<td><strong>string</strong></td>
+<td>SwiftLineThree</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>SwiftLineFour</strong></td>
+<td><strong>string</strong></td>
+<td>SwiftLineFour</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>SwiftLineFive</strong></td>
+<td><strong>string</strong></td>
+<td>SwiftLineFive</td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="intermediaryinstitution">IntermediaryInstitution<a class="headerlink" href="#intermediaryinstitution" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SwiftFieldTag</strong></td>
+<td><strong>string</strong></td>
+<td>SwiftFieldTag</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>SwiftLineOne</strong></td>
+<td><strong>string</strong></td>
+<td>SwiftLineOne</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>SwiftLineTwo</strong></td>
+<td><strong>string</strong></td>
+<td>SwiftLineTwo</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>SwiftLineThree</strong></td>
+<td><strong>string</strong></td>
+<td>SwiftLineThree</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>SwiftLineFour</strong></td>
+<td><strong>string</strong></td>
+<td>SwiftLineFour</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>SwiftLineFive</strong></td>
+<td><strong>string</strong></td>
+<td>SwiftLineFive</td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="institutionaccount">InstitutionAccount<a class="headerlink" href="#institutionaccount" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SwiftFieldTag</strong></td>
+<td><strong>string</strong></td>
+<td>SwiftFieldTag</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>SwiftLineOne</strong></td>
+<td><strong>string</strong></td>
+<td>SwiftLineOne</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>SwiftLineTwo</strong></td>
+<td><strong>string</strong></td>
+<td>SwiftLineTwo</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>SwiftLineThree</strong></td>
+<td><strong>string</strong></td>
+<td>SwiftLineThree</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>SwiftLineFour</strong></td>
+<td><strong>string</strong></td>
+<td>SwiftLineFour</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>SwiftLineFive</strong></td>
+<td><strong>string</strong></td>
+<td>SwiftLineFive</td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="beneficiarycustomer">BeneficiaryCustomer<a class="headerlink" href="#beneficiarycustomer" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SwiftFieldTag</strong></td>
+<td><strong>string</strong></td>
+<td>SwiftFieldTag</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>SwiftLineOne</strong></td>
+<td><strong>string</strong></td>
+<td>SwiftLineOne</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>SwiftLineTwo</strong></td>
+<td><strong>string</strong></td>
+<td>SwiftLineTwo</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>SwiftLineThree</strong></td>
+<td><strong>string</strong></td>
+<td>SwiftLineThree</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>SwiftLineFour</strong></td>
+<td><strong>string</strong></td>
+<td>SwiftLineFour</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>SwiftLineFive</strong></td>
+<td><strong>string</strong></td>
+<td>SwiftLineFive</td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="remittance">Remittance<a class="headerlink" href="#remittance" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SwiftFieldTag</strong></td>
+<td><strong>string</strong></td>
+<td>SwiftFieldTag</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>SwiftLineOne</strong></td>
+<td><strong>string</strong></td>
+<td>SwiftLineOne</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>SwiftLineTwo</strong></td>
+<td><strong>string</strong></td>
+<td>SwiftLineTwo</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>SwiftLineThree</strong></td>
+<td><strong>string</strong></td>
+<td>SwiftLineThree</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>SwiftLineFour</strong></td>
+<td><strong>string</strong></td>
+<td>SwiftLineFour</td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sender-to-receiver">Sender to Receiver<a class="headerlink" href="#sender-to-receiver" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SwiftFieldTag</strong></td>
+<td><strong>string</strong></td>
+<td>SwiftFieldTag</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>SwiftLineOne</strong></td>
+<td><strong>string</strong></td>
+<td>SwiftLineOne</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>SwiftLineTwo</strong></td>
+<td><strong>string</strong></td>
+<td>SwiftLineTwo</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>SwiftLineThree</strong></td>
+<td><strong>string</strong></td>
+<td>SwiftLineThree</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>SwiftLineFour</strong></td>
+<td><strong>string</strong></td>
+<td>SwiftLineFour</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>SwiftLineFive</strong></td>
+<td><strong>string</strong></td>
+<td>SwiftLineFive</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>SwiftLineSix</strong></td>
+<td><strong>string</strong></td>
+<td>SwiftLineSix</td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="unstructured-addenda">Unstructured Addenda<a class="headerlink" href="#unstructured-addenda" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>AddendaLength</strong></td>
+<td><strong>string</strong></td>
+<td>AddendaLength  Addenda Length must be numeric, padded with leading zeros if less than four characters and must equal length of content in Addenda Information (e.g., if content of Addenda Information is 987 characters, Addenda Length must be 0987).</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>Addenda</strong></td>
+<td><strong>string</strong></td>
+<td>Addenda</td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="relatedremittance">RelatedRemittance<a class="headerlink" href="#relatedremittance" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>RemittanceIdentification</strong></td>
+<td><strong>string</strong></td>
+<td>RemittanceIdentification</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>RemittanceLocationMethod</strong></td>
+<td><strong>string</strong></td>
+<td>RemittanceLocationMethod  * &#x60;EDIC&#x60; - Electronic Data Interchange * &#x60;EMAL&#x60; - Email * &#x60;FAXI&#x60; - Fax * &#x60;POST&#x60; - Postal services * &#x60;SMS&#x60; - Short Message Service (text) * &#x60;URI&#x60; - Uniform Resource Identifier</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>RemittanceLocationElectronicAddress</strong></td>
+<td><strong>string</strong></td>
+<td>RemittanceLocationElectronicAddress (E-mail or URL address)</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>RemittanceData</strong></td>
+<td><a href="../remittanceData/"><strong>RemittanceData</strong></a></td>
+<td></td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h2 id="structured-remittance-information">Structured Remittance Information<a class="headerlink" href="#structured-remittance-information" title="Permanent link">&para;</a></h2>
+<h4 id="remittanceoriginator">RemittanceOriginator<a class="headerlink" href="#remittanceoriginator" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>IdentificationType</strong></td>
+<td><strong>string</strong></td>
+<td>IdentificationType  * &#x60;OI&#x60; - Organization ID * &#x60;PI&#x60; - Private ID</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>IdentificationCode</strong></td>
+<td><strong>string</strong></td>
+<td>IdentificationCode  Organization Identification Codes  * &#x60;BANK&#x60; - Bank Party Identification * &#x60;CUST&#x60; - Customer Number * &#x60;DUNS&#x60; - Data Universal Number System (Dun &amp; Bradstreet) * &#x60;EMPL&#x60; - Employer Identification Number * &#x60;GS1G&#x60; - Global Location Number * &#x60;PROP&#x60; - Proprietary Identification Number * &#x60;SWBB&#x60; - SWIFT BIC or BEI * &#x60;TXID&#x60; - Tax Identification Number  Private Identification Codes  * &#x60;ARNU&#x60; - Alien Registration Number * &#x60;CCPT&#x60; - Passport Number * &#x60;CUST&#x60; - Customer Number * &#x60;DPOB&#x60; - Date &amp; Place of Birth * &#x60;DRLC&#x60; - Driver’s License Number * &#x60;EMPL&#x60; - Employee Identification Number * &#x60;NIDN&#x60; - National Identity Number * &#x60;PROP&#x60; - Proprietary Identification Number * &#x60;SOSE&#x60; - Social Security Number * &#x60;TXID&#x60; - Tax Identification Number</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>IdentificationNumber</strong></td>
+<td><strong>string</strong></td>
+<td>IdentificationNumber</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>IdentificationNumberIssuer</strong></td>
+<td><strong>string</strong></td>
+<td>IdentificationNumberIssuer</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>DateBirthPlace</strong></td>
+<td><strong>string</strong></td>
+<td>DateBirthPlace</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>RemittanceData</strong></td>
+<td><a href="../remittanceData/"><strong>RemittanceData</strong></a></td>
+<td></td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>CountryOfResidence</strong></td>
+<td><strong>string</strong></td>
+<td>CountryOfResidence</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>ContactName</strong></td>
+<td><strong>string</strong></td>
+<td>ContactName</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>ContactPhoneNumber</strong></td>
+<td><strong>string</strong></td>
+<td>ContactPhoneNumber</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>ContactMobileNumber</strong></td>
+<td><strong>string</strong></td>
+<td>ContactMobileNumber</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>ContactFaxNumber</strong></td>
+<td><strong>string</strong></td>
+<td>ContactFaxNumber</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>ContactElectronicAddress</strong></td>
+<td><strong>string</strong></td>
+<td>ContactElectronicAddress ( i.e., E-mail or URL address)</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>ContactOther</strong></td>
+<td><strong>string</strong></td>
+<td>ContactOther</td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="remittancebeneficiary">RemittanceBeneficiary<a class="headerlink" href="#remittancebeneficiary" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>IdentificationType</strong></td>
+<td><strong>string</strong></td>
+<td>IdentificationType  * &#x60;OI&#x60; - Organization ID * &#x60;PI&#x60; - Private ID</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>IdentificationCode</strong></td>
+<td><strong>string</strong></td>
+<td>IdentificationCode  Organization Identification Codes  * &#x60;BANK&#x60; - Bank Party Identification * &#x60;CUST&#x60; - Customer Number * &#x60;DUNS&#x60; - Data Universal Number System (Dun &amp; Bradstreet) * &#x60;EMPL&#x60; - Employer Identification Number * &#x60;GS1G&#x60; - Global Location Number * &#x60;PROP&#x60; - Proprietary Identification Number * &#x60;SWBB&#x60; - SWIFT BIC or BEI * &#x60;TXID&#x60; - Tax Identification Number  Private Identification Codes  * &#x60;ARNU&#x60; - Alien Registration Number * &#x60;CCPT&#x60; - Passport Number * &#x60;CUST&#x60; - Customer Number * &#x60;DPOB&#x60; - Date &amp; Place of Birth * &#x60;DRLC&#x60; - Driver’s License Number * &#x60;EMPL&#x60; - Employee Identification Number * &#x60;NIDN&#x60; - National Identity Number * &#x60;PROP&#x60; - Proprietary Identification Number * &#x60;SOSE&#x60; - Social Security Number * &#x60;TXID&#x60; - Tax Identification Number</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>IdentificationNumber</strong></td>
+<td><strong>string</strong></td>
+<td>IdentificationNumber</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>IdentificationNumberIssuer</strong></td>
+<td><strong>string</strong></td>
+<td>IdentificationNumberIssuer</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>DateBirthPlace</strong></td>
+<td><strong>string</strong></td>
+<td>DateBirthPlace</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>RemittanceData</strong></td>
+<td><a href="../remittanceData/"><strong>RemittanceData</strong></a></td>
+<td></td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="primaryremittancedocument">PrimaryRemittanceDocument<a class="headerlink" href="#primaryremittancedocument" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>DocumentTypeCode</strong></td>
+<td><strong>string</strong></td>
+<td>DocumentTypeCode  * &#x60;AROI&#x60; - Accounts Receivable Open Item * &#x60;BOLD&#x60; - Bill of Lading Shipping Notice * &#x60;CINV&#x60; - Commercial Invoice * &#x60;CMCN&#x60; - Commercial Contract * &#x60;CNFA&#x60; - Credit Note Related to Financial Adjustment * &#x60;CREN&#x60; - Credit Note * &#x60;DEBN&#x60; - Debit Note * &#x60;DISP&#x60; - Dispatch Advice * &#x60;DNFA&#x60; - Debit Note Related to Financial Adjustment HIRI Hire Invoice * &#x60;MSIN&#x60; - Metered Service Invoice * &#x60;PROP&#x60; - Proprietary Document Type * &#x60;PUOR&#x60; - Purchase Order * &#x60;SBIN&#x60; - Self Billed Invoice * &#x60;SOAC&#x60; - Statement of Account * &#x60;TSUT&#x60; - Trade Services Utility Transaction VCHR Voucher</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>ProprietaryDocumentTypeCode</strong></td>
+<td><strong>string</strong></td>
+<td>ProprietaryDocumentTypeCode</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>DocumentIdentificationNumber</strong></td>
+<td><strong>string</strong></td>
+<td>DocumentIdentificationNumber</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>Issuer</strong></td>
+<td><strong>string</strong></td>
+<td>Issuer</td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="actualamountpaid">ActualAmountPaid<a class="headerlink" href="#actualamountpaid" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CurrencyCode</strong></td>
+<td><strong>string</strong></td>
+<td>CurrencyCode</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>Amount</strong></td>
+<td><strong>string</strong></td>
+<td>Amount Must contain at least one numeric character and only one decimal period marker (e.g., $1,234.56 should be entered as 1234.56). Can have up to 5 numeric characters following the decimal period marker (e.g., 1234.56789). Amount must be greater than zero (i.e., at least .01).</td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="grossamountofremittancedocument">GrossAmountOfRemittanceDocument<a class="headerlink" href="#grossamountofremittancedocument" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CurrencyCode</strong></td>
+<td><strong>string</strong></td>
+<td>CurrencyCode</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>Amount</strong></td>
+<td><strong>string</strong></td>
+<td>Amount Must contain at least one numeric character and only one decimal period marker (e.g., $1,234.56 should be entered as 1234.56). Can have up to 5 numeric characters following the decimal period marker (e.g., 1234.56789). Amount must be greater than zero (i.e., at least .01).</td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="amountnegotiateddiscount">AmountNegotiatedDiscount<a class="headerlink" href="#amountnegotiateddiscount" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CurrencyCode</strong></td>
+<td><strong>string</strong></td>
+<td>CurrencyCode</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>Amount</strong></td>
+<td><strong>string</strong></td>
+<td>Amount Must contain at least one numeric character and only one decimal period marker (e.g., $1,234.56 should be entered as 1234.56). Can have up to 5 numeric characters following the decimal period marker (e.g., 1234.56789). Amount must be greater than zero (i.e., at least .01).</td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="adjustment">Adjustment<a class="headerlink" href="#adjustment" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>AdjustmentReasonCode</strong></td>
+<td><strong>string</strong></td>
+<td>Adjustment  * &#x60;01&#x60; - Pricing Error * &#x60;03&#x60; - Extension Error * &#x60;04&#x60; - Item Not Accepted (Damaged) * &#x60;05&#x60; - Item Not Accepted (Quality) * &#x60;06&#x60; - Quantity Contested 07   Incorrect Product * &#x60;11&#x60; - Returns (Damaged) * &#x60;12&#x60; - Returns (Quality) * &#x60;59&#x60; - Item Not Received * &#x60;75&#x60; - Total Order Not Received * &#x60;81&#x60; - Credit as Agreed * &#x60;CM&#x60; - Covered by Credit Memo</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>CreditDebitIndicator</strong></td>
+<td><strong>string</strong></td>
+<td>CreditDebitIndicator  * &#x60;CRDT&#x60; - Credit * &#x60;DBIT&#x60; - Debit</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>CurrencyCode</strong></td>
+<td><strong>string</strong></td>
+<td>CurrencyCode</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>Amount</strong></td>
+<td><strong>string</strong></td>
+<td>Amount Must contain at least one numeric character and only one decimal period marker (e.g., $1,234.56 should be entered as 1234.56). Can have up to 5 numeric characters following the decimal period marker (e.g., 1234.56789). Amount must be greater than zero (i.e., at least .01).</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>AdditionalInfo</strong></td>
+<td><strong>string</strong></td>
+<td>AdditionalInfo</td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="dateremittancedocument">DateRemittanceDocument<a class="headerlink" href="#dateremittancedocument" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>DateRemittanceDocument</strong></td>
+<td><strong>string</strong></td>
+<td>DateRemittanceDocument CCYYMMDD</td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="secondaryremittancedocument">SecondaryRemittanceDocument<a class="headerlink" href="#secondaryremittancedocument" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>DocumentTypeCode</strong></td>
+<td><strong>string</strong></td>
+<td>SecondaryRemittanceDocument  * &#x60;AROI&#x60; - Accounts Receivable Open Item * &#x60;DISP&#x60; - Dispatch Advice * &#x60;FXDR&#x60; - Foreign Exchange Deal Reference * &#x60;PROP&#x60; - Proprietary Document Type PUOR Purchase Order * &#x60;RADM&#x60; - Remittance Advice Message * &#x60;RPIN&#x60; - Related Payment Instruction * &#x60;SCOR1&#x60; - Structured Communication Reference VCHR Voucher</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>ProprietaryDocumentTypeCode</strong></td>
+<td><strong>string</strong></td>
+<td>proprietaryDocumentTypeCode</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>DocumentIdentificationNumber</strong></td>
+<td><strong>string</strong></td>
+<td>documentIdentificationNumber</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>Issuer</strong></td>
+<td><strong>string</strong></td>
+<td>Issuer</td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="remittancefreetext">RemittanceFreeText<a class="headerlink" href="#remittancefreetext" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>LineOne</strong></td>
+<td><strong>string</strong></td>
+<td>LineOne</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineTwo</strong></td>
+<td><strong>string</strong></td>
+<td>LineTwo</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>LineThree</strong></td>
+<td><strong>string</strong></td>
+<td>LineThree</td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<p>## Information Appended by the FEDWire Funds Service</p>
+<h3 id="messagedisposition">MessageDisposition<a class="headerlink" href="#messagedisposition" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>FormatVersion</strong></td>
+<td><strong>string</strong></td>
+<td>FormatVersion 30</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>TestProductionCode</strong></td>
+<td><strong>string</strong></td>
+<td>TestProductionCode  * &#x60;T&#x60; - Test * &#x60;P&#x60; - Production</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>MessageDuplicationCode</strong></td>
+<td><strong>string</strong></td>
+<td>MessageDuplicationCode  * &#x60; &#x60; - Original Message * &#x60;R&#x60; - Retrieval of an original message * &#x60;P&#x60; - Resend</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>MessageStatusIndicator</strong></td>
+<td><strong>string</strong></td>
+<td>Message Status Indicator  Outgoing Messages * &#x60;0&#x60; - In process or Intercepted * &#x60;2&#x60; - Successful with Accounting (Value) * &#x60;3&#x60; - Rejected due to Error Condition * &#x60;7&#x60; - Successful without Accounting (Non-Value)  Incoming Messages * &#x60;N&#x60; - Successful with Accounting (Value) * &#x60;S&#x60; - Successful without Accounting (Non-Value)</td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="receipttimestamp">ReceiptTimeStamp<a class="headerlink" href="#receipttimestamp" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ReceiptDate</strong></td>
+<td><a href="../DateMMDD/"><strong>Date</strong></a></td>
+<td>Date</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>ReceiptTime</strong></td>
+<td><a href="../TimeHHMM/"><strong>Time</strong></a></td>
+<td>Time</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>ReceiptApplicationIdentification</strong></td>
+<td><strong>string</strong></td>
+<td>ApplicationIdentification</td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="outputmessageaccountabilitydata">OutputMessageAccountabilityData<a class="headerlink" href="#outputmessageaccountabilitydata" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>OutputCycleDate</strong></td>
+<td><strong>string</strong></td>
+<td>OutputCycleDate (CCYYMMDD)</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>OutputDestinationID</strong></td>
+<td><strong>string</strong></td>
+<td>OutputDestinationID</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>OutputSequenceNumber</strong></td>
+<td><strong>string</strong></td>
+<td>outputSequenceNumber</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>OutputDate</strong></td>
+<td><a href="../DateMMDD/"><strong>Date</strong></a></td>
+<td>Date</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>OutputTime</strong></td>
+<td><a href="../TimeHHMM/"><strong>Time</strong></a></td>
+<td>Time</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>OutputFRBApplicationIdentification</strong></td>
+<td><strong>string</strong></td>
+<td>OutputFRBApplicationIdentification</td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+<h3 id="errorwire">ErrorWire<a class="headerlink" href="#errorwire" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ErrorCategory</strong></td>
+<td><strong>string</strong></td>
+<td>* &#x60;E&#x60; - Data Error * &#x60;F&#x60; - Insufficient Balance * &#x60;H&#x60; - Accountability Error * &#x60;I&#x60; - In Process or Intercepted * &#x60;W&#x60; - Cutoff Hour Error * &#x60;X&#x60; - Duplicate IMAD</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>ErrorCode</strong></td>
+<td><strong>string</strong></td>
+<td>ErrorCode</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td><strong>ErrorDescription</strong></td>
+<td><strong>string</strong></td>
+<td>ErrorDescription</td>
+<td>[optional]</td>
+</tr>
+</tbody>
+</table>
+                
+                  
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../" title="Overview" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Overview
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../DateMMDD/" title="Date" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Date
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright &copy; 2017 - 2019 Moov Authors
+          </div>
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+  <div class="md-footer-social">
+    <link rel="stylesheet" href="../../assets/fonts/font-awesome.css">
+    
+      <a href="https://moov.io" class="md-footer-social__link fa fa-globe"></a>
+    
+      <a href="https://github.com/moov-io" class="md-footer-social__link fa fa-github-alt"></a>
+    
+      <a href="https://twitter.com/moov_io" class="md-footer-social__link fa fa-twitter"></a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.245445c6.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="../../assets/javascript/github-buttons.js"></script>
+      
+    
+  </body>
+</html>
