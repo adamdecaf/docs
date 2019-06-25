@@ -1,11 +1,95 @@
-# Overview
+# Getting Started
 
-A RESTFul service that implements an interface to write files for the [Fedwire Funds Service](https://www.frbservices.org/financial-services/wires/index.html), [a real-time gross settlement funds transfer system operated by the United States Federal Reserve Banks](https://en.wikipedia.org/wiki/Fedwire). These [compatible files](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.445.7645&rep=rep1&type=pdf) include routing instructions that, once received and processed, will debit the funds from the sending bank's reserve account at their Federal Reserve bank and credit the receiving bank's account. Wire transfers sent via Fedwire are completed in the same day, while some are completed instantly.
+## What is FED
 
-## FED Intro
+[Moov FED](https://github.com/moov-io/fed) implements an HTTP interface to search [FEDWIRE](https://github.com/moov-io/fed/tree/master/docs/fpddir.md) and [FEDACH](https://github.com/moov-io/fed/tree/master/docs/FedACHdir.md) data from the Federal Reserve Bank Services.  
 
+[source: U.S. DEPARTMENT OF THE TREASURY](https://www.treasury.gov/resource-center/faqs/Sanctions/Pages/faq_general.aspx#basic)
+
+The data and formats represent a compilation of the **FedWire** and **FedACH** data from the [Federal Reserve Bank Services site](https://frbservices.org/).
+
+* [FEDACH](https://github.com/moov-io/fed/tree/master/docs/FedACHdir.md)
+
+* [FEDWire](https://github.com/moov-io/fed/tree/master/docs/fpddir.md)
+
+FED can be used stand alone to search for routing numbers by Financial institution name, city, state and postal code and routing number.  It can also be used in conjunction with [ACH](https://github.com/moov-io/ach) and [WIRE](https://github.com/moov-io/wire) to validate routing numbers.
+
+## Running Moov FED Server
+
+Moov FED can be deployed in multiple scenarios.
+
+- Binary Distributions are released with every versioned release. Frequently added to the VM/AMI build script for the application needing Moov FED.
+- Our hosted [api.moov.io](https://api.moov.io) is updated with every versioned release. Our Kubernetes example is what Moov utilizes in our production environment. 
+- A Docker container is built and added to Docker Hub with every versioned released.
+
+### Binary Distribution
+
+Download the [latest Moov FED server release](https://github.com/moov-io/fed/releases) for your operating system and run it from a terminal.
 
 ```sh
+host:~ $ cd ~/Downloads/
+host:Downloads $ ./fed-darwin-amd64 
+ts=2019-06-20T23:23:44.870717Z caller=main.go:75 startup="Starting fed server version v0.2.0"
+ts=2019-06-20T23:23:44.871623Z caller=main.go:135 transport=HTTP addr=:8086
+ts=2019-06-20T23:23:44.871692Z caller=main.go:125 admin="listening on :9096"
+```
+
+Next [Connect to Moov FED](#connecting-to-moov-fed)
+
+### Docker Container
+
+Moov FED is dependent on Docker being properly installed and running on your machine. Ensure that Docker is running. If your Docker client has issues connecting to the service review the [Docker getting started guide](https://docs.docker.com/get-started/) if you have any issues.
+
+```sh
+host:~ $ docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+host:~ $ 
+```
+
+Execute the Docker run command
+
+```sh
+host:~ $ docker run moov/fed:latest
+ts=2019-06-21T17:03:23.782592Z caller=main.go:69 startup="Starting fed server version v0.2.0"
+ts=2019-06-21T17:03:23.78314Z caller=main.go:129 transport=HTTP addr=:8086
+ts=2019-06-21T17:03:23.783252Z caller=main.go:119 admin="listening on :9096"
+```
+
+!!! warning "OSX Users"
+    You will need to use [port forwarding](https://docs.docker.com/docker-for-mac/networking/#known-limitations-use-cases-and-workarounds):
+    `$ docker run -p 8080:8080 -p 9090:9090 moov/fed:latest`)
+
+Next [Connect to Moov FED](#connecting-to-moov-fed)
+
+### Kubernetes
+
+The following snippet runs the FED Server on [Kubernetes](https://kubernetes.io/docs/tutorials/kubernetes-basics/) in the `apps` namespace. You could reach the fed instance at the following URL from inside the cluster.
+
+```
+# Needs to be ran from inside the cluster
+$ curl http://fed.apps.svc.cluster.local:8086/ping
+PONG
+
+$ curl -s localhost:8086/fed/ach/search?routingNumber=273976369 | jq .
+
+```
+
+Kubernetes manifest - save in a file (`fed.yaml`) and apply with `kubectl apply -f fed.yaml`.
+
+## Connecting to Moov FED
+The Moov FED service will be running on port 8086 (with an admin port on 9096).
+
+Confirm that the service is running by issuing the following command or simply visiting the url in your browser localhost:8086/ping
+
+```sh
+$ curl http://localhost:8086/ping 
+```
+
+```
+PONG
+```
+
+```
 $ curl -s localhost:8086/fed/ach/search?routingNumber=273976369 | jq .
 ```
 
@@ -35,22 +119,6 @@ $ curl -s localhost:8086/fed/ach/search?routingNumber=273976369 | jq .
     "wireParticipants": null
     }
 ```
-
-## What is FED
-
-FED is FedWire and FedACH data from the Federal Reserve Bank Services.  
-
-[source: U.S. DEPARTMENT OF THE TREASURY](https://www.treasury.gov/resource-center/faqs/Sanctions/Pages/faq_general.aspx#basic)
-
-The data and formats represent a compilation of the **FedWire** and **FedACH** data from the [Federal Reserve Bank Services site](https://frbservices.org/).
-
-### FedACH Directory
-
-* [FedACH](https://github.com/moov-io/fed/tree/master/docs/FedACHdir.md)
-
-### FedWire Directory
-
-* [FedWire](https://github.com/moov-io/fed/tree/master/docs/fpddir.md)
 
 ### Other resources
 
