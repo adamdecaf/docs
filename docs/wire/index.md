@@ -60,7 +60,7 @@ Next [Connect to Moov WIRE](#connecting-to-moov-wire)
 
 ### Kubernetes
 
-The following snippet runs the FED Server on [Kubernetes](https://kubernetes.io/docs/tutorials/kubernetes-basics/) in the `apps` namespace. You could reach the fed instance at the following URL from inside the cluster.
+The following snippet runs the WIRE Server on [Kubernetes](https://kubernetes.io/docs/tutorials/kubernetes-basics/) in the `apps` namespace. You could reach the fed instance at the following URL from inside the cluster.
 
 ```
 # Needs to be ran from inside the cluster
