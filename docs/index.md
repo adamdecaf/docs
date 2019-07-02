@@ -22,7 +22,7 @@ Common functionality for creating funding accounts
 - [Moov Customers](./Customers/) The Customers project focuses on solving authentic identification of humans who are legally able to hold and transfer currency within the US. Primarily this project solves Know Your Customer (KYC), Customer Identification Program (CIP), Office of Foreign Asset Control (OFAC) checks and verification workflows to comply with US federal law and ensure authentic transfers.
 - [Moov Accounts](./accounts/) is an RESTful API implementation of an accounting General Ledger used to track monetary transfers in digital systems.
 - [Moov OFAC](./ofac/) Office of Foreign Asset Control (OFAC) is an HTTP API and Go library to download, parse and serve United States OFAC sanction data for applications and humans.
-- [Moov FED](./fed/) implements utility services for searching the United States Federal Reserve System such as ABA routing numbers, Financial Institution name lookup and Fed Wire routing information. 
+- [Moov FED](./fed/) implements utility services for searching the United States Federal Reserve System such as ABA routing numbers, Financial Institution name lookup and Fed Wire routing information.
 
 ## Design Goals
 
@@ -39,7 +39,7 @@ The core principles underlying Moov are performance, scalability, and ease-of-us
  channel | info
  ------- | -------
 [moov-io slack](http://moov-io.slack.com/) | Join our slack channel to have an interactive discussion about the development of the project. [Request an invite to the slack channel](https://join.slack.com/t/moov-io/shared_invite/enQtNDE5NzIwNTYxODEwLTRkYTcyZDI5ZTlkZWRjMzlhMWVhMGZlOTZiOTk4MmM3MmRhZDY4OTJiMDVjOTE2MGEyNWYzYzY1MGMyMThiZjg)
- [Project Documentation](https://docs.moov.io/en/latest/) | Our project documentation available online. (This site!)
+ [Project Documentation](https://docs.moov.io/) | Our project documentation available online. (This site!)
  Google Group [moov-users](https://groups.google.com/forum/#!forum/moov-users)| The Moov users Google group is for contributors other people contributing to the Moov project. You can join them without a google account by sending an email to [moov-users+subscribe@googlegroups.com](mailto:moov-users+subscribe@googlegroups.com). After receiving the join-request message, you can simply reply to that to confirm the subscription.
 Twitter [@moov_io](https://twitter.com/moov_io)	| You can follow Moov.IO's Twitter feed to get updates on our project(s). You can also tweet us questions or just share blogs or stories.
 [GitHub Issue](https://github.com/moov-io) | If you are able to reproduce an problem please [open a GitHub Issue](https://github.com/moov-io/ach/issues/new) under the specific project that caused the error.
