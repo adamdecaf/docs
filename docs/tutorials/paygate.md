@@ -66,9 +66,26 @@ After confirming that the services are running correctly, there are several thin
 
 ## Setup SFTP
 
-PayGate currently requires the SFTP configuration to be manually setup in the database. [See here](https://github.com/moov-io/paygate/blob/master/docs/ach.md#configuration) for more information.
+PayGate currently requires the SFTP configuration to be manually setup in the database. [See here](https://github.com/moov-io/paygate/blob/master/docs/ach.md#sftp-uploads-of-merged-ach-files) for more information.
 
-If using the Docker Compose script above, you need to mount the `/data` volume of the `paygate` section in `docker-compose.yml` file like so:
+### MySQL
+
+MySQL is a database which applications or developers connect to over the network. This means to configure paygate's SFTP and file upload configuration a developer needs to connect to the database.
+
+```
+# Connect using host, username and password for your setup
+$ mysql -h localhost:3306 -u paygate
+
+> INSERT INTO sftp_configs (routing_number, hostname, username, password) VALUES ('000000000', 'localhost:22', 'myusername', 'mypassword');
+
+> INSERT INTO cutoff_times (routing_number, cutoff, location) VALUES ('000000000', '1700', 'America/New_York');
+
+> INSERT INTO file_transfer_configs (routing_number, inbound_path, outbound_path, return_path) VALUES ('000000000', '/inbound', '/outbound', '/returns');
+```
+
+### SQLite
+
+If using the Docker Compose and sqlite (`DATABASE_TYPE=sqlite`) script above, you need to mount the `/data` volume of the `paygate` section in `docker-compose.yml` file like so:
 ```
   paygate:
     image: moov/paygate:v0.5.0-dev
@@ -95,7 +112,7 @@ This will attach the `/data` volume within the image to the same directory in wh
 To setup SFTP, run the following commands on the now exposed `paygate.db` file, changing the dummy string values below:
 ```
 # Setup credentials for sqlite3
-$ sqlite3 paygate.db "INSERT INTO sftp_configs (routing_number, hostname, username, password) VALUES ('000000000', 'sftp://change.me//folder', 'myusername', 'mypassword');"
+$ sqlite3 paygate.db "INSERT INTO sftp_configs (routing_number, hostname, username, password) VALUES ('000000000', 'localhost:22', 'myusername', 'mypassword');"
 
 # Setup cutoff times
 $ sqlite3 paygate.db "INSERT INTO cutoff_times (routing_number, cutoff, location) VALUES ('000000000', '1700', 'America/New_York');"
@@ -105,8 +122,35 @@ $ sqlite3 paygate.db "INSERT INTO file_transfer_configs (routing_number, inbound
 ```
 The command may need to be ran with elevated privileges, using `sudo` or another method. The database will also need to be writable.
 
-Recently an admin interface to check these values was setup (default on port `:9092`), but require PayGate to be running from the latest codebase (and not the docker image above).
+## Verify SFTP configuration
+
+Paygaet's admin HTTP interface offers endpoints to check these values were setup (default on port `:9092`).
 
 ```
-curl -X GET http://localhost:9092/configs/uploads -H 'x-user-id: username' --verbose
+curl -s -X GET http://localhost:9092/configs/uploads | jq .
+{
+  "cutoffTimes": [
+    {
+      "RoutingNumber": "121042882",
+      "Cutoff": 1700,
+      "Location": "America/New_York"
+    }
+  ],
+  "sftpConfigs": [
+    {
+      "RoutingNumber": "121042882",
+      "Hostname": "localhost:2121",
+      "Username": "admin",
+      "Password": "1****6"
+    }
+  ],
+  "fileTransferConfigs": [
+    {
+      "RoutingNumber": "121042882",
+      "InboundPath": "inbound/",
+      "OutboundPath": "outbound/",
+      "ReturnPath": "returned/"
+    }
+  ]
+}
 ```
