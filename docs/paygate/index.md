@@ -1,6 +1,4 @@
-## Setup PayGate
-
-The [Moov PayGate project](https://github.com/moov-io/paygate) provides an HTTP REST endpoint for submitting and receiving ACH payments and builds upon a suite of services offered by Moov, including [ACH](https://github.com/moov-io/ach), [OFAC](https://github.com/moov-io/ofac), and [FED](https://github.com/moov-io/fed). Each of these services must be running and reachable by PayGate. We provide several examples of setting up a complete installation using [Docker Compose](https://docs.docker.com/compose/), Kubernetes, or directly using the provided binaries.
+[Moov's PayGate project](https://github.com/moov-io/paygate) provides an HTTP REST endpoint for submitting and receiving ACH payments and builds upon a suite of services offered by Moov, including [ACH](https://github.com/moov-io/ach), [OFAC](https://github.com/moov-io/ofac), and [FED](https://github.com/moov-io/fed). Each of these services must be running and reachable by PayGate. We provide several examples of setting up a complete installation using [Docker Compose](https://docs.docker.com/compose/), Kubernetes, or directly using the provided binaries.
 
 ### Running PayGate locally using Docker Compose (Quickest)
 
