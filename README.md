@@ -1,5 +1,8 @@
 ## moov-io/docs
 
+[![Build Status](https://travis-ci.com/moov-io/docs.svg?branch=master)](https://travis-ci.com/moov-io/docs)
+[![Apache 2 licensed](https://img.shields.io/badge/license-Apache2-blue.svg)](https://raw.githubusercontent.com/moov-io/docs/master/LICENSE)
+
 Documentation for the Moov project hosted at [docs.moov.io](https://docs.moov.io) on Github Pages.
 
 ## Getting Started / Install
