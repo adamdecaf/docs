@@ -6,3 +6,4 @@ install:
 - pip install mkdocs-material
 script:
 - git clean -f -d -x
+- mkdocs build
