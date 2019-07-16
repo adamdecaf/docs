@@ -95,23 +95,27 @@ nav:
     - 'ACH File Structure': ach/file-structure.md
     - 'Picking an SEC Code': ach/sec-codes-table.md
 - FED:
-  - Overview: fed/index.md
-  - 'FED File Structure': fed/file-structure.md
+  - Getting Started: fed/index.md
+  - FED Developers:
+    - 'FED File Structure': fed/file-structure.md
 - 'Image Cash Letter':
-  - Overview: icl/index.md
-  - 'ICL File Structure': icl/file-structure.md
+  - Getting Started: icl/index.md
+  - ICL Developers:
+    - 'ICL File Structure': icl/file-structure.md
 - OFAC:
-  - Overview: ofac/index.md
-  - 'OFAC File Structure': ofac/file-structure.md
+  - Getting Started: ofac/index.md
+  - OFAC Developers:
+    - 'OFAC File Structure': ofac/file-structure.md
 - Paygate:
-  - Overview: paygate/index.md
+  - Getting Started: paygate/index.md
 - WIRE:
-  - Overview: wire/index.md
-  - 'WIRE Fed Wire Message Structure': wire/fedWireMessage-Structure.md
-  - 'Date': wire/DateMMDD.md
-  - 'Time': wire/TimeHHMM.md
-  - 'Address': wire/address.md
-  - 'Remittance Data': wire/remittanceData.md
+  - Getting Started: wire/index.md
+  - WIRE Developers:
+    - 'WIRE Fed Wire Message Structure': wire/fedWireMessage-Structure.md
+    - 'Date': wire/DateMMDD.md
+    - 'Time': wire/TimeHHMM.md
+    - 'Address': wire/address.md
+    - 'Remittance Data': wire/remittanceData.md
 
 # Google analytics
 google_analytics: ['UA-118148273-1', 'moov.io']
