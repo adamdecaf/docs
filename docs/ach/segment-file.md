@@ -9,33 +9,34 @@ Note: Segmented files (via `SegmentFile()`) are only in ACH v1.1.0 and later.
 An ACH [File](https://godoc.org/github.com/moov-io/ach#File) supports calling [SegmentFile](https://godoc.org/github.com/moov-io/ach#File.SegmentFile) to create a debit ach file and credit ach file from an ach file that contains mixed debits and credits.
 
 ```go
-	// open an ACH file
-    f, err := os.Open(filepath.Join("examples", "ach-ppd-read-mixedDebitCredit", "ppd-mixedDebitCredit.ach"))
-	if err != nil {
-		log.Fatal(err)
-	}
-	
-    // read file
-	r := ach.NewReader(f)
-	achFile, err := r.Read()
-	if err != nil {
-		fmt.Printf("Issue reading file: %+v \n", err)
-	}
-	
-	// Segment File
-	creditFile, debitFile, err := achFile.SegmentFile()
-	if err != nil {
-		fmt.Printf("Could not segment the file: %v", err)
-	}
 
-	// write the file to std out. Anything io.Writer
-	w := ach.NewWriter(os.Stdout)
-	if err := w.Write(creditFile); err != nil {
-		log.Fatalf("Unexpected error: %s\n", err)
-	}
-	if err := w.Write(debitFile); err != nil {
-		log.Fatalf("Unexpected error: %s\n", err)
-	}
+// open an ACH file
+f, err := os.Open(filepath.Join("examples", "ach-ppd-read-mixedDebitCredit", "ppd-mixedDebitCredit.ach"))
+if err != nil {
+	log.Fatal(err)
+}
+	
+// read file
+r := ach.NewReader(f)
+achFile, err := r.Read()
+if err != nil {
+	fmt.Printf("Issue reading file: %+v \n", err)
+}
+	
+// Segment File
+creditFile, debitFile, err := achFile.SegmentFile()
+if err != nil {
+	fmt.Printf("Could not segment the file: %v", err)
+}
 
-	w.Flush()
+// write the file to std out. Anything io.Writer
+w := ach.NewWriter(os.Stdout)
+if err := w.Write(creditFile); err != nil {
+	log.Fatalf("Unexpected error: %s\n", err)
+}
+if err := w.Write(debitFile); err != nil {
+	log.Fatalf("Unexpected error: %s\n", err)
+}
+
+w.Flush()
 ```
