@@ -2,7 +2,7 @@ ACH File creation should default to NACHA rules by supporting both credits and d
 
 Segmenting files is a post file creation process that takes an input of an ACH.File and returns two ACH.Files that have been segmented (debits and credits).
 
-Note: Segmented files (via `SegmentFile()`) are only in ACH v1.2.0 and later.
+Note: Segmented files (via `SegmentFile()`) are only in ACH v1.1.0 and later.
 
 ## Creating Segmented Files
 
