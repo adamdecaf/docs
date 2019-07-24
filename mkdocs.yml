@@ -90,7 +90,7 @@ nav:
       - 'Balanced Offset Records': ach/balanced-offset.md
       - 'Create an ACH FIle': ach/create-file.md
       - 'Merging ACH Files': ach/merging-files.md
-      - 'Segment ACH Files by credit and debit': /ach/segment-file.md
+      - 'Segment Files': /ach/segment-file.md
   - ACH Developers:
     - 'Intro to ACH': ach/intro.md
     - 'ACH File Structure': ach/file-structure.md
