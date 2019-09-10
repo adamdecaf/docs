@@ -89,6 +89,7 @@ nav:
   - Tutorials:
     - 'Balanced Offset Records': ach/balanced-offset.md
     - 'Create an ACH File': ach/create-file.md
+    - 'Flatten Batches': ach/flatten-batches.md
     - 'Merging ACH Files': ach/merging-files.md
     - 'Segment ACH File': ach/segment-file.md
   - ACH Developers:
