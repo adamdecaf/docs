@@ -16,12 +16,14 @@ FROM nginx:1.17
 RUN chmod 777 -R /var/cache/nginx/
 COPY nginx/nginx.conf /opt/nginx/nginx.conf
 COPY nginx/default.conf /opt/nginx/conf.d/default.conf
-
-COPY --from=builder /docs.moov.io/site/ /opt/nginx/www/
-RUN mkdir -p /opt/nginx/www/
-RUN echo '# empty prometheus metrics response' > /opt/nginx/www/metrics
+RUN chmod 644 /etc/nginx/mime.types
 
 RUN adduser -q --gecos '' --disabled-login --shell /bin/false moov
+
+RUN mkdir -p /opt/nginx/www/ && chown -R moov /opt/nginx/www/
+COPY --from=builder /docs.moov.io/site/ /opt/nginx/www/
+RUN echo '# empty prometheus metrics response' > /opt/nginx/www/metrics
+
 USER moov
 
 EXPOSE 8080
