@@ -21,6 +21,10 @@ Documentation for the Moov project hosted at [docs.moov.io](https://docs.moov.io
 1. `mkdocs build` will assemble HTML from the markdown files
 1. `mkdocs gh-deploy` builds HTML and pushes to GitHub's `gh-pages` branch
 
+### Docker Image
+
+We host a [Docker image on Docker Hub](https://hub.docker.com/r/moov/docs/tags) for anyone to download. We host this image at [`docs.moov.io`](https://docs.moov.io).
+
 ## License
 
 Apache License 2.0 See [LICENSE](LICENSE) for details.
