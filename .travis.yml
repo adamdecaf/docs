@@ -8,3 +8,14 @@ script:
 - git clean -f -d -x
 - mkdocs build
 - make
+deploy:
+  provider: releases
+  api_key:
+    secure: GPnU1MfX+MHoH+2qc3KBui+zlEWLu+vnVTA/u3SJR7Js4bUm9yXVVosVCN+AfafWKidibJHdg2iDm6mnnmTQvadK3W9blApkjntbGnIg4R7gru207c57EnqMnRyQpY0dYJrXDPoZiACSeAZ9vX1k/qknvC3DlInAuif4uW7mUDr5omHDsQLUW8jIC94wDZdVjBue+X6BusDUKDrXnae+JeRdZ8nPWmAldYs+vwG0f9FwCoqIdOWdOIc9ByxdoKpz7S4yw/OSDhN8d6XCmG90Sr6m+YQgo9kyPk8S9FvT8AMqya7ICaQ6PG80iaHPPnF+PGUmc6X8/hxXNEEhUiHTx/Zu42TuKwbJwWEyNysfgh0rd7uT75zd3xYMMME9AqxUug8hS2mTVKX1FVfyhva1noZUSljHInPzj6W6BtaOm9hXr+aWELcOCVyxDw2Q6L5TK+SffwrMT3RcITrMgcAnkvyGSg9lBJHgQcepV1n3BePnr8o+hpVMDgo8Xs3WQYoybrSJfSS96V3UP+rd/QW87Xrg04mNlIHe9LTY/xIJ8ONR/jv9qEKccu9yFfHMOJ+lfv0rcnyK/fehiBYUuZcxDpyxSv12+tM6mxM4r2H7Emv/k/ioo4qujBv1IYhUn5BVnJDTvygMqRuwaOSsnek1UgmqTMrbMDNQF+nSOoIxI4k=
+  on:
+    repo: moov-io/docs
+    tags: true
+  skip_cleanup: true
+after_deploy:
+- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+- make release-push
