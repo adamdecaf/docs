@@ -19,9 +19,8 @@ Moov imagecashletter can be deployed in multiple scenarios.
 Download the [latest Moov imagecashletter server release](https://github.com/moov-io/imagecashletter/releases) for your operating system and run it from a terminal.
 
 ```sh
-host:~ $ cd ~/Downloads/
-host:Downloads $ ./imagecashletter-darwin-amd64
-ts=2019-06-20T23:23:44.870717Z caller=main.go:75 startup="Starting imagecashletter server version v0.2.0-rc1"
+$ ./imagecashletter-darwin-amd64
+ts=2019-06-20T23:23:44.870717Z caller=main.go:75 startup="Starting imagecashletter server version v0.2.0"
 ts=2019-06-20T23:23:44.871623Z caller=main.go:135 transport=HTTP addr=:8083
 ts=2019-06-20T23:23:44.871692Z caller=main.go:125 admin="listening on :9093"
 ```
@@ -33,23 +32,26 @@ Next [Connect to Moov imagecashletter](#connecting-to-moov-imagecashletter)
 Moov imagecashletter is dependent on Docker being properly installed and running on your machine. Ensure that Docker is running. If your Docker client has issues connecting to the service review the [Docker getting started guide](https://docs.docker.com/get-started/) if you have any issues.
 
 ```sh
-host:~ $ docker ps
+$ docker ps
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
-host:~ $
 ```
 
 Execute the Docker run command
 
 ```sh
-host:~ $ docker run moov/imagecashletter:latest
-ts=2019-06-21T17:03:23.782592Z caller=main.go:69 startup="Starting imagecashletter server version v1.0.2"
+$ docker run moov/imagecashletter:latest
+ts=2019-06-21T17:03:23.782592Z caller=main.go:69 startup="Starting imagecashletter server version v0.2.0"
 ts=2019-06-21T17:03:23.78314Z caller=main.go:129 transport=HTTP addr=:8083
 ts=2019-06-21T17:03:23.783252Z caller=main.go:119 admin="listening on :9093"
 ```
 
-!!! warning "OSX Users"
-    You will need to use [port forwarding](https://docs.docker.com/docker-for-mac/networking/#known-limitations-use-cases-and-workarounds):
-    `$ docker run -p 8083:8083 -p 9093:9093 moov/imagecashletter:latest`)
+> Note for OSX Users:
+>
+> You will need to use [port forwarding](https://docs.docker.com/docker-for-mac/networking/#known-limitations-use-cases-and-workarounds):
+
+```
+$ docker run -p 8083:8083 -p 9093:9093 moov/imagecashletter:latest
+```
 
 Next [Connect to Moov imagecashletter](#connecting-to-moov-imagecashletter)
 
@@ -111,7 +113,7 @@ spec:
         app: imagecashletter
     spec:
       containers:
-      - image: moov/imagecashletter:v1.0.0
+      - image: moov/imagecashletter:latest
         imagePullPolicy: Always
         name: imagecashletter
         args:
