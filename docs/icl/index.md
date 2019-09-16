@@ -1,22 +1,166 @@
+# Overview
+<!-- Place this tag where you want the button to render. -->
+<a class="github-button" href="https://github.com/moov-io/imagecashletter" data-size="large" data-show-count="true" aria-label="Star moov-io/imagecashletter on GitHub">moov-io/imagecashletter</a>
+<a href="https://godoc.org/github.com/moov-io/imagecashletter"><img src="https://godoc.org/github.com/moov-io/imagecashletter?status.svg" /></a>
+<a href="https://raw.githubusercontent.com/moov-io/imagecashletter/master/LICENSE"><img src="https://img.shields.io/badge/license-Apache2-blue.svg" /></a>
 
+Moov imagecashletter implements a low level Image Cash Letter (ICL) interface for parsing, creating, and validating, ICL files. Moov imagecashletter exposes an HTTP API for REST based interaction. Any language which can use HTTP and JSON can leverage the imagecashletter Server. The API's endpoints expose both text and JSON to easily ingest or export either format.
 
-## What is Image Cash Letter
-Image Cash Letter (ICL) specifications provide Check 21 services is designed to enable banks to handle more checks electronically, which should make check processing faster and more efficient. Traditionally, banks often physically move original paper checks from the bank where the checks are deposited to the bank that pays them. The overall process of translating physical checks to electronic messages is [called Check Truncation](https://en.wikipedia.org/wiki/Cheque_truncation).
+## Running Moov imagecashletter Server
 
-[source: FDIC Check 21](https://www.fdic.gov/consumers/assistance/protection/check21.html)
+Moov imagecashletter can be deployed in multiple scenarios.
 
-## How Does Check21 Work
-Check 21 affects check writers and depositors in the following ways:
+- <a href="#binary-distribution">Binary Distributions</a> are released with every versioned release. Frequently added to the VM/AMI build script for the application needing Moov ICL.
+- A <a href="#docker-container">Docker container</a> is built and added to Docker Hub with every versioned released.
+- Our hosted [api.moov.io](https://api.moov.io) is updated with every versioned release. Our Kubernetes example is what Moov utilizes in our production environment.
 
-* If you are used to getting your canceled checks back to you when you get your account statement, you may now be getting a "substitute" check. A substitute check is a high-quality paper reproduction of both sides of the original check. A substitute check is a legal equivalent of the original check.
-* It is more important than ever to avoid bouncing checks. A check deposited in a bank generally travels by airplane and truck until it reaches the paying bank, typically about one or two days later. As a result of Check 21, more checks will be processed electronically... and faster!
-* Check 21 does not require your bank to return your original check to you. However, Check 21 ensures that you have the same legal protections when you receive a substitute check from your bank as you do when you receive an original check.
-* If you notice a problem with a substitute check, you should contact your bank as soon as possible. Check 21 provides a special process that allows you to claim a refund when you receive a substitute check from a bank and you think there is an error because of the substitute check. In general, you should contact your bank no later than 40 days from the date your bank provided the substitute check or from the date of the statement that shows the problem.
+### Binary Distribution
 
-[FRB: Frequently Asked Questions about Check 21 and Substitute Checks](http://www.federalreserve.gov)
+Download the [latest Moov imagecashletter server release](https://github.com/moov-io/imagecashletter/releases) for your operating system and run it from a terminal.
 
-[source: FDIC Check 21](https://www.fdic.gov/consumers/assistance/protection/check21.html)
+```sh
+host:~ $ cd ~/Downloads/
+host:Downloads $ ./imagecashletter-darwin-amd64
+ts=2019-06-20T23:23:44.870717Z caller=main.go:75 startup="Starting imagecashletter server version v0.2.0-rc1"
+ts=2019-06-20T23:23:44.871623Z caller=main.go:135 transport=HTTP addr=:8083
+ts=2019-06-20T23:23:44.871692Z caller=main.go:125 admin="listening on :9093"
+```
 
-## FAQ
+Next [Connect to Moov imagecashletter](#connecting-to-moov-imagecashletter)
 
-[FAQ](https://www.ffiec.gov/exam/check21/faq.htm)
+### Docker Container
+
+Moov imagecashletter is dependent on Docker being properly installed and running on your machine. Ensure that Docker is running. If your Docker client has issues connecting to the service review the [Docker getting started guide](https://docs.docker.com/get-started/) if you have any issues.
+
+```sh
+host:~ $ docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+host:~ $
+```
+
+Execute the Docker run command
+
+```sh
+host:~ $ docker run moov/imagecashletter:latest
+ts=2019-06-21T17:03:23.782592Z caller=main.go:69 startup="Starting imagecashletter server version v1.0.2"
+ts=2019-06-21T17:03:23.78314Z caller=main.go:129 transport=HTTP addr=:8083
+ts=2019-06-21T17:03:23.783252Z caller=main.go:119 admin="listening on :9093"
+```
+
+!!! warning "OSX Users"
+    You will need to use [port forwarding](https://docs.docker.com/docker-for-mac/networking/#known-limitations-use-cases-and-workarounds):
+    `$ docker run -p 8083:8083 -p 9093:9093 moov/imagecashletter:latest`)
+
+Next [Connect to Moov imagecashletter](#connecting-to-moov-imagecashletter)
+
+### Kubernetes
+
+The following snippet runs the imagecashletter Server on [Kubernetes](https://kubernetes.io/docs/tutorials/kubernetes-basics/) in the `apps` namespace. You could reach the imagecashletter instance at the following URL from inside the cluster.
+
+```
+# Needs to be ran from inside the cluster
+$ curl http://imagecashletter.apps.svc.cluster.local:8083/ping
+PONG
+
+$ curl http://localhost:8083/files
+{"files":[],"error":null}
+```
+
+Kubernetes manifest - save in a file (`imagecashletter.yaml`) and apply with `kubectl apply -f imagecashletter.yaml`.
+
+```yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: apps
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: imagecashletter
+  namespace: apps
+spec:
+  type: ClusterIP
+  selector:
+    app: imagecashletter
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8083
+      targetPort: 8083
+    - name: metrics
+      protocol: TCP
+      port: 9093
+      targetPort: 9093
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: imagecashletter
+  namespace: apps
+  labels:
+    app: imagecashletter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: imagecashletter
+  template:
+    metadata:
+      labels:
+        app: imagecashletter
+    spec:
+      containers:
+      - image: moov/imagecashletter:v1.0.0
+        imagePullPolicy: Always
+        name: imagecashletter
+        args:
+          - -http.addr=:8083
+          - -admin.addr=:9093
+        ports:
+          - containerPort: 8083
+            name: http
+            protocol: TCP
+          - containerPort: 9093
+            name: metrics
+            protocol: TCP
+        resources:
+          limits:
+            cpu: 0.1
+            memory: 50Mi
+          requests:
+            cpu: 25m
+            memory: 10Mi
+        readinessProbe:
+          httpGet:
+            path: /ping
+            port: 8083
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /ping
+            port: 8083
+          initialDelaySeconds: 5
+          periodSeconds: 10
+      restartPolicy: Always
+```
+Next [Connect to Moov imagecashletter](#connecting-to-moov-imagecashletter)
+
+## Connecting to Moov imagecashletter
+
+The Moov imagecashletter service will be running on port `8083` (with an admin port on `9093`).
+
+Confirm that the service is running by issuing the following command or simply visiting the url in your browser [localhost:8083/ping](http://localhost:8083/ping)
+
+```bash
+$ curl http://localhost:8083/ping
+PONG
+
+$ curl http://localhost:8083/files
+null
+```
+
+### imagecashletter Admin Ports
+
+The port `9093` is bound by imagecashletter for our admin service. This HTTP server has endpoints for Prometheus metrics (`GET /metrics`), readiness (`GET /ready`) and liveness checks (`GET /live`).
