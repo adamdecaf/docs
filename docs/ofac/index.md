@@ -5,21 +5,23 @@ The Office of Foreign Assets Control administers and enforces economic sanctions
 
 [source: U.S. DEPARTMENT OF THE TREASURY](https://www.treasury.gov/resource-center/faqs/Sanctions/Pages/faq_general.aspx#basic)
 
+![](images/webui.png)
+
 ## Running Moov OFAC
 
 You can download a [binary from GitHub](https://github.com/moov-io/ofac/releases) or a [Docker image](https://hub.docker.com/r/moov/ofac) for OFAC. Once downloaded you can start making requests against OFAC. The service will download the latest data on startup.
 
 ```
-$ docker run -p 8084:8084 -p 9094:9094 -it moov/ofac:v0.5.2
-ts=2019-02-26T05:17:06.49074Z caller=main.go:42 startup="Starting ofac server version v0.5.2"
-ts=2019-02-26T05:17:06.49086Z caller=main.go:55 main="sqlite version 3.25.2"
-ts=2019-02-26T05:17:06.492432Z caller=sqlite.go:73 sqlite="starting database migrations"
-ts=2019-02-26T05:17:06.492528Z caller=sqlite.go:83 sqlite="migration #0 [create table if not exists customer_name...] changed 0 rows"
-...
-ts=2019-02-26T05:17:06.492849Z caller=sqlite.go:87 sqlite="finished migrations"
-ts=2019-02-26T05:17:06.493182Z caller=download.go:74 download="Starting refresh of OFAC data"
-ts=2019-02-26T05:17:12.058369Z caller=download.go:117 download="Finished refresh of OFAC data"
-ts=2019-02-26T05:17:12.061278Z caller=main.go:125 main="OFAC data refreshed - Addresses=11774 AltNames=9748 SDNs=7441"
+$ docker run -p 8084:8084 -p 9094:9094 -it moov/ofac:v0.11.0
+ts=2019-10-01T20:35:31.301254Z caller=main.go:54 startup="Starting ofac server version v0.11.0"
+ts=2019-10-01T20:35:31.301338Z caller=database.go:18 database="looking for  database provider"
+ts=2019-10-01T20:35:31.301376Z caller=sqlite.go:119 main="sqlite version 3.25.2"
+ts=2019-10-01T20:35:31.302651Z caller=download.go:80 download="Starting refresh of OFAC and DPL data"
+ts=2019-10-01T20:35:31.302651Z caller=main.go:118 admin="listening on :9094"
+ts=2019-10-01T20:35:31.530729Z caller=download.go:132 download="Finished refresh of OFAC and BIS DPL data"
+ts=2019-10-01T20:35:31.532927Z caller=main.go:142 main="OFAC data refreshed - Addresses=11696 AltNames=9682 SDNs=7379 DeniedPersons=547"
+ts=2019-10-01T20:35:31.532962Z caller=main.go:218 main="Setting OFAC data refresh interval to 12h0m0s (default)"
+ts=2019-10-01T20:35:31.533312Z caller=main.go:182 startup="binding to :8084 for HTTP server"
 
 $ curl -s localhost:8084/search?name=...
 {
@@ -45,6 +47,10 @@ $ curl -s localhost:8084/search?name=...
 ```
 
 An SDN (or entity) is an individual, group, or company which has or could do business with United States companies or individuals. US law requires checking OFAC data before transactions.
+
+## Web Interface
+
+Moov OFAC provides a web interface for easy browsing of the SDN and related data for mobile and desktop clients. Simply load the address of OFAC in a browser.
 
 ## Webhooks
 

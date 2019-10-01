@@ -106,6 +106,7 @@ nav:
     - 'ICL File Structure': icl/file-structure.md
 - OFAC:
   - Getting Started: ofac/index.md
+  - Search: ofac/search.md
   - OFAC Developers:
     - 'OFAC File Structure': ofac/file-structure.md
 - Paygate:
