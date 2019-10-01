@@ -101,6 +101,7 @@ nav:
   - FED Developers:
     - 'FED File Structure': fed/file-structure.md
 - 'Image Cash Letter':
+  - 'Intro to ICL': icl/intro.md
   - Getting Started: icl/index.md
   - ICL Developers:
     - 'ICL File Structure': icl/file-structure.md
