@@ -6,6 +6,10 @@ build:
 	docker build -t moov/docs:$(VERSION) .
 	docker tag moov/docs:$(VERSION) moov/docs:latest
 
+.PHONY: run
+run:
+	docker run -p 8080:8080 moov/docs:$(VERSION)
+
 .PHONY: release-push
 release-push:
 	docker push moov/docs:$(VERSION)
