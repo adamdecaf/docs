@@ -108,6 +108,7 @@ nav:
 - OFAC:
   - Getting Started: ofac/index.md
   - Search: ofac/search.md
+  - Web Interface: ofac/webui.md
   - OFAC Developers:
     - 'OFAC File Structure': ofac/file-structure.md
 - Paygate:
