@@ -1,9 +1,8 @@
 VERSION=v$(shell date +"%Y.%m.%d").1
 
 .PHONY: build
-
 build:
-	docker build -t moov/docs:$(VERSION) .
+	docker build --pull -t moov/docs:$(VERSION) .
 	docker tag moov/docs:$(VERSION) moov/docs:latest
 
 .PHONY: run
