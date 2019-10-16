@@ -1,4 +1,4 @@
-FROM python:3.7-buster as builder
+FROM python:3.8-buster as builder
 RUN pip install --upgrade pip
 RUN pip install mkdocs mkdocs-material pymdown-extensions && mkdocs --version
 
