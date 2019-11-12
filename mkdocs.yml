@@ -113,6 +113,10 @@ nav:
     - 'OFAC File Structure': ofac/file-structure.md
 - Paygate:
   - Getting Started: paygate/index.md
+  - ACH: paygate/ach.md
+  - Admin Endpoints: paygate/admin-endpoints.md
+  - Local Dev: paygate/local-dev.md
+  - Micro Deposits: paygate/micro-deposits.md
 - WIRE:
   - Getting Started: wire/index.md
   - WIRE Developers:
