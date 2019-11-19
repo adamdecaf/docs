@@ -88,6 +88,12 @@ Also, several functions are available (in addition to Go's standard template fun
 
 Note: By default filenames have sequence numbers which are incremented by paygate and are assumed to be in a specific format. It is currently (as of 2019-10-14) undefined behavior what happens to incremented sequence numbers when filenames are in a different format. Please open issue if you run into problems here.
 
+#### IP Whitelisting
+
+When paygate uploads an ACH file to the ODFI server it can verify the remote server's hostname resolves to a whitelisted IP or CIDR range. This supports certain network controls to prevent dns poisoning or misconfigured routing.
+
+Setting `file_transfer_configs.allowed_ips` can be done with values like: `35.211.43.9` (specific IP address), `10.4.0.0/16` (CIDR range), `10.1.0.12,10.3.0.0/16` (Multiple values)
+
 #### Force Merge and Upload of ACH files
 
 Paygate supports admin endpoints for manually initiating the processing of inbound and outbound files. These are designed to push files sooner than the typical interval (default 10 minutes), which is helpful in debugging, testing, or local development.
