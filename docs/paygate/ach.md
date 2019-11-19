@@ -38,24 +38,6 @@ Otherwise, the following SQLite and MySQL tables can be configured. Insert, upda
 
 There is a Prometheus metric exposed for tracking ACH file uploads `ach_files_uploaded{destination="..", origin=".."}` and `missing_ach_file_upload_configs{routing_number="..."}` which counts how often configurations aren't found for given routing numbers. These need to be addressed by a human operator (insert the proper configurations) so files can be uploaded to a Financial Institution.
 
-Note: Public and Private keys can be encoded with base64 from the following formats or kept as-is. We expect Go's `base64.StdEncoding` encoding (not base64 URL encoding).
-
-**Public Key** (SSH Authorized key format)
-
-```
-ssh-rsa AAAAB...wwW95ttP3pdwb7Z computer-hostname
-```
-
-**Private Key** (PKCS#8)
-
-```
------BEGIN RSA PRIVATE KEY-----
-...
-33QwOLPLAkEA0NNUb+z4ebVVHyvSwF5jhfJxigim+s49KuzJ1+A2RaSApGyBZiwS
-...
------END RSA PRIVATE KEY-----
-```
-
 #### Filename templates
 
 Paygate supports templated naming of ACH files prior to their upload. This is helpful for ODFI's which require specific naming of uploaded files. Templates use Go's [`text/template` syntax](https://golang.org/pkg/text/template/) and are validated when paygate starts or changed via admin endpoints.
@@ -108,6 +90,33 @@ There are endpoints for just inbound or outbound file processing:
 Note: The query parameter `?wait` can be added onto any endpoint to hold the HTTP response until file operations are done. This has the potential of returning a timeout however, and the file operations will continue.
 
 Note: These endpoints currently return no information in the HTTP response and instead inspect paygate's logs for details.
+
+#### SFTP Host and Client Key Verification
+
+Paygate can verify the remote SFTP server's host key prior to uploading files and it can have a client key provided. Both methods assist in authenticating paygate and the remote server prior to any file uploads.
+
+**Public Key** (SSH Authorized key format)
+
+```
+Column: file_transfer_configs.host_public_key
+
+Format: ssh-rsa AAAAB...wwW95ttP3pdwb7Z computer-hostname
+```
+
+**Private Key** (PKCS#8)
+
+```
+Column: file_transfer_configs.client_private_key
+
+Format:
+-----BEGIN RSA PRIVATE KEY-----
+...
+33QwOLPLAkEA0NNUb+z4ebVVHyvSwF5jhfJxigim+s49KuzJ1+A2RaSApGyBZiwS
+...
+-----END RSA PRIVATE KEY-----
+```
+
+Note: Public and Private keys can be encoded with base64 from the following formats or kept as-is. We expect Go's `base64.StdEncoding` encoding (not base64 URL encoding).
 
 ### Returned ACH Files
 
