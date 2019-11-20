@@ -13,3 +13,8 @@ run:
 release-push:
 	docker push moov/docs:$(VERSION)
 	docker push moov/docs:latest
+
+.PHONY: tag
+tag:
+	git tag $(VERSION)
+	git push origin $(VERSION)
