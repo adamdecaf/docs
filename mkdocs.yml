@@ -105,18 +105,18 @@ nav:
   - Getting Started: icl/index.md
   - ICL Developers:
     - 'ICL File Structure': icl/file-structure.md
-- OFAC:
-  - Getting Started: ofac/index.md
-  - Search: ofac/search.md
-  - Web Interface: ofac/webui.md
-  - OFAC Developers:
-    - 'OFAC File Structure': ofac/file-structure.md
 - Paygate:
   - Getting Started: paygate/index.md
   - ACH: paygate/ach.md
   - Admin Endpoints: paygate/admin-endpoints.md
   - Local Dev: paygate/local-dev.md
   - Micro Deposits: paygate/micro-deposits.md
+- Watchman:
+  - Getting Started: watchman/index.md
+  - Search: watchman/search.md
+  - Web Interface: watchman/webui.md
+  - Watchman Developers:
+    - 'OFAC File Structure': watchman/file-structure.md
 - WIRE:
   - Getting Started: wire/index.md
   - WIRE Developers:

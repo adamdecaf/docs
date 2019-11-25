@@ -1,8 +1,8 @@
-Moov's OFAC product offers numerous search options for inspecting the SDN and related data.
+Moov's Watchman product offers numerous search options for inspecting the SDN and related data.
 
 ### All In One
 
-The most common endpoint for searching across all data OFAC has indexed. To perform this search make an HTTP query like the following:
+The most common endpoint for searching across all data Watchman has indexed. To perform this search make an HTTP query like the following:
 
 ```
 $ curl -s 'http://localhost:8084/search?q=nicolas+maduro&limit=1' | jq .
@@ -97,7 +97,7 @@ $ curl -s 'http://localhost:8084/search?name=nicolas+maduro&limit=1' | jq .
 
 ### SDN Remark ID's
 
-SDN Remarks contain semi-structured data which OFAC attempts to parse. One common element of this data is a National or Governmental ID which uniquely identifies an entity.
+SDN Remarks contain semi-structured data which Watchman attempts to parse. One common element of this data is a National or Governmental ID which uniquely identifies an entity.
 
 ```
 $ curl -s 'http://localhost:8084/search?id=5892464&limit=1' | jq .
@@ -201,7 +201,7 @@ $ curl -s 'http://localhost:8084/search?address=first+st&province=harare&country
 
 ## Filtering
 
-Moov OFAC offers filters to further refine search results. The supported query parameters are:
+Moov Watchman offers filters to further refine search results. The supported query parameters are:
 
 - `sdnType`: This is commonly `individual`, `aicraft` or `vessel`.
 - `program`: The specific US sanctions program which added the entity. (Example: `SDGT`)

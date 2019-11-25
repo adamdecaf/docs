@@ -1,4 +1,4 @@
-[Moov's PayGate project](https://github.com/moov-io/paygate) provides an HTTP REST endpoint for submitting and receiving ACH payments and builds upon a suite of services offered by Moov, including [ACH](https://github.com/moov-io/ach), [OFAC](https://github.com/moov-io/ofac), and [FED](https://github.com/moov-io/fed). Each of these services must be running and reachable by PayGate. We provide several examples of setting up a complete installation using [Docker Compose](https://docs.docker.com/compose/), Kubernetes, or directly using the provided binaries.
+[Moov's PayGate project](https://github.com/moov-io/paygate) provides an HTTP REST endpoint for submitting and receiving ACH payments and builds upon a suite of services offered by Moov, including [ACH](https://github.com/moov-io/ach), [Watchman](https://github.com/moov-io/watchman), and [FED](https://github.com/moov-io/fed). Each of these services must be running and reachable by PayGate. We provide several examples of setting up a complete installation using [Docker Compose](https://docs.docker.com/compose/), Kubernetes, or directly using the provided binaries.
 
 ### Running PayGate locally using Docker Compose (Quickest)
 
@@ -95,14 +95,14 @@ If using the Docker Compose and sqlite (`DATABASE_TYPE=sqlite`) script above, yo
       ACCOUNTS_ENDPOINT: 'http://accounts:8085'
       ACH_ENDPOINT: 'http://ach:8080'
       FED_ENDPOINT: 'http://fed:8086'
-      OFAC_ENDPOINT: 'http://ofac:8084'
+      CUSTOMERS_ENDPOINT: 'http://customers:8087'
     volumes:
       - .:/data
     depends_on:
       - ach
       - accounts
       - fed
-      - ofac
+      - customers
       - auth
 ```
 This will attach the `/data` volume within the image to the same directory in which the `docker-compose.yml` file resides.

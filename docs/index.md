@@ -11,7 +11,7 @@ Moov projects are focused on solving a single responsibility capability in finan
 Process funds with the following settlement methods:
 
 - [Moov ACH](./ach/) (including Same Day ACH) implements a NACHA compliant RESTFul API for file creation, parsing, and validation. Supports generating and parsing all Standard Entry Class (SEC) codes. ACH is the primary method of electronic money movement throughout the United States.
-- [Moov PayGate](./paygate/) provides a complete implementation of ACH origination (file creation), OFAC checks, micro-deposits, SFTP uploading, and other features to be a complete system for ACH transfers.
+- [Moov PayGate](./paygate/) provides a complete implementation of ACH origination (file creation), micro-deposits, SFTP uploading, and other features to be a complete system for ACH transfers.
 - [Moov Wire](./wire/) (domestic Fedwire) implements an interface to write files for the Fedwire Funds Service, a real-time gross settlement funds transfer system operated by the United States Federal Reserve Banks. These compatible files include routing instructions that, once received and processed, will debit the funds from the sending bank's reserve account at their Federal Reserve bank and credit the receiving bank's account. Wire transfers sent via Fedwire are completed in the same day, while some are completed instantly.
 - [Moov Image Cash Letter](./icl/) implements Image Cash Letter (ICL) files used for Check21 or Check truncation files for exchange and remote deposit in the U.S.; also known as X9 files, X9.37 files, X9.100-187
 
@@ -21,7 +21,7 @@ Common functionality for creating funding accounts
 
 - [Moov Customers](https://github.com/moov-io/customers) The Customers project focuses on solving authentic identification of humans who are legally able to hold and transfer currency within the US. Primarily this project solves Know Your Customer (KYC), Customer Identification Program (CIP), Office of Foreign Asset Control (OFAC) checks and verification workflows to comply with US federal law and ensure authentic transfers.
 - [Moov Accounts](https://github.com/moov-io/accounts) is an RESTful API implementation of an accounting General Ledger used to track monetary transfers in digital systems.
-- [Moov OFAC](./ofac/) Office of Foreign Asset Control (OFAC) is an HTTP API and Go library to download, parse and serve United States OFAC sanction data for applications and humans.
+- [Moov Watchman](./watchman/) is an HTTP API and Go library to download, parse and offer search functions over numerous trade sanction lists from the United States and European Union.
 - [Moov FED](./fed/) implements utility services for searching the United States Federal Reserve System such as ABA routing numbers, Financial Institution name lookup and Fed Wire routing information.
 
 ## Design Goals
