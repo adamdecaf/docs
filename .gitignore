@@ -5,7 +5,6 @@
 !.vscode/launch.json
 !.vscode/extensions.json
 
-
 *.exe
 *.test
 *.prof
@@ -13,4 +12,7 @@
 .vscode/launch.json
 
 # generated site
-site/ 
+site/
+
+./nginx/cache/
+./nginx/run/

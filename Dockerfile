@@ -13,14 +13,14 @@ RUN mkdocs build
 
 # Setup our load balancer image
 FROM nginx:1.17
-RUN chmod 777 -R /var/cache/nginx/
+
+USER nginx
+
 COPY nginx/nginx.conf /opt/nginx/nginx.conf
 COPY nginx/default.conf /opt/nginx/conf.d/default.conf
+COPY nginx/metrics /opt/nginx/www/metrics
 
 COPY --from=builder /docs.moov.io/site/ /opt/nginx/www/
-RUN echo '# empty prometheus metrics response' > /opt/nginx/www/metrics
-
-RUN adduser -q --gecos '' --disabled-login --shell /bin/false moov
 
 EXPOSE 8080
 ENTRYPOINT ["nginx"]
