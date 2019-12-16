@@ -21,7 +21,6 @@ COPY --from=builder /docs.moov.io/site/ /opt/nginx/www/
 RUN echo '# empty prometheus metrics response' > /opt/nginx/www/metrics
 
 RUN adduser -q --gecos '' --disabled-login --shell /bin/false moov
-# USER moov
 
 EXPOSE 8080
 ENTRYPOINT ["nginx"]
