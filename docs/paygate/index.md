@@ -62,6 +62,10 @@ After confirming that the services are running correctly, there are several thin
 1. [Setup a Receiver](https://api.moov.io/#operation/addReceivers)
 1. Then you can [create a transaction](https://api.moov.io/#operation/addTransfer) between these two FIs
 
+### X-User-ID
+
+The HTTP header `X-User-ID` is required and used to isolate objects (e.g. `Depository`, `Originator`) when using paygate in a multi-tenant setup. This is useful if you're managing transfers for multiple customers/users or multiple Financial Institutions. The value for this header can be a UTF-8 string, but typically it is a random alphanumeric string.
+
 ## Setup FTP
 
 PayGate currently requires the FTP configuration to be manually setup in the database. [See here](https://github.com/moov-io/paygate/blob/master/docs/ach.md#uploads-of-merged-ach-files) for more information.
