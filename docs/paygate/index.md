@@ -126,7 +126,7 @@ The command may need to be ran with elevated privileges, using `sudo` or another
 
 ## Verify FTP configuration
 
-Paygaet's admin HTTP interface offers endpoints to check these values were setup (default on port `:9092`).
+Paygate's admin HTTP interface offers endpoints to check these values were setup (default on port `:9092`).
 
 ```
 curl -s -X GET http://localhost:9092/configs/uploads | jq .

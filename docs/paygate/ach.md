@@ -78,7 +78,7 @@ Note: By default filenames have sequence numbers which are incremented by paygat
 
 #### IP Whitelisting
 
-When paygate uploads an ACH file to the ODFI server it can verify the remote server's hostname resolves to a whitelisted IP or CIDR range. This supports certain network controls to prevent dns poisoning or misconfigured routing.
+When paygate uploads an ACH file to the ODFI server it can verify the remote server's hostname resolves to a whitelisted IP or CIDR range. This supports certain network controls to prevent DNS poisoning or misconfigured routing.
 
 Setting `file_transfer_configs.allowed_ips` can be done with values like: `35.211.43.9` (specific IP address), `10.4.0.0/16` (CIDR range), `10.1.0.12,10.3.0.0/16` (Multiple values)
 
