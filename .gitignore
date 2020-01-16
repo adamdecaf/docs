@@ -14,5 +14,5 @@
 # generated site
 site/
 
-./nginx/cache/
-./nginx/run/
+/nginx/cache/
+/nginx/run/
