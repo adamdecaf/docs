@@ -58,8 +58,8 @@ After confirming that the services are running correctly, there are several thin
 
 1. [Setup a Depository](https://api.moov.io/#operation/addDepository) for the Originator (ODFI)
 1. [Setup a Depository](https://api.moov.io/#operation/addDepository) for the Receiver as well (RDFI)
-1. [Setup an Originator](https://api.moov.io/#operation/addOriginator)
-1. [Setup a Receiver](https://api.moov.io/#operation/addReceivers)
+1. [Setup an Originator](https://api.moov.io/#operation/addOriginator) with customer information
+1. [Setup a Receiver](https://api.moov.io/#operation/addReceivers) with customer information
 1. Then you can [create a Transfer](https://api.moov.io/#operation/addTransfer) between these two FIs
 
 ### X-User-ID
