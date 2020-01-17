@@ -64,7 +64,7 @@ After confirming that the services are running correctly, there are several thin
 
 ### X-User-ID
 
-The HTTP header `X-User-ID` is required and used to isolate objects (e.g. `Depository`, `Originator`) when using paygate in a multi-tenant setup. This is useful if you're managing transfers for multiple customers/users or multiple Financial Institutions. The value for this header can be a UTF-8 string, but typically it is a random alphanumeric string.
+The HTTP header `X-User-ID` is required and used to isolate objects (such as `Depository`, `Originator`, `Receiver`, `Gateway`, `Transfer`) when using paygate in a multi-tenant setup. This is useful if you're managing transfers for multiple customers/users or multiple Financial Institutions. The value for this header can be a UTF-8 string, but typically it is a random alphanumeric string.
 
 ## Setup FTP
 
