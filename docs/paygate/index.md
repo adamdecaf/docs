@@ -57,7 +57,7 @@ $ ./apitest -help
 After confirming that the services are running correctly, there are several things needed before ACH transactions can be created/processed using PayGate.  Listed below are the steps necessary:
 
 1. [Setup a Depository](https://api.moov.io/#operation/addDepository) for the Originator (ODFI)
-1. Setup a Depository for the Receiver as well (RDFI)
+1. [Setup a Depository](https://api.moov.io/#operation/addDepository) for the Receiver as well (RDFI)
 1. [Setup an Originator](https://api.moov.io/#operation/addOriginator)
 1. [Setup a Receiver](https://api.moov.io/#operation/addReceivers)
 1. Then you can [create a Transfer](https://api.moov.io/#operation/addTransfer) between these two FIs
