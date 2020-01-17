@@ -38,6 +38,12 @@ Otherwise, the following SQLite and MySQL tables can be configured. Insert, upda
 
 There is a Prometheus metric exposed for tracking ACH file uploads `ach_files_uploaded{destination="..", origin=".."}` and `missing_ach_file_upload_configs{routing_number="..."}` which counts how often configurations aren't found for given routing numbers. These need to be addressed by a human operator (insert the proper configurations) so files can be uploaded to a Financial Institution.
 
+#### File-based Upload Configuration
+
+Paygate supports reading a config file (via `CONFIG_FILE=/conf/config.yml`) for ACH file uploads to their remote ODFI server. The structure follows the admin HTTP endpoints, but is configured in YAML.
+
+- [Example upload configuration file](https://github.com/moov-io/paygate/blob/master/testdata/configs/routing-good.yaml)
+
 #### Filename templates
 
 Paygate supports templated naming of ACH files prior to their upload. This is helpful for ODFI's which require specific naming of uploaded files. Templates use Go's [`text/template` syntax](https://golang.org/pkg/text/template/) and are validated when paygate starts or changed via admin endpoints.
@@ -72,7 +78,7 @@ Note: By default filenames have sequence numbers which are incremented by paygat
 
 #### IP Whitelisting
 
-When paygate uploads an ACH file to the ODFI server it can verify the remote server's hostname resolves to a whitelisted IP or CIDR range. This supports certain network controls to prevent dns poisoning or misconfigured routing.
+When paygate uploads an ACH file to the ODFI server it can verify the remote server's hostname resolves to a whitelisted IP or CIDR range. This supports certain network controls to prevent DNS poisoning or misconfigured routing.
 
 Setting `file_transfer_configs.allowed_ips` can be done with values like: `35.211.43.9` (specific IP address), `10.4.0.0/16` (CIDR range), `10.1.0.12,10.3.0.0/16` (Multiple values)
 

@@ -57,10 +57,14 @@ $ ./apitest -help
 After confirming that the services are running correctly, there are several things needed before ACH transactions can be created/processed using PayGate.  Listed below are the steps necessary:
 
 1. [Setup a Depository](https://api.moov.io/#operation/addDepository) for the Originator (ODFI)
-1. Setup a Depository for the Receiver as well (RDFI)
-1. [Setup an Originator](https://api.moov.io/#operation/addOriginator)
-1. [Setup a Receiver](https://api.moov.io/#operation/addReceivers)
-1. Then you can [create a transaction](https://api.moov.io/#operation/addTransfer) between these two FIs
+1. [Setup a Depository](https://api.moov.io/#operation/addDepository) for the Receiver as well (RDFI)
+1. [Setup an Originator](https://api.moov.io/#operation/addOriginator) with customer information
+1. [Setup a Receiver](https://api.moov.io/#operation/addReceivers) with customer information
+1. Then you can [create a Transfer](https://api.moov.io/#operation/addTransfer) between these two FIs
+
+### X-User-ID
+
+The HTTP header `X-User-ID` is required and used to isolate objects (such as `Depository`, `Originator`, `Receiver`, `Gateway`, `Transfer`) when using paygate in a multi-tenant setup. This is useful if you're managing transfers for multiple customers/users or multiple Financial Institutions. The value for this header can be a UTF-8 string, but typically it is a random alphanumeric string.
 
 ## Setup FTP
 
@@ -122,7 +126,7 @@ The command may need to be ran with elevated privileges, using `sudo` or another
 
 ## Verify FTP configuration
 
-Paygaet's admin HTTP interface offers endpoints to check these values were setup (default on port `:9092`).
+Paygate's admin HTTP interface offers endpoints to check these values were setup (default on port `:9092`).
 
 ```
 curl -s -X GET http://localhost:9092/configs/uploads | jq .
