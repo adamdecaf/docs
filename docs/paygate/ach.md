@@ -132,4 +132,6 @@ Returned ACH files are downloaded via SFTP by paygate and processed. Each file i
 
 ### Incoming ACH Files
 
-TODO(adam)
+Incoming ACH files are downloaded via SFTP by paygate and processed. Each file is expected to be an IAT file or be a NOC/COR file with an [Addenda98](https://godoc.org/github.com/moov-io/ach#Addenda98) ACH record containing a change code. This change code is used to indicate which `Depository` fields of the file are incorrect and need changed before uploading to the ODFI's server again.
+
+By default Paygate does not update user-created objects from these files, but it can automatically update them by setting the `UPDATE_DEPOSITORIES_FROM_CHANGE_CODE=yes` environment variable. When these automatic updates are disabled the Depository Statuses are `Rejected` along with the `Transfer`.
