@@ -38,6 +38,8 @@ Otherwise, the following SQLite and MySQL tables can be configured. Insert, upda
 
 There is a Prometheus metric exposed for tracking ACH file uploads `ach_files_uploaded{destination="..", origin=".."}` and `missing_ach_file_upload_configs{routing_number="..."}` which counts how often configurations aren't found for given routing numbers. These need to be addressed by a human operator (insert the proper configurations) so files can be uploaded to a Financial Institution.
 
+There's also a Prometheus metric called `ach_file_upload_errors{destination="..", origin=".."}` for tracking upload errors given the routing numbers involved.
+
 #### File-based Upload Configuration
 
 Paygate supports reading a config file (via `CONFIG_FILE=/conf/config.yml`) for ACH file uploads to their remote ODFI server. The structure follows the admin HTTP endpoints, but is configured in YAML.
