@@ -28,11 +28,9 @@ Note: Paygate currently supports `/ready`, but has no checks on this so `200 OK`
 
 ### Flushing ACH File Merging and Uploading
 
-Call this endpoint to start paygate's merging and uploading of ACH files outside of the interval. There's no response except for `200 OK` after the process completes.
+[Call this endpoint](https://api.moov.io/admin/paygate/#post-/files/flush) to start paygate's merging and uploading of ACH files outside of the interval. There's no response except for `200 OK` after the process completes.
 
 ```
-$ curl -XPOST localhost:9092/files/flush
-
 # paygate logs
 ts=2019-08-23T18:36:24.206694Z caller=file_transfer_async.go:218 startPeriodicFileOperations="forcing merge and upload of ACH files"
 ts=2019-08-23T18:36:24.206898Z caller=file_transfer_async.go:640 file-transfer-controller="Starting file merge and upload operations"
@@ -43,7 +41,7 @@ Note: There are endpoints to flush only the incoming or outbound files: `POST /f
 
 ### Reading Micro-Deposit Amounts
 
-This endpoint takes a Depository ID and returns the micro-deposits posted against the account.
+[This endpoint](https://api.moov.io/admin/paygate/#get-/depositories/{depositoryId}/micro-deposits) takes a Depository ID and returns the micro-deposits posted against the account.
 
 ```
 $ curl -H "x-user-id: adam" localhost:9092/depositories/:id/micro-deposits
@@ -52,7 +50,7 @@ $ curl -H "x-user-id: adam" localhost:9092/depositories/:id/micro-deposits
 
 ### ACH File Upload Configs
 
-Paygate has several endpoints for ACH file merging and upload configuration. To view all the configuration call the following endpoint:
+Paygate [has several endpoints](https://api.moov.io/admin/paygate/#get-/configs/filetransfers) for ACH file merging and upload configuration. To view all the configuration call the following endpoint:
 
 ```
 $ curl -s localhost:9092/configs/uploads | jq .
@@ -94,7 +92,7 @@ $ curl -s localhost:9092/configs/uploads | jq .
 }
 ```
 
-Then you can update (or delete) the `CutoffTime` for a routing number with the following. Config values are unique to a `routingNumber`.
+Then you can [update (or delete) the `CutoffTime`](https://api.moov.io/admin/paygate/#put-/configs/filetransfers/{routingNumber}) for a routing number with the following. Config values are unique to a `routingNumber`.
 
 ```
 $ curl -XPUT localhost:9092/configs/uploads/cutoff-times/{routingNumber} --data '{
@@ -107,7 +105,7 @@ $ curl -XPUT localhost:9092/configs/uploads/cutoff-times/{routingNumber} --data 
 $ curl -XDELETE localhost:9092/configs/uploads/cutoff-times/{routingNumber}
 ```
 
-Also, update the file transfer configuration (InboundPath, OutboundPath, ReturnPath, etc..). Config values are unique to a `routingNumber`.
+Also, [update the file transfer configuration](https://api.moov.io/admin/paygate/#get-/configs/filetransfers/{routingNumber}) (InboundPath, OutboundPath, ReturnPath, etc..). Config values are unique to a `routingNumber`.
 
 ```
 $ curl -XPUT localhost:9092/configs/uploads/file-transfers/{routingNumber} --data '{"inboundPath": "./inbound/", "outboundPath": "./outbound/", "returnPath": "./returned/"}'
@@ -119,7 +117,7 @@ $ curl -XDELETE localhost:9092/configs/uploads/file-transfers/{routingNumber}
 
 #### FTP (File Transfer Protocol)
 
-Update the hostname, username, password, etc for a routing number's FTP config. The `password` is optional, but all other fields are required. Config values are unique to a `routingNumber`.
+[Update the hostname, username, password, etc](https://api.moov.io/admin/paygate/#put-/configs/filetransfers/ftp/{routingNumber}) for a routing number's FTP config. The `password` is optional, but all other fields are required. Config values are unique to a `routingNumber`.
 
 ```
 $ curl -XPUT localhost:9092/configs/uploads/ftp/{routingNumber} --data '{
@@ -135,7 +133,7 @@ $ curl -XDELETE localhost:9092/configs/uploads/ftp/{routingNumber}
 
 #### SFTP (SSH File Transfer Protocol)
 
-Update the hostname, username, password, client private key, host public key, etc for a routing number's SFTP config. `password`, `clientPrivateKey`, and `hostPublicKey` are all optional, but all other fields are required. Config values are unique to a `routingNumber`.
+[Update the hostname, username, password, client private key, host public key, etc](https://api.moov.io/admin/paygate/#put-/configs/filetransfers/sftp/{routingNumber}) for a routing number's SFTP config. `password`, `clientPrivateKey`, and `hostPublicKey` are all optional, but all other fields are required. Config values are unique to a `routingNumber`.
 
 ```
 $ curl -XPUT localhost:9092/configs/uploads/sftp/{routingNumber} --data '{
@@ -153,7 +151,7 @@ $ curl -XDELETE localhost:9092/configs/uploads/sftp/{routingNumber}
 
 ### Updating the Status of a Depository
 
-`Depository` objects can have their status updated outside of micro-deposits via the admin HTTP server. To do so simply provide the status.
+`Depository` objects can have their [status updated outside of micro-deposits](https://api.moov.io/admin/paygate/#put-/depositories/{depositoryId}) via the admin HTTP server. To do so simply provide the status.
 
 ```
 $ curl -XPUT --data '{"status": "rejected"}' http://localhost:9092/depositories/{depositoryID}
