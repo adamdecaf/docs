@@ -96,6 +96,7 @@ nav:
     - 'Intro to ACH': ach/intro.md
     - 'ACH File Structure': ach/file-structure.md
     - 'Picking an SEC Code': ach/sec-codes-table.md
+    - 'Custom Validation': ach/custom-validation.md
 - FED:
   - Getting Started: fed/index.md
   - FED Developers:
