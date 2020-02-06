@@ -18,6 +18,10 @@ ACH transfers are merged (grouped) according their destination routing numbers a
 
 The code paths for [merging and uploading ACH files is within `filetransfer.Controller`](../internal/filetransfer/controller.go) and there is a Prometheus metric exposed for tracking merged ACH transfers `transfers_merged_into_ach_files{destination="..", origin=".."}`.
 
+#### Remote Service
+
+PayGate uses [Moov ACH](https://docs.moov.io/ach/) to store files for each Transfer. They are merged on the local filesystem prior to upload with the ODFI. There's a Prometheus metric tracking errors with remote calls called `ach_client_errors{"instance"="...", "operation": "..."}`.
+
 #### Advanced Routing
 
 The [US Federal Reserve](https://en.wikipedia.org/wiki/Federal_Reserve_Bank) has multiple locations where we can have ACH files sent to. Some Financial Institutions optimize routing of files to allow processing during the same calendar day or to benefit from physical locality. This is done in part by the ABA routing number prefix. Paygate has long term plans to perform routing optimizations like this, but currently does no such optimization.
