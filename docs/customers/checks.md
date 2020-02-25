@@ -31,4 +31,4 @@ Clients can call `PUT /customers/:id/refresh/ofac` to manually refresh a custome
 
 ### CIP
 
-(Customer Identification Program](https://en.wikipedia.org/wiki/Customer_Identification_Program) (CIP) performs Social Security Number (SSN) validation over the Customers stored SSN. Currently we do not perform validation against a third-party, but plan to.
+[Customer Identification Program](https://en.wikipedia.org/wiki/Customer_Identification_Program) (CIP) performs Social Security Number (SSN) validation over the Customers stored SSN. Currently we do not perform validation against a third-party, but plan to.
