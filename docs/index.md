@@ -19,7 +19,7 @@ Process funds with the following settlement methods:
 
 Common functionality for creating funding accounts
 
-- [Moov Customers](https://github.com/moov-io/customers) The Customers project focuses on solving authentic identification of humans who are legally able to hold and transfer currency within the US. Primarily this project solves Know Your Customer (KYC), Customer Identification Program (CIP), Office of Foreign Asset Control (OFAC) checks and verification workflows to comply with US federal law and ensure authentic transfers.
+- [Moov Customers](./customers/) The Customers project focuses on solving authentic identification of humans who are legally able to hold and transfer currency within the US. Primarily this project solves Know Your Customer (KYC), Customer Identification Program (CIP), Office of Foreign Asset Control (OFAC) checks and verification workflows to comply with US federal law and ensure authentic transfers.
 - [Moov Accounts](https://github.com/moov-io/accounts) is an RESTful API implementation of an accounting General Ledger used to track monetary transfers in digital systems.
 - [Moov Watchman](./watchman/) is an HTTP API and Go library to download, parse and offer search functions over numerous trade sanction lists from the United States and European Union.
 - [Moov FED](./fed/) implements utility services for searching the United States Federal Reserve System such as ABA routing numbers, Financial Institution name lookup and Fed Wire routing information.

@@ -97,6 +97,12 @@ nav:
     - 'ACH File Structure': ach/file-structure.md
     - 'Picking an SEC Code': ach/sec-codes-table.md
     - 'Custom Validation': ach/custom-validation.md
+- Customers:
+    - Getting Started: customers/index.md
+    - 'Checks (KYC/AML)': customers/checks.md
+    - Disclaimers: customers/disclaimers.md
+    - Documents: customers/documents.md
+    - Local Dev: customers/local-dev.md
 - FED:
   - Getting Started: fed/index.md
   - FED Developers:
