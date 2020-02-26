@@ -2,7 +2,7 @@
 
 ## What is FED
 
-[Moov FED](https://github.com/moov-io/fed) implements an HTTP interface to search [FEDWIRE](https://github.com/moov-io/fed/tree/master/docs/fpddir.md) and [FEDACH](https://github.com/moov-io/fed/tree/master/docs/FedACHdir.md) data from the Federal Reserve Bank Services.  
+[Moov FED](https://github.com/moov-io/fed) implements an HTTP interface to search [FEDWIRE](https://github.com/moov-io/fed/tree/master/docs/fpddir.md) and [FEDACH](https://github.com/moov-io/fed/tree/master/docs/FedACHdir.md) data from the Federal Reserve Bank Services.
 
 [source: U.S. DEPARTMENT OF THE TREASURY](https://www.treasury.gov/resource-center/faqs/Sanctions/Pages/faq_general.aspx#basic)
 
@@ -19,7 +19,7 @@ FED can be used stand alone to search for routing numbers by Financial instituti
 Moov FED can be deployed in multiple scenarios.
 
 - Binary Distributions are released with every versioned release. Frequently added to the VM/AMI build script for the application needing Moov FED.
-- Our hosted [api.moov.io](https://api.moov.io) is updated with every versioned release. Our Kubernetes example is what Moov utilizes in our production environment. 
+- Our hosted [api.moov.io](https://api.moov.io) is updated with every versioned release. Our Kubernetes example is what Moov utilizes in our production environment.
 - A Docker container is built and added to Docker Hub with every versioned released.
 
 ### Binary Distribution
@@ -28,7 +28,7 @@ Download the [latest Moov FED server release](https://github.com/moov-io/fed/rel
 
 ```sh
 host:~ $ cd ~/Downloads/
-host:Downloads $ ./fed-darwin-amd64 
+host:Downloads $ ./fed-darwin-amd64
 ts=2019-06-20T23:23:44.870717Z caller=main.go:75 startup="Starting fed server version v0.2.0"
 ts=2019-06-20T23:23:44.871623Z caller=main.go:135 transport=HTTP addr=:8086
 ts=2019-06-20T23:23:44.871692Z caller=main.go:125 admin="listening on :9096"
@@ -43,7 +43,7 @@ Moov FED is dependent on Docker being properly installed and running on your mac
 ```sh
 host:~ $ docker ps
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
-host:~ $ 
+host:~ $
 ```
 
 Execute the Docker run command
@@ -76,13 +76,19 @@ $ curl -s localhost:8086/fed/ach/search?routingNumber=273976369 | jq .
 
 Kubernetes manifest - save in a file (`fed.yaml`) and apply with `kubectl apply -f fed.yaml`.
 
+## FED data files
+
+The data files included with the Docker image (and in the Fed repository) are outdated. This is due to the licensing on the files which prevents us from distributing them.
+
+Moov Fed can read the data files from anywhere on the filesystem. This allows you to mount the files and set `FEDACH_DATA_PATH` / `FEDWIRE_DATA_PATH` environmental variables.
+
 ## Connecting to Moov FED
 The Moov FED service will be running on port 8086 (with an admin port on 9096).
 
 Confirm that the service is running by issuing the following command or simply visiting the url in your browser localhost:8086/ping
 
 ```sh
-$ curl http://localhost:8086/ping 
+$ curl http://localhost:8086/ping
 ```
 
 ```
@@ -128,7 +134,7 @@ $ curl -s localhost:8086/fed/ach/search?routingNumber=273976369 | jq .
 
 (c) Federal Reserve Banks
 
-By accessing the [data](https://github.com/moov-io/fed/data) in this repository you agree to the [Federal Reserve Banks' Terms of Use](https://frbservices.org/terms/index.html) and the [E-Payments Routing Directory Terms of Use Agreement](https://www.frbservices.org/EPaymentsDirectory/agreement.html).  
+By accessing the [data](https://github.com/moov-io/fed/data) in this repository you agree to the [Federal Reserve Banks' Terms of Use](https://frbservices.org/terms/index.html) and the [E-Payments Routing Directory Terms of Use Agreement](https://www.frbservices.org/EPaymentsDirectory/agreement.html).
 
 ## Disclaimer
 
