@@ -53,6 +53,10 @@ For database storage we offer [SQLite](https://github.com/moov-io/customers#sqli
 
 [Document storage](https://github.com/moov-io/customers#document-storage) can be in in a [local filesystem](https://github.com/moov-io/customers#local-filesystem-storage),  [AWS S3](https://github.com/moov-io/customers#aws-s3-storage), or [Google Cloud Storage](https://github.com/moov-io/customers#google-cloud-storage).
 
-### Customers Admin Ports
+### Customers Admin Port
 
 The port `:9097` is bound by Customers for our admin service. This HTTP server has endpoints for Prometheus metrics (`GET /metrics`), readiness (`GET /ready`) and liveness checks (`GET /live`).
+
+## API documentation
+
+See our [API documentation](https://api.moov.io/apps/customers/) for Moov Customers endpoints.

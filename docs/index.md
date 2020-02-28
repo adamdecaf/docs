@@ -4,7 +4,7 @@
 
 ## Moov Projects
 
-Moov projects are focused on solving a single responsibility capability in financial services. Projects can be leveraged as a RESTFul service or GoLang library and are built from source into an OS specific binary and docker container. Deployment of Moov projects can be deployed as a binary on your application server, as a docker container, or leverage the our hosted API [api.moov.io](https://api.moov.io) endpoints.
+Moov projects are focused on solving a single responsibility capability in financial services. Projects can be leveraged as a RESTFul service or Golang library and are built from source into an OS specific binary and docker container. Deployment of Moov projects can be deployed as a binary on your application server, as a docker container, or leverage the our hosted API [api.moov.io](https://api.moov.io) endpoints.
 
 ### Payments
 
@@ -38,9 +38,9 @@ The core principles underlying Moov are performance, scalability, and ease-of-us
 
  channel | info
  ------- | -------
-[moov-io slack](http://moov-io.slack.com/) | Join our slack channel to have an interactive discussion about the development of the project. [Request an invite to the slack channel](https://join.slack.com/t/moov-io/shared_invite/enQtNDE5NzIwNTYxODEwLTRkYTcyZDI5ZTlkZWRjMzlhMWVhMGZlOTZiOTk4MmM3MmRhZDY4OTJiMDVjOTE2MGEyNWYzYzY1MGMyMThiZjg)
- [Project Documentation](https://docs.moov.io/) | Our project documentation available online. (This site!)
- Google Group [moov-users](https://groups.google.com/forum/#!forum/moov-users)| The Moov users Google group is for contributors other people contributing to the Moov project. You can join them without a google account by sending an email to [moov-users+subscribe@googlegroups.com](mailto:moov-users+subscribe@googlegroups.com). After receiving the join-request message, you can simply reply to that to confirm the subscription.
+[moov-io slack](https://slack.moov.io/) | Join our slack channel to have an interactive discussion about the development of the project.
+[Project Documentation](https://docs.moov.io/) | Our project documentation available online. (This site!)
+Google Group [moov-users](https://groups.google.com/forum/#!forum/moov-users)| The Moov users Google group is for contributors other people contributing to the Moov project. You can join them without a google account by sending an email to [moov-users+subscribe@googlegroups.com](mailto:moov-users+subscribe@googlegroups.com). After receiving the join-request message, you can simply reply to that to confirm the subscription.
 Twitter [@moov_io](https://twitter.com/moov_io)	| You can follow Moov.IO's Twitter feed to get updates on our project(s). You can also tweet us questions or just share blogs or stories.
 [GitHub Issue](https://github.com/moov-io) | If you are able to reproduce a problem please open a GitHub Issue under the specific project that caused the error.
 

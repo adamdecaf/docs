@@ -1,4 +1,6 @@
-## Admin Endpoints
+### Documentation
+
+See our [API documentation](https://api.moov.io/admin/paygate/) for Moov PayGate admin endpoints.
 
 ### Version
 
