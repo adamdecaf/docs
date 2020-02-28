@@ -126,6 +126,11 @@ $ curl -s localhost:8086/fed/ach/search?routingNumber=273976369 | jq .
     }
 ```
 
+### API documentation
+
+See our [API documentation](https://api.moov.io/apps/fed/) for Moov FED endpoints.
+
+
 ### Other resources
 
 * [State and Territory Abbreviations](https://github.com/moov-io/fed/docs/Fed_STATE_CODES.md)

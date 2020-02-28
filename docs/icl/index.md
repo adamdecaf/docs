@@ -4,11 +4,11 @@
 <a href="https://godoc.org/github.com/moov-io/imagecashletter"><img src="https://godoc.org/github.com/moov-io/imagecashletter?status.svg" /></a>
 <a href="https://raw.githubusercontent.com/moov-io/imagecashletter/master/LICENSE"><img src="https://img.shields.io/badge/license-Apache2-blue.svg" /></a>
 
-Moov imagecashletter implements a low level Image Cash Letter (ICL) interface for parsing, creating, and validating, ICL files. Moov imagecashletter exposes an HTTP API for REST based interaction. Any language which can use HTTP and JSON can leverage the imagecashletter Server. The API's endpoints expose both text and JSON to easily ingest or export either format.
+Moov ImageCashLetter implements a low level Image Cash Letter (ICL) interface for parsing, creating, and validating, ICL files. Moov ImageCashLetter exposes an HTTP API for REST based interaction. Any language which can use HTTP and JSON can leverage the ImageCashLetter Server. The API's endpoints expose both text and JSON to easily ingest or export either format.
 
-## Running Moov imagecashletter Server
+## Running Moov ImageCashLetter Server
 
-Moov imagecashletter can be deployed in multiple scenarios.
+Moov ImageCashLetter can be deployed in multiple scenarios.
 
 - <a href="#binary-distribution">Binary Distributions</a> are released with every versioned release. Frequently added to the VM/AMI build script for the application needing Moov ICL.
 - A <a href="#docker-container">Docker container</a> is built and added to Docker Hub with every versioned released.
@@ -16,7 +16,7 @@ Moov imagecashletter can be deployed in multiple scenarios.
 
 ### Binary Distribution
 
-Download the [latest Moov imagecashletter server release](https://github.com/moov-io/imagecashletter/releases) for your operating system and run it from a terminal.
+Download the [latest Moov ImageCashLetter server release](https://github.com/moov-io/imagecashletter/releases) for your operating system and run it from a terminal.
 
 ```sh
 $ ./imagecashletter-darwin-amd64
@@ -29,7 +29,7 @@ Next [Connect to Moov imagecashletter](#connecting-to-moov-imagecashletter)
 
 ### Docker Container
 
-Moov imagecashletter is dependent on Docker being properly installed and running on your machine. Ensure that Docker is running. If your Docker client has issues connecting to the service review the [Docker getting started guide](https://docs.docker.com/get-started/) if you have any issues.
+Moov ImageCashLetter is dependent on Docker being properly installed and running on your machine. Ensure that Docker is running. If your Docker client has issues connecting to the service review the [Docker getting started guide](https://docs.docker.com/get-started/) if you have any issues.
 
 ```sh
 $ docker ps
@@ -39,25 +39,17 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 Execute the Docker run command
 
 ```sh
-$ docker run moov/imagecashletter:latest
+$ docker run -p 8083:8083 -p 9093:9093 moov/imagecashletter:latest
 ts=2019-06-21T17:03:23.782592Z caller=main.go:69 startup="Starting imagecashletter server version v0.2.0"
 ts=2019-06-21T17:03:23.78314Z caller=main.go:129 transport=HTTP addr=:8083
 ts=2019-06-21T17:03:23.783252Z caller=main.go:119 admin="listening on :9093"
 ```
 
-> Note for OSX Users:
->
-> You will need to use [port forwarding](https://docs.docker.com/docker-for-mac/networking/#known-limitations-use-cases-and-workarounds):
-
-```
-$ docker run -p 8083:8083 -p 9093:9093 moov/imagecashletter:latest
-```
-
-Next [Connect to Moov imagecashletter](#connecting-to-moov-imagecashletter)
+Next [Connect to Moov ImageCashLetter](#connecting-to-moov-imagecashletter)
 
 ### Kubernetes
 
-The following snippet runs the imagecashletter Server on [Kubernetes](https://kubernetes.io/docs/tutorials/kubernetes-basics/) in the `apps` namespace. You could reach the imagecashletter instance at the following URL from inside the cluster.
+The following snippet runs the ImageCashLetter Server on [Kubernetes](https://kubernetes.io/docs/tutorials/kubernetes-basics/) in the `apps` namespace. You could reach the ImageCashLetter instance at the following URL from inside the cluster.
 
 ```
 # Needs to be ran from inside the cluster
@@ -147,11 +139,11 @@ spec:
           periodSeconds: 10
       restartPolicy: Always
 ```
-Next [Connect to Moov imagecashletter](#connecting-to-moov-imagecashletter)
+Next [Connect to Moov ImageCashLetter](#connecting-to-moov-imagecashletter)
 
-## Connecting to Moov imagecashletter
+## Connecting to Moov ImageCashLetter
 
-The Moov imagecashletter service will be running on port `8083` (with an admin port on `9093`).
+The Moov ImageCashLetter service will be running on port `8083` (with an admin port on `9093`).
 
 Confirm that the service is running by issuing the following command or simply visiting the url in your browser [localhost:8083/ping](http://localhost:8083/ping)
 
@@ -163,6 +155,10 @@ $ curl http://localhost:8083/files
 null
 ```
 
-### imagecashletter Admin Ports
+### API documentation
 
-The port `9093` is bound by imagecashletter for our admin service. This HTTP server has endpoints for Prometheus metrics (`GET /metrics`), readiness (`GET /ready`) and liveness checks (`GET /live`).
+See our [API documentation](https://api.moov.io/apps/icl/) for Moov ImageCashLetter endpoints.
+
+### ImageCashLetter Admin Port
+
+The port `9093` is bound by ImageCashLetter for our admin service. This HTTP server has endpoints for Prometheus metrics (`GET /metrics`), readiness (`GET /ready`) and liveness checks (`GET /live`).

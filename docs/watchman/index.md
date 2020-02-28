@@ -1,4 +1,3 @@
-
 ## What is Watchman
 
 Moov Watchman is an HTTP API and Go library to download, parse and offer search functions over numerous trade sanction lists from the United States, European Union governments, agencies, and non profits for complying with regional laws. Also included is a web UI and async webhook notification service to initiate processes on remote systems.
@@ -51,6 +50,10 @@ An SDN (or entity) is an individual, group, or company which has or could do bus
 ## Web Interface
 
 Moov Watchman provides a web interface for easy browsing of the SDN and related data for mobile and desktop clients. Simply load the address of Watchman in a browser.
+
+## API Documentation
+
+See our documentation for Watchman's [API](https://api.moov.io/apps/watchman/) or [admin endpoints](https://api.moov.io/admin/watchman/).
 
 ## Webhooks
 

@@ -29,6 +29,10 @@ $ cd paygate
 $ go run .
 ```
 
+## API documentation
+
+See our [API documentation](https://api.moov.io/apps/paygate/) for Moov PayGate endpoints.
+
 ## Testing endpoints
 
 In order to check that the services are running, moov provides an api tool ([`apitest`](https://github.com/moov-io/api#apitest)) for testing the endpoints [with binaries you can download](https://github.com/moov-io/api/releases). Once downloaded running `apitest -local` will create Customer, Receiver, Depository, and a Transfer against your local docker compose stack.

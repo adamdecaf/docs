@@ -19,8 +19,8 @@ Moov ACH can be deployed in multiple scenarios.
 Download the [latest Moov ACH server release](https://github.com/moov-io/ach/releases) for your operating system and run it from a terminal.
 
 ```sh
-host:~ $ cd ~/Downloads/
-host:Downloads $ ./ach-darwin-amd64
+$ cd ~/Downloads/
+$ ./ach-darwin-amd64
 ts=2019-06-20T23:23:44.870717Z caller=main.go:75 startup="Starting ach server version v1.0.2"
 ts=2019-06-20T23:23:44.871623Z caller=main.go:135 transport=HTTP addr=:8080
 ts=2019-06-20T23:23:44.871692Z caller=main.go:125 admin="listening on :9090"
@@ -33,23 +33,19 @@ Next [Connect to Moov ACH](#connecting-to-moov-ach)
 Moov ACH is dependent on Docker being properly installed and running on your machine. Ensure that Docker is running. If your Docker client has issues connecting to the service review the [Docker getting started guide](https://docs.docker.com/get-started/) if you have any issues.
 
 ```sh
-host:~ $ docker ps
+$ docker ps
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
-host:~ $
+$
 ```
 
 Execute the Docker run command
 
 ```sh
-host:~ $ docker run moov/ach:latest
+$ docker run -p 8080:8080 -p 9090:9090 moov/ach:latest
 ts=2019-06-21T17:03:23.782592Z caller=main.go:69 startup="Starting ach server version v1.0.2"
 ts=2019-06-21T17:03:23.78314Z caller=main.go:129 transport=HTTP addr=:8080
 ts=2019-06-21T17:03:23.783252Z caller=main.go:119 admin="listening on :9090"
 ```
-
-!!! warning "OSX Users"
-    You will need to use [port forwarding](https://docs.docker.com/docker-for-mac/networking/#known-limitations-use-cases-and-workarounds):
-    `$ docker run -p 8080:8080 -p 9090:9090 moov/ach:latest`)
 
 Next [Connect to Moov ACH](#connecting-to-moov-ach)
 
@@ -166,6 +162,10 @@ $ curl http://localhost:8080/files
 
 You can also send [an example PPD ACH file we have](https://github.com/moov-io/ach/blob/master/test/testdata/ppd-valid.json) to any ACH service or read through HTTP examples in [Ruby](https://github.com/moov-io/ruby-ach-demo) and [Go](https://github.com/moov-io/ach/blob/master/examples/http/main.go).
 
-### ACH Admin Ports
+### API documentation
+
+See our [API documentation](https://api.moov.io/apps/ach/) for Moov ACH endpoints.
+
+### ACH Admin Port
 
 The port `9090` is bound by ACH for our admin service. This HTTP server has endpoints for Prometheus metrics (`GET /metrics`), readiness (`GET /ready`) and liveness checks (`GET /live`).
