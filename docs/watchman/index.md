@@ -11,7 +11,7 @@ Moov Watchman is an HTTP API and Go library to download, parse and offer search 
 You can download a [binary from GitHub](https://github.com/moov-io/watchman/releases) or a [Docker image](https://hub.docker.com/r/moov/watchman) for Watchman. Once downloaded you can start making requests against Watchman. The service will download the latest data on startup.
 
 ```
-$ docker run -p 8084:8084 -p 9094:9094 -it moov/watchman:v0.13.0
+$ docker run -p 8084:8084 -p 9094:9094 -it moov/watchman:latest
 ts=2019-10-01T20:35:31.301254Z caller=main.go:54 startup="Starting watchman server version v0.13.0"
 ts=2019-10-01T20:35:31.301338Z caller=database.go:18 database="looking for  database provider"
 ts=2019-10-01T20:35:31.301376Z caller=sqlite.go:119 main="sqlite version 3.25.2"
