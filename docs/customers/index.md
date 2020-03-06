@@ -8,9 +8,26 @@ The Customers project focuses on solving authentic identification of humans who 
 
 ## Running Moov Customers Server
 
+- The quickest way to try Customers is with our <a href="#running-locally">Docker compose</a> setup.
 - <a href="#binary-distribution">Binary Distributions</a> are released with every versioned release. Frequently added to the VM/AMI build script for the application needing Moov Customers.
 - A <a href="#docker-container">Docker container</a> is built and added to Docker Hub with every versioned released.
 - Our hosted [api.moov.io](https://api.moov.io) is updated with every versioned release. Our Kubernetes example is what Moov utilizes in our production environment.
+
+### Running Locally
+
+Customers has a [Docker Compose](https://docs.docker.com/compose/gettingstarted/) setup which you can run locally. This uses the latest releases of Customers and Watchman.
+
+```
+$ docker-compose up
+Creating customers_watchman_1 ... done
+Creating customers_customers_1 ... done
+...
+customers_1  | ts=2020-03-06T22:56:24.2184402Z caller=main.go:50 startup="Starting moov-io/customers server version v0.4.0-rc1"
+customers_1  | ts=2020-03-06T22:56:24.393462Z caller=watchman.go:102 watchman="using http://watchman:8084 for Watchman address"
+customers_1  | ts=2020-03-06T22:56:24.3951132Z caller=main.go:171 startup="binding to :8087 for HTTP server"
+```
+
+Once the systems start you can access Customers via `http://localhost:8087` and Watchman's [web interface or api](http://localhost:8084).
 
 ### Binary Distribution
 
