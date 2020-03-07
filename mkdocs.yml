@@ -116,6 +116,7 @@ nav:
   - Getting Started: paygate/index.md
   - ACH: paygate/ach.md
   - Admin Endpoints: paygate/admin-endpoints.md
+  - High Availability: paygate/ha.md
   - Local Dev: paygate/local-dev.md
   - Micro Deposits: paygate/micro-deposits.md
 - Watchman:
