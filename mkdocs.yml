@@ -121,6 +121,7 @@ nav:
   - Micro Deposits: paygate/micro-deposits.md
 - Watchman:
   - Getting Started: watchman/index.md
+  - High Availability: watchman/ha.md
   - Search: watchman/search.md
   - Web Interface: watchman/webui.md
   - Index Pipeline: watchman/pipeline.md
