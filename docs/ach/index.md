@@ -46,7 +46,6 @@ Moov ACH is dependent on Docker being properly installed and running on your mac
 ```sh
 $ docker ps
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
-$
 ```
 
 Execute the Docker run command
