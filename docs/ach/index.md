@@ -16,14 +16,25 @@ Moov ACH can be deployed in multiple scenarios.
 
 ### Binary Distribution
 
-Download the [latest Moov ACH server release](https://github.com/moov-io/ach/releases) for your operating system and run it from a terminal.
+Download the [latest Moov ACH server release](https://github.com/moov-io/ach/releases/latest) for your operating system and run it from a terminal.
+
+For macOS / Linux users:
 
 ```sh
 $ cd ~/Downloads/
 $ ./ach-darwin-amd64
-ts=2019-06-20T23:23:44.870717Z caller=main.go:75 startup="Starting ach server version v1.0.2"
+ts=2019-06-20T23:23:44.870717Z caller=main.go:75 startup="Starting ach server version v1.3.1"
 ts=2019-06-20T23:23:44.871623Z caller=main.go:135 transport=HTTP addr=:8080
 ts=2019-06-20T23:23:44.871692Z caller=main.go:125 admin="listening on :9090"
+```
+
+For Windows users:
+
+```
+> ach.exe
+ts=2019-06-20T23:23:44.870717Z caller=main.go:75 startup="Starting ach server version v1.3.1"
+ts=2019-06-20T23:23:44.871623Z caller=main.go:135 transport=HTTP addr=:8080
+ts=2019-06-20T23:23:44.871692Z caller=main.go:125 admin="listening on :9090
 ```
 
 Next [Connect to Moov ACH](#connecting-to-moov-ach)
@@ -42,7 +53,7 @@ Execute the Docker run command
 
 ```sh
 $ docker run -p 8080:8080 -p 9090:9090 moov/ach:latest
-ts=2019-06-21T17:03:23.782592Z caller=main.go:69 startup="Starting ach server version v1.0.2"
+ts=2019-06-21T17:03:23.782592Z caller=main.go:69 startup="Starting ach server version v1.3.1"
 ts=2019-06-21T17:03:23.78314Z caller=main.go:129 transport=HTTP addr=:8080
 ts=2019-06-21T17:03:23.783252Z caller=main.go:119 admin="listening on :9090"
 ```
