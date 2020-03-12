@@ -115,10 +115,10 @@ nav:
 - Paygate:
   - Getting Started: paygate/index.md
   - ACH: paygate/ach.md
+  - Account Validation: paygate/account-validation.md
   - Admin Endpoints: paygate/admin-endpoints.md
   - High Availability: paygate/ha.md
   - Local Dev: paygate/local-dev.md
-  - Micro Deposits: paygate/micro-deposits.md
 - Watchman:
   - Getting Started: watchman/index.md
   - High Availability: watchman/ha.md
