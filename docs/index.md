@@ -50,4 +50,4 @@ Wow, we really appreciate that you even looked at this section! We are trying to
 
 You only have a fresh set of eyes once! The easiest way to contribute is to give feedback on the documentation that you are reading right now. This can be as simple as sending a message to our Google Group with your feedback or updating the markdown in this documentation and issuing a pull request.
 
-Stability is the hallmark of any good software. If you find an edge case that isn't handled please [open an GitHub issue](https://github.com/moov-io/ach/issues/new) with the example data so that we can make our software more robust for everyone. We also welcome pull requests if you want to get your hands dirty.
+Stability is the hallmark of any good software. If you find an edge case that isn't handled please [open an GitHub issue](https://github.com/moov-io) on the project's repository with the example data so that we can make our software more robust for everyone. We also welcome pull requests if you want to get your hands dirty.
