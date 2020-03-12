@@ -27,7 +27,7 @@ OFAC match results over `OFAC_MATCH_THRESHOLD` will prevent the Customer from ob
 
 #### Refreshing OFAC Searches
 
-Clients can call `PUT /customers/:id/refresh/ofac` to manually refresh a customers OFAC search results. This
+Clients can call `PUT /customers/:id/refresh/ofac` to manually refresh a customers OFAC search results.
 
 ### CIP
 

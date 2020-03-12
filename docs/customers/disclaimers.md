@@ -4,6 +4,8 @@ Disclaimers are plain text which are presented to a user and must be accepted pr
 
 See our [API documentation](https://api.moov.io/apps/customers/) for Moov Customers disclaimer endpoints.
 
+<!--
 ## Creating Disclaimers
 
 TODO(adam)
+-->
