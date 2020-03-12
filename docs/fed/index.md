@@ -4,8 +4,6 @@
 
 [Moov FED](https://github.com/moov-io/fed) implements an HTTP interface to search [FEDWIRE](https://github.com/moov-io/fed/tree/master/docs/fpddir.md) and [FEDACH](https://github.com/moov-io/fed/tree/master/docs/FedACHdir.md) data from the Federal Reserve Bank Services.
 
-[source: U.S. DEPARTMENT OF THE TREASURY](https://www.treasury.gov/resource-center/faqs/Sanctions/Pages/faq_general.aspx#basic)
-
 The data and formats represent a compilation of the **FedWire** and **FedACH** data from the [Federal Reserve Bank Services site](https://frbservices.org/).
 
 * [FEDACH](https://github.com/moov-io/fed/tree/master/docs/FedACHdir.md)
@@ -27,9 +25,9 @@ Moov FED can be deployed in multiple scenarios.
 Download the [latest Moov FED server release](https://github.com/moov-io/fed/releases) for your operating system and run it from a terminal.
 
 ```sh
-host:~ $ cd ~/Downloads/
+$ cd ~/Downloads/
 host:Downloads $ ./fed-darwin-amd64
-ts=2019-06-20T23:23:44.870717Z caller=main.go:75 startup="Starting fed server version v0.2.0"
+ts=2019-06-20T23:23:44.870717Z caller=main.go:75 startup="Starting fed server version v0.4.1"
 ts=2019-06-20T23:23:44.871623Z caller=main.go:135 transport=HTTP addr=:8086
 ts=2019-06-20T23:23:44.871692Z caller=main.go:125 admin="listening on :9096"
 ```
@@ -41,23 +39,18 @@ Next [Connect to Moov FED](#connecting-to-moov-fed)
 Moov FED is dependent on Docker being properly installed and running on your machine. Ensure that Docker is running. If your Docker client has issues connecting to the service review the [Docker getting started guide](https://docs.docker.com/get-started/) if you have any issues.
 
 ```sh
-host:~ $ docker ps
+$ docker ps
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
-host:~ $
 ```
 
 Execute the Docker run command
 
 ```sh
-host:~ $ docker run moov/fed:latest
-ts=2019-06-21T17:03:23.782592Z caller=main.go:69 startup="Starting fed server version v0.2.0"
+$ docker run -p "8086:8086" -p "9096:9096" moov/fed:latest
+ts=2019-06-21T17:03:23.782592Z caller=main.go:69 startup="Starting fed server version v0.4.1"
 ts=2019-06-21T17:03:23.78314Z caller=main.go:129 transport=HTTP addr=:8086
 ts=2019-06-21T17:03:23.783252Z caller=main.go:119 admin="listening on :9096"
 ```
-
-!!! warning "OSX Users"
-    You will need to use [port forwarding](https://docs.docker.com/docker-for-mac/networking/#known-limitations-use-cases-and-workarounds):
-    `$ docker run -p 8080:8080 -p 9090:9090 moov/fed:latest`)
 
 Next [Connect to Moov FED](#connecting-to-moov-fed)
 
@@ -69,9 +62,6 @@ The following snippet runs the FED Server on [Kubernetes](https://kubernetes.io/
 # Needs to be ran from inside the cluster
 $ curl http://fed.apps.svc.cluster.local:8086/ping
 PONG
-
-$ curl -s localhost:8086/fed/ach/search?routingNumber=273976369 | jq .
-
 ```
 
 Kubernetes manifest - save in a file (`fed.yaml`) and apply with `kubectl apply -f fed.yaml`.
@@ -89,41 +79,67 @@ Confirm that the service is running by issuing the following command or simply v
 
 ```sh
 $ curl http://localhost:8086/ping
-```
-
-```
 PONG
 ```
 
+Search for a routing number:
+
 ```
-$ curl -s localhost:8086/fed/ach/search?routingNumber=273976369 | jq .
+$ curl -s "localhost:8086/fed/ach/search?routingNumber=273976369" | jq .
+{
+  "achParticipants": [
+    {
+      "routingNumber": "273976369",
+      "officeCode": "O",
+      "servicingFRBNumber": "071000301",
+      "recordTypeCode": "1",
+      "revised": "041513",
+      "newRoutingNumber": "000000000",
+      "customerName": "VERIDIAN CREDIT UNION",
+      "achLocation": {
+        "address": "1827 ANSBOROUGH",
+        "city": "WATERLOO",
+        "state": "IA",
+        "postalCode": "50702",
+        "postalCodeExtension": "0000"
+      },
+      "phoneNumber": "3192878332",
+      "statusCode": "1",
+      "viewCode": "1"
+    }
+  ],
+  "wireParticipants": null
+}
 ```
 
-```json
+Search for a Financial Institution by name:
+
+```
+$ curl -s "localhost:8086/fed/ach/search?name=Veridian&limit=1" | jq .
+{
+  "achParticipants": [
     {
-    "achParticipants": [
-        {
-        "routingNumber": "273976369",
-        "officeCode": "O",
-        "servicingFRBNumber": "071000301",
-        "recordTypeCode": "1",
-        "revised": "041513",
-        "newRoutingNumber": "000000000",
-        "customerName": "VERIDIAN CREDIT UNION",
-        "achLocation": {
-            "address": "1827 ANSBOROUGH",
-            "city": "WATERLOO",
-            "state": "IA",
-            "postalCode": "50702",
-            "postalCodeExtension": "0000"
-        },
-        "phoneNumber": "3192878332",
-        "statusCode": "1",
-        "viewCode": "1"
-        }
-    ],
-    "wireParticipants": null
+      "routingNumber": "273976369",
+      "officeCode": "O",
+      "servicingFRBNumber": "071000301",
+      "recordTypeCode": "1",
+      "revised": "041513",
+      "newRoutingNumber": "000000000",
+      "customerName": "VERIDIAN CREDIT UNION",
+      "achLocation": {
+        "address": "1827 ANSBOROUGH",
+        "city": "WATERLOO",
+        "state": "IA",
+        "postalCode": "50702",
+        "postalCodeExtension": "0000"
+      },
+      "phoneNumber": "3192878332",
+      "statusCode": "1",
+      "viewCode": "1"
     }
+  ],
+  "wireParticipants": null
+}
 ```
 
 ### API documentation
@@ -133,13 +149,14 @@ See our [API documentation](https://api.moov.io/apps/fed/) for Moov FED endpoint
 
 ### Other resources
 
-* [State and Territory Abbreviations](https://github.com/moov-io/fed/docs/Fed_STATE_CODES.md)
+- [State and Territory Abbreviations](https://github.com/moov-io/fed/docs/Fed_STATE_CODES.md)
+- [U.S. Department of the Treasury FAQ](https://www.treasury.gov/resource-center/faqs/Sanctions/Pages/faq_general.aspx#basic)
 
 ### Copyright and Terms of Use
 
-(c) Federal Reserve Banks
+Copyright &copy; Federal Reserve Banks
 
-By accessing the [data](https://github.com/moov-io/fed/data) in this repository you agree to the [Federal Reserve Banks' Terms of Use](https://frbservices.org/terms/index.html) and the [E-Payments Routing Directory Terms of Use Agreement](https://www.frbservices.org/EPaymentsDirectory/agreement.html).
+By accessing the [data](https://github.com/moov-io/fed) in this repository you agree to the [Federal Reserve Banks' Terms of Use](https://frbservices.org/terms/index.html) and the [E-Payments Routing Directory Terms of Use Agreement](https://www.frbservices.org/EPaymentsDirectory/agreement.html).
 
 ## Disclaimer
 
