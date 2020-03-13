@@ -1,6 +1,6 @@
 ### Local FTP server
 
-PayGate supports merging and uploading tranfers into ACH files and defaults to a local File Transport Protocol (FTP) server. The defaults PayGate assumes are defined in `staticRepository` and you can run an FTP server by running Moov's `fsftp` Docker image with `make start-ftp-server`. This image is [located in moov-io/infra](https://github.com/moov-io/infra/tree/master/images/fsftp).
+PayGate supports merging and uploading transfers into ACH files and defaults to a local File Transport Protocol (FTP) server. The defaults PayGate assumes are defined in `staticRepository` and you can run an FTP server by running Moov's `fsftp` Docker image with `make start-ftp-server`. This image is [located in moov-io/infra](https://github.com/moov-io/infra/tree/master/images/fsftp).
 
 Running `moov/fsftp` can be done with (from PayGate's `testdata/ftp-server/` directory):
 
@@ -16,7 +16,7 @@ Note: After processing PayGate will delete files in `testdata/ftp-server/inbound
 
 ### Local SFTP server
 
-PayGate supports merging and uploading tranfers into ACH files and defaults to a local SSH File Transport Protocol (SFTP) server. The defaults PayGate assumes are defined in `staticRepository` and you can run an SFTP server by running the [`atmoz/sftp`](https://hub.docker.com/r/atmoz/sftp) Docker image with `make start-sftp-server`.
+PayGate supports merging and uploading transfers into ACH files and defaults to a local SSH File Transport Protocol (SFTP) server. The defaults PayGate assumes are defined in `staticRepository` and you can run an SFTP server by running the [`atmoz/sftp`](https://hub.docker.com/r/atmoz/sftp) Docker image with `make start-sftp-server`.
 
 Running `atmoz/sftp` can be done with (from PayGate's `testdata/sftp-server/` directory):
 

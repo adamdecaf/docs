@@ -32,7 +32,7 @@ SQLite replication (possibly implemented via [rqlite](https://github.com/rqlite/
 
 ### Hot Routing Numbers
 
-One usecase of PayGate is to have "hot" routing numbers in which a large fraction of Transfers are destined to a specific ABA routing number. If one ABA is a large fraction of overall Transfers it poses a risk to dominate the file merging and uploads. While not an issue that should require code changes to solve the batch size and interval intervals should be adjusted for the requirements.
+One use case of PayGate is to have "hot" routing numbers in which a large fraction of Transfers are destined to a specific ABA routing number. If one ABA is a large fraction of overall Transfers it poses a risk to dominate the file merging and uploads. While not an issue that should require code changes to solve the batch size and interval intervals should be adjusted for the requirements.
 
 This scenario can be solved by deploying a PayGate instance for a specific routing number. To configure this [run a PayGate instance for each routing number](https://docs.moov.io/paygate/ach/#uploads-of-merged-ach-files) and optionally one instance which gathers the other transfers for upload. (Note: See [PayGate issue #407](https://github.com/moov-io/paygate/issues/407) for discussion on this implementation.)
 
