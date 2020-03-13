@@ -84,6 +84,9 @@ markdown_extensions:
 nav:
 - Introduction:
   - Welcome: index.md
+- Accounts:
+  - Getting Started: accounts/index.md
+  - Accounts and Transactions: accounts/getting-started.md
 - ACH:
   - Getting Started: ach/index.md
   - Tutorials:
