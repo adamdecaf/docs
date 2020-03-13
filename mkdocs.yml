@@ -115,11 +115,14 @@ nav:
   - Intro to ICL: icl/intro.md
   - ICL Developers:
     - 'ICL File Structure': icl/file-structure.md
-- Paygate:
+- PayGate:
   - Getting Started: paygate/index.md
   - ACH: paygate/ach.md
+  - Accounts: paygate/accounts.md
   - Account Validation: paygate/account-validation.md
   - Admin Endpoints: paygate/admin-endpoints.md
+  - Customers: paygate/customers.md
+  - Fed: paygate/fed.md
   - High Availability: paygate/ha.md
   - Local Dev: paygate/local-dev.md
 - Watchman:

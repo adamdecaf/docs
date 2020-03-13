@@ -56,7 +56,21 @@ $ ./apitest -dev
 $ ./apitest -help
 ```
 
-## Configuring Data
+## Disable What Isn't Needed
+
+If you don't need (Know Your Customer) KYC checks on `Originator` or `Receiver` objects disable the calls to Moov Customers:
+
+```
+CUSTOMERS_CALLS_DISABLED=yes
+```
+
+If you don't need a general ledger to track accounts and transactions with disable Moov Accounts calls:
+
+```
+ACCOUNTS_CALLS_DISABLED=yes
+```
+
+## Make a Transfer
 
 After confirming that the services are running correctly, there are several things needed before ACH transactions can be created/processed using PayGate.  Listed below are the steps necessary:
 
@@ -72,7 +86,7 @@ The HTTP header `X-User-ID` is required and used to isolate objects (such as `De
 
 ## Setup FTP
 
-PayGate currently requires the FTP configuration to be manually setup in the database. [See here](https://github.com/moov-io/paygate/blob/master/docs/ach.md#uploads-of-merged-ach-files) for more information.
+PayGate currently requires the FTP configuration to be manually setup in the database. [See here](./ach/#uploads-of-merged-ach-files) for more information on FTP/SFTP configs. The following will setup paygate to connect to the local FTP server started by `make start-ftp-server` in the repository.
 
 ### MySQL
 
