@@ -68,9 +68,9 @@ Kubernetes manifest - save in a file (`fed.yaml`) and apply with `kubectl apply 
 
 ## FED data files
 
-The data files included with the Docker image (and in the Fed repository) are outdated. This is due to the licensing on the files which prevents us from distributing them.
+The data files included with the Docker image (and in the Fed repository) are **outdated**. This is due to the licensing on the files which prevents us from distributing them.
 
-Moov Fed can read the data files from anywhere on the filesystem. This allows you to mount the files and set `FEDACH_DATA_PATH` / `FEDWIRE_DATA_PATH` environmental variables.
+Moov Fed can read the data files from anywhere on the filesystem. This allows you to mount the files and set `FEDACH_DATA_PATH` / `FEDWIRE_DATA_PATH` environmental variables. Both official formats from the Federal Reserve (plaintext and JSON) are supported.
 
 ## Connecting to Moov FED
 The Moov FED service will be running on port 8086 (with an admin port on 9096).
