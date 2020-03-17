@@ -85,6 +85,8 @@ nav:
 - Introduction:
   - Welcome: index.md
   - Technology: technology.md
+  - FAQ:
+      Production: faq/production.md
 - Accounts:
   - Getting Started: accounts/index.md
   - Accounts and Transactions: accounts/getting-started.md
