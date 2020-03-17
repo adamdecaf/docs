@@ -118,13 +118,16 @@ nav:
     - 'ICL File Structure': icl/file-structure.md
 - PayGate:
   - Getting Started: paygate/index.md
-  - ACH: paygate/ach.md
-  - Accounts: paygate/accounts.md
-  - Account Validation: paygate/account-validation.md
+  - Troubleshooting: paygate/troubleshooting.md
+  - Concepts:
+      - Account Validation: paygate/concepts/account-validation.md
+      - High Availability: paygate/concepts/ha.md
+  - Dependencies:
+      - ACH: paygate/dependencies/ach.md
+      - Accounts: paygate/dependencies/accounts.md
+      - Customers: paygate/dependencies/customers.md
+      - Fed: paygate/dependencies/fed.md
   - Admin Endpoints: paygate/admin-endpoints.md
-  - Customers: paygate/customers.md
-  - Fed: paygate/fed.md
-  - High Availability: paygate/ha.md
   - Local Dev: paygate/local-dev.md
 - Watchman:
   - Getting Started: watchman/index.md

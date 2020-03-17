@@ -2,9 +2,9 @@
 
 ### Running PayGate locally using Docker Compose (Quickest)
 
-PayGate can be quickly ran using the provided [Docker Compose file](https://github.com/moov-io/paygate/blob/master/docker-compose.yml). Note that you may need to adjust some environment variables in this file before running it, for example the `DEFAULT_ROUTING_NUMBER` account variable.
+PayGate can be quickly ran using the provided [Docker Compose file](https://github.com/moov-io/paygate/blob/master/docker-compose.yml). Ensur you have [installed Docker Compose](https://docs.docker.com/compose/install/) for your platform
 
-First, [install Docker Compose](https://docs.docker.com/compose/install/) for your platform.  Then clone the repository and run `docker-compose up` within it.
+Clone the repository and run `docker-compose up` within it.
 
 ```
 $ git clone https://github.com/moov-io/paygate.git
@@ -12,15 +12,15 @@ $ cd paygate
 $ docker-compose up -d
 ```
 
-That's it! Your PayGate endpoint should be accessible at `http://localhost:8082`. You can verify paygate is running with `curl http://localhost:8082/ping` and monitor the health with `curl http://localhost:9092/live`.
+That's it! The Docker files will be downloaded and ran on your machine. PayGate endpoints will be accessible at `http://localhost:8082` and `http://localhost:9092`. You can verify paygate is running with `curl http://localhost:8082/ping` and monitor the health with `curl http://localhost:9092/live`.
 
 ### Running PayGate using Kubernetes (Advanced)
 
-Moov uses [Kubernetes](https://kubernetes.io/) for deploying [its own infrastructure](https://github.com/moov-io/infra) on development and production machines.  The instructions on the readme are a good place to start.  Follow the instructions from the [local development](https://github.com/moov-io/infra#local-development) section on the infra readme.
+Moov uses [Kubernetes](https://kubernetes.io/) for clustering our production services and we have [Helm charts for each application](https://github.com/moov-io/charts) in beta currently. Inside the [moov-io/infra repository we have Kubernetes manifests](https://github.com/moov-io/infra/tree/master/lib/apps) which you can reference also.
 
 ### Running from source
 
-PayGate can run directly from source using Go, but the required services need to be running as well. The default port 8082 is used unless otherwise specified as an attribute `-http.addr` and needs environment variables setup beforehand as [outlined here](https://github.com/moov-io/paygate#configuration).
+PayGate can run directly from source using Go, but the required services need to be running as well in order for API calls to complete successfully. The default port `8082` is used unless a CLI flag (e.g. `-http.addr=<port>`) or environment variable override from [our configuration documentation](https://github.com/moov-io/paygate#configuration) is set when running PayGate.
 
 ```
 # With Golang and git installed:
