@@ -2,6 +2,10 @@ Below is a series of questions and answers around production setups when running
 
 ## Database Backups
 
+Backup and restore of database contents is a critical component of production deployments. This is how business operations continue after major system failure.
+
+There are several secure and production-grade backup solutions such as [Restic](https://restic.net/) or [Tarsnap](https://www.tarsnap.com/) if you are going to manage your own backups.
+
 #### SQLite
 
 SQLite is a file-based database and by default Moov services don't require auth to access the file. Instead we rely on machine-level restrictions to limit access to the database file and write-ahead log.
