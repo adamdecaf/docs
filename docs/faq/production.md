@@ -1,5 +1,9 @@
 Below is a series of questions and answers around production setups when running Moov services. The hosted Moov service will have different answers than self-hosted options.
 
+## Operating System
+
+Moov offers two foramts for running services in production: Docker images or compiled binaries for Linux, macOS, and Windows. The supported versions of each OS are what is supported by Docker or Go and Moov makes no attempts to support older operating systems.
+
 ## Database Backups
 
 Backup and restore of database contents is a critical component of production deployments. This is how business operations continue after major system failure.
