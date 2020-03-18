@@ -125,6 +125,7 @@ nav:
   - Concepts:
       - Account Validation: paygate/concepts/account-validation.md
       - High Availability: paygate/concepts/ha.md
+      - Models: paygate/models.md
   - Dependencies:
       - ACH: paygate/dependencies/ach.md
       - Accounts: paygate/dependencies/accounts.md
