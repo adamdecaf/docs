@@ -86,6 +86,7 @@ nav:
   - Welcome: index.md
   - Technology: technology.md
   - FAQ:
+      'Local Dev': faq/local-dev.md
       Production: faq/production.md
 - Accounts:
   - Getting Started: accounts/index.md
