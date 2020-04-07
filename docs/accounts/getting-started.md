@@ -12,6 +12,11 @@ $ curl -XPOST -H "x-user-id: 8ebaf4dc" --data '{
   "type": "Checking"
 }' http://localhost:8085/accounts | jq .
 
+```
+
+Returns
+
+```
 {
   "ID": "ed4c07e1255e84bddf473e4ad4082f763e02e110",
   "customerID": "foo",
