@@ -1,6 +1,6 @@
 FROM python:3.8-buster as builder
 RUN pip install --upgrade pip
-RUN pip install mkdocs mkdocs-material pymdown-extensions && mkdocs --version
+RUN pip install mkdocs mkdocs-material==4.6.3 pymdown-extensions && mkdocs --version
 
 # bring site data into image
 RUN mkdir docs.moov.io
