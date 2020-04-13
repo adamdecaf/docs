@@ -39,6 +39,29 @@ ts=2019-06-20T23:23:44.871692Z caller=main.go:125 admin="listening on :9090
 
 Next [Connect to Moov ACH](#connecting-to-moov-ach)
 
+### Command Line
+
+On each release there's a `achcli` utility released. This tool can display ACH files in a human-readable format which is easier to read than their plaintext format.
+
+```
+$ wget -O achcli https://github.com/moov-io/ach/releases/download/v1.4.0/achcli-darwin-amd64 && chmod +x achcli
+
+$ achcli test/testdata/ppd-debit.ach
+Describing ACH file 'test/testdata/ppd-debit.ach'
+
+  Origin     OriginName    Destination  DestinationName       FileCreationDate  FileCreationTime
+  121042882  My Bank Name  231380104    Federal Reserve Bank  190624            0000
+
+  BatchCount  BlockCount  EntryAddendaCount  TotalDebitAmount  TotalCreditAmount
+  1           1           1                  100000000         0
+
+  BatchNumber  Type  ServiceClass  Addendas  TotalDebits  TotalCredits
+  1            PPD   225           1         100000000    0
+
+    TxCode  AccountNumber      Amount     Name                    TraceNumber      Category
+    27      12345678           100000000  Receiver Account Name   121042880000001
+```
+
 ### Docker Container
 
 Moov ACH is dependent on Docker being properly installed and running on your machine. Ensure that Docker is running. If your Docker client has issues connecting to the service review the [Docker getting started guide](https://docs.docker.com/get-started/) if you have any issues.
