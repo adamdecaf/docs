@@ -21,7 +21,6 @@ Download the [latest Moov ACH server release](https://github.com/moov-io/ach/rel
 For macOS / Linux users:
 
 ```sh
-$ cd ~/Downloads/
 $ ./ach-darwin-amd64
 ts=2019-06-20T23:23:44.870717Z caller=main.go:75 startup="Starting ach server version v1.3.1"
 ts=2019-06-20T23:23:44.871623Z caller=main.go:135 transport=HTTP addr=:8080
@@ -38,29 +37,6 @@ ts=2019-06-20T23:23:44.871692Z caller=main.go:125 admin="listening on :9090
 ```
 
 Next [Connect to Moov ACH](#connecting-to-moov-ach)
-
-### Command Line
-
-On each release there's a `achcli` utility released. This tool can display ACH files in a human-readable format which is easier to read than their plaintext format.
-
-```
-$ wget -O achcli https://github.com/moov-io/ach/releases/download/v1.4.0/achcli-darwin-amd64 && chmod +x achcli
-
-$ achcli test/testdata/ppd-debit.ach
-Describing ACH file 'test/testdata/ppd-debit.ach'
-
-  Origin     OriginName    Destination  DestinationName       FileCreationDate  FileCreationTime
-  121042882  My Bank Name  231380104    Federal Reserve Bank  190624            0000
-
-  BatchCount  BlockCount  EntryAddendaCount  TotalDebitAmount  TotalCreditAmount
-  1           1           1                  100000000         0
-
-  BatchNumber  Type  ServiceClass  Addendas  TotalDebits  TotalCredits
-  1            PPD   225           1         100000000    0
-
-    TxCode  AccountNumber      Amount     Name                    TraceNumber      Category
-    27      12345678           100000000  Receiver Account Name   121042880000001
-```
 
 ### Docker Container
 
@@ -82,102 +58,28 @@ ts=2019-06-21T17:03:23.783252Z caller=main.go:119 admin="listening on :9090"
 
 Next [Connect to Moov ACH](#connecting-to-moov-ach)
 
-### Kubernetes
+## Command Line
 
-The following snippet runs the ACH Server on [Kubernetes](https://kubernetes.io/docs/tutorials/kubernetes-basics/) in the `apps` namespace. You could reach the ach instance at the following URL from inside the cluster.
+On each release there's a `achcli` utility released. This tool can display ACH files in a human-readable format which is easier to read than their plaintext format.
 
 ```
-# Needs to be ran from inside the cluster
-$ curl http://ach.apps.svc.cluster.local:8080/ping
-PONG
+$ wget -O achcli https://github.com/moov-io/ach/releases/download/v1.4.0/achcli-darwin-amd64 && chmod +x achcli
 
-$ curl http://localhost:8080/files
-{"files":[],"error":null}
+$ achcli test/testdata/ppd-debit.ach
+Describing ACH file 'test/testdata/ppd-debit.ach'
+
+  Origin     OriginName    Destination  DestinationName       FileCreationDate  FileCreationTime
+  121042882  My Bank Name  231380104    Federal Reserve Bank  190624            0000
+
+  BatchCount  BlockCount  EntryAddendaCount  TotalDebitAmount  TotalCreditAmount
+  1           1           1                  100000000         0
+
+  BatchNumber  Type  ServiceClass  Addendas  TotalDebits  TotalCredits
+  1            PPD   225           1         100000000    0
+
+    TxCode  AccountNumber      Amount     Name                    TraceNumber      Category
+    27      12345678           100000000  Receiver Account Name   121042880000001
 ```
-
-Kubernetes manifest - save in a file (`ach.yaml`) and apply with `kubectl apply -f ach.yaml`.
-
-```yaml
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: apps
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: ach
-  namespace: apps
-spec:
-  type: ClusterIP
-  selector:
-    app: ach
-  ports:
-    - name: http
-      protocol: TCP
-      port: 8080
-      targetPort: 8080
-    - name: metrics
-      protocol: TCP
-      port: 9090
-      targetPort: 9090
----
-apiVersion: extensions/v1beta1
-kind: Deployment
-metadata:
-  name: ach
-  namespace: apps
-  labels:
-    app: ach
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: ach
-  template:
-    metadata:
-      labels:
-        app: ach
-    spec:
-      containers:
-      - image: moov/ach:v1.0.0
-        imagePullPolicy: Always
-        name: ach
-        args:
-          - -http.addr=:8080
-          - -admin.addr=:9090
-        env:
-          - name: ACH_FILE_TTL
-            value: 30m # 30 minutes
-        ports:
-          - containerPort: 8080
-            name: http
-            protocol: TCP
-          - containerPort: 9090
-            name: metrics
-            protocol: TCP
-        resources:
-          limits:
-            cpu: 0.1
-            memory: 50Mi
-          requests:
-            cpu: 25m
-            memory: 10Mi
-        readinessProbe:
-          httpGet:
-            path: /ping
-            port: 8080
-          initialDelaySeconds: 5
-          periodSeconds: 10
-        livenessProbe:
-          httpGet:
-            path: /ping
-            port: 8080
-          initialDelaySeconds: 5
-          periodSeconds: 10
-      restartPolicy: Always
-```
-Next [Connect to Moov ACH](#connecting-to-moov-ach)
 
 ## Connecting to Moov ACH
 

@@ -104,6 +104,9 @@ nav:
     - 'ACH File Structure': ach/file-structure.md
     - 'Picking an SEC Code': ach/sec-codes-table.md
     - 'Custom Validation': ach/custom-validation.md
+  - Operating:
+      - Deployment: ach/deployment.md
+      - Metrics: ach/metrics.md
 - Customers:
     - Getting Started: customers/index.md
     - 'Checks (KYC/AML)': customers/checks.md
