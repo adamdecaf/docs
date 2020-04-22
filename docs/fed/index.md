@@ -144,7 +144,7 @@ $ curl -s "localhost:8086/fed/ach/search?name=Veridian&limit=1" | jq .
 
 ### API documentation
 
-See our [API documentation](https://api.moov.io/apps/fed/) for Moov FED endpoints.
+See our [API documentation](https://moov-io.github.io/fed/) for Moov FED endpoints.
 
 
 ### Other resources

@@ -81,7 +81,7 @@ $ curl http://localhost:8088/files
 
 ### API documentation
 
-See our [API documentation](https://api.moov.io/apps/wire/) for Moov Wire endpoints.
+See our [API documentation](https://moov-io.github.io/wire/) for Moov Wire endpoints.
 
 ### Wire Admin Port
 

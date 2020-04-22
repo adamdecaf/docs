@@ -51,7 +51,7 @@ if err != nil {
 
 ## HTTP Server
 
-The ACH HTTP server can accept `ValidateOpts` when [Validating a file](https://api.moov.io/apps/ach/#get-/files/{fileID}/validate). This will leverage the above one-off validation methods and return any errors.
+The ACH HTTP server can accept `ValidateOpts` when [Validating a file](https://moov-io.github.io/ach/#get-/files/{fileID}/validate). This will leverage the above one-off validation methods and return any errors.
 
 **Create a File**
 ```
