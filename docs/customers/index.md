@@ -76,4 +76,4 @@ The port `:9097` is bound by Customers for our admin service. This HTTP server h
 
 ## API documentation
 
-See our [API documentation](https://api.moov.io/apps/customers/) for Moov Customers endpoints.
+See our [API documentation](https://moov-io.github.io/customers/) for Moov Customers endpoints.

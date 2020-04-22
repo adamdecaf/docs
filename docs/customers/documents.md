@@ -6,4 +6,4 @@ Documents can be listed for a user and specific documents can streamed to a brow
 
 ## API documentation
 
-See our [API documentation](https://api.moov.io/apps/customers/) for Moov Customers documents endpoints.
+See our [API documentation](https://moov-io.github.io/customers/) for Moov Customers documents endpoints.

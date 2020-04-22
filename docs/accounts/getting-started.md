@@ -1,6 +1,6 @@
 This guide is a walkthrough for using Moov Accounts.
 
-Refer to the [Accounts API documentation](http://api.moov.io/apps/accounts/) for additional details and an OpenAPI specification of these endpoints.
+Refer to the [Accounts API documentation](https://moov-io.github.io/accounts/) for additional details and an OpenAPI specification of these endpoints.
 
 ### Create an Account
 

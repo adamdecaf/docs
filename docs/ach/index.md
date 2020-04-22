@@ -99,7 +99,7 @@ You can also send [an example PPD ACH file we have](https://github.com/moov-io/a
 
 ### API documentation
 
-See our [API documentation](https://api.moov.io/apps/ach/) for Moov ACH endpoints.
+See our [API documentation](https://moov-io.github.io/ach/) for Moov ACH endpoints.
 
 ### ACH Admin Port
 

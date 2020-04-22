@@ -75,4 +75,4 @@ The port `:9095` is bound by Accounts for our admin service. This HTTP server ha
 
 ### API documentation
 
-See our [API documentation](https://api.moov.io/apps/accounts/) for Moov Accounts endpoints.
+See our [API documentation](https://moov-io.github.io/accounts/) for Moov Accounts endpoints.

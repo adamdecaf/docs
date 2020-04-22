@@ -53,7 +53,7 @@ Moov Watchman provides a web interface for easy browsing of the SDN and related 
 
 ## API Documentation
 
-See our documentation for Watchman's [API](https://api.moov.io/apps/watchman/) or [admin endpoints](https://api.moov.io/admin/watchman/).
+See our documentation for Watchman's [API](https://moov-io.github.io/watchman/) or [admin endpoints](https://api.moov.io/admin/watchman/).
 
 ## Webhooks
 
