@@ -157,7 +157,7 @@ null
 
 ### API documentation
 
-See our [API documentation](https://moov-io.github.io/icl/) for Moov ImageCashLetter endpoints.
+See our [API documentation](https://moov-io.github.io/imagecashletter/) for Moov ImageCashLetter endpoints.
 
 ### ImageCashLetter Admin Port
 
