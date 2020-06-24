@@ -85,74 +85,38 @@ nav:
 - Introduction:
   - Welcome: index.md
   - Technology: technology.md
+  - 'How can I use Moov?':
+    - Capabilities: how/capabilities.md
+    - First Party Payments: how/first-party.md
+    - SaaS Bundling Payments: how/saas-bundle-payment.md
+    - Examples:
+      - Bike Company: how/examples/bike-sales.md
+      - Game Developer: how/examples/game-developer.md
+      - HOA Vendor: how/examples/hoa.md
   - FAQ:
-      'Local Dev': faq/local-dev.md
-      Production: faq/production.md
-- Accounts:
-  - Getting Started: accounts/index.md
-  - Accounts and Transactions: accounts/getting-started.md
-- ACH:
-  - Getting Started: ach/index.md
-  - Tutorials:
-    - 'Balanced Offset Records': ach/balanced-offset.md
-    - 'Create an ACH File': ach/create-file.md
-    - 'Custom Validation': ach/custom-validation.md
-    - 'Flatten Batches': ach/flatten-batches.md
-    - 'Merging ACH Files': ach/merging-files.md
-    - 'Segment ACH File': ach/segment-file.md
-  - ACH Developers:
-    - 'Intro to ACH': ach/intro.md
-    - 'ACH File Structure': ach/file-structure.md
-    - 'Picking an SEC Code': ach/sec-codes-table.md
-    - 'Custom Validation': ach/custom-validation.md
-  - Operating:
-      - Deployment: ach/deployment.md
-      - Metrics: ach/metrics.md
+    - Local Dev: faq/local-dev.md
+    - Production: faq/production.md
 - Customers:
     - Getting Started: customers/index.md
+    - Account Validation: customers/account-validation.md
     - 'Checks (KYC/AML)': customers/checks.md
     - Disclaimers: customers/disclaimers.md
     - Documents: customers/documents.md
     - Local Dev: customers/local-dev.md
-- FED:
-  - Getting Started: fed/index.md
-  - FED Developers:
-    - 'FED File Structure': fed/file-structure.md
-- 'Image Cash Letter':
-  - Getting Started: icl/index.md
-  - Intro to ICL: icl/intro.md
-  - ICL Developers:
-    - 'ICL File Structure': icl/file-structure.md
 - PayGate:
   - Getting Started: paygate/index.md
-  - Troubleshooting: paygate/troubleshooting.md
   - Concepts:
-      - Account Validation: paygate/concepts/account-validation.md
-      - High Availability: paygate/concepts/ha.md
-      - Models: paygate/models.md
+    - ACH Operations: paygate/concepts/ach.md
+    - Advanced Routing: paygate/concepts/advanced-routing.md
+    - High Availability: paygate/concepts/ha.md
+  - Configuration: paygate/config.md
   - Dependencies:
-      - ACH: paygate/dependencies/ach.md
-      - Accounts: paygate/dependencies/accounts.md
-      - Customers: paygate/dependencies/customers.md
-      - Fed: paygate/dependencies/fed.md
-  - Admin Endpoints: paygate/admin-endpoints.md
+    - Customers: paygate/dependencies/customers.md
   - Local Dev: paygate/local-dev.md
-- Watchman:
-  - Getting Started: watchman/index.md
-  - High Availability: watchman/ha.md
-  - Search: watchman/search.md
-  - Web Interface: watchman/webui.md
-  - Index Pipeline: watchman/pipeline.md
-  - Watchman Developers:
-    - 'OFAC File Structure': watchman/file-structure.md
-- WIRE:
-  - Getting Started: wire/index.md
-  - WIRE Developers:
-    - 'WIRE Fed Wire Message Structure': wire/fedWireMessage-Structure.md
-    - 'Date': wire/DateMMDD.md
-    - 'Time': wire/TimeHHMM.md
-    - 'Address': wire/address.md
-    - 'Remittance Data': wire/remittanceData.md
+  - Admin Endpoints: paygate/admin.md
+  # - Troubleshooting: paygate/troubleshooting.md
+  # - Frequently Asked Questions: paygate/faq.md
+  - Vocab: paygate/vocab.md
 
 # Google analytics
 google_analytics: ['UA-118148273-1', 'moov.io']

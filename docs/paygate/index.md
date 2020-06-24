@@ -1,8 +1,10 @@
-[Moov's PayGate project](https://github.com/moov-io/paygate) provides an HTTP REST endpoint for submitting and receiving ACH payments and builds upon a suite of services offered by Moov, including [ACH](https://github.com/moov-io/ach), [Watchman](https://github.com/moov-io/watchman), and [FED](https://github.com/moov-io/fed). Each of these services must be running and reachable by PayGate. We provide several examples of setting up a complete installation using [Docker Compose](https://docs.docker.com/compose/), Kubernetes, or directly using the provided binaries.
+[Moov's PayGate project](https://github.com/moov-io/paygate) provides an HTTP REST endpoint for submitting and receiving ACH payments and builds upon a suite of services offered by Moov, including [ACH](https://github.com/moov-io/ach), [Customers](https://github.com/moov-io/customers), [FED](https://github.com/moov-io/fed), and [Watchman](https://github.com/moov-io/watchman). We provide several examples of setting up a complete installation using [Docker Compose](https://docs.docker.com/compose/), Kubernetes, or directly using the provided binaries.
 
-**Note**: This documentation is for the v0.7.x series of PayGate. Please use the [latest release](https://github.com/moov-io/paygate/releases/v0.7.3) (v0.7.3) of that series or [use that branch](https://github.com/moov-io/paygate/tree/release-v0.7) if you're building from source.
+**Note**: This documentation is for the v0.8.x series of PayGate.
 
-### Running PayGate locally using Docker Compose (Quickest)
+## Running PayGate
+
+### Docker Compose (Quickest)
 
 PayGate can be quickly ran using the provided [Docker Compose file](https://github.com/moov-io/paygate/blob/master/docker-compose.yml). Ensur you have [installed Docker Compose](https://docs.docker.com/compose/install/) for your platform
 
@@ -16,11 +18,7 @@ $ docker-compose up -d
 
 That's it! The Docker files will be downloaded and ran on your machine. PayGate endpoints will be accessible at `http://localhost:8082` and `http://localhost:9092`. You can verify paygate is running with `curl http://localhost:8082/ping` and monitor the health with `curl http://localhost:9092/live`.
 
-### Running PayGate using Kubernetes (Advanced)
-
-Moov uses [Kubernetes](https://kubernetes.io/) for clustering our production services and we have [Helm charts for each application](https://github.com/moov-io/charts) in beta currently. Inside the [moov-io/infra repository we have Kubernetes manifests](https://github.com/moov-io/infra/tree/master/lib/apps) which you can reference also.
-
-### Running from source
+### From Source
 
 PayGate can run directly from source using Go, but the required services need to be running as well in order for API calls to complete successfully. The default port `8082` is used unless a CLI flag (e.g. `-http.addr=<port>`) or environment variable override from [our configuration documentation](https://github.com/moov-io/paygate#configuration) is set when running PayGate.
 
@@ -31,149 +29,34 @@ $ cd paygate
 $ go run .
 ```
 
-## API documentation
+### Kubernetes
 
-See our [API documentation](https://moov-io.github.io/paygate/) for Moov PayGate endpoints.
-
-## Testing endpoints
-
-In order to check that the services are running, moov provides an api tool ([`apitest`](https://github.com/moov-io/api#apitest)) for testing the endpoints [with binaries you can download](https://github.com/moov-io/api/releases). Once downloaded running `apitest -local` will create Customer, Receiver, Depository, and a Transfer against your local docker compose stack.
-
-```
-# For Linux
-$ wget https://github.com/moov-io/api/releases/download/v0.10.0/apitest-linux-amd64
-$ mv apitest-linux-amd64 apitest && chmod +x apitest
-
-# For OSX
-$ wget https://github.com/moov-io/api/releases/download/v0.10.0/apitest-darwin-amd64
-$ mv apitest-darwin-amd64 apitest && chmod +x apitest
-
-# For docker compose setup or the running binaries using default values.
-$ ./apitest -local
-
-# For Tilt setup using Kubernetes
-$ ./apitest -dev
-
-# For other options, run
-$ ./apitest -help
-```
-
-## Disable What Isn't Needed
-
-If you don't need (Know Your Customer) KYC checks on `Originator` or `Receiver` objects disable the calls to Moov Customers:
-
-```
-CUSTOMERS_CALLS_DISABLED=yes
-```
-
-If you don't need a general ledger to track accounts and transactions with disable Moov Accounts calls:
-
-```
-ACCOUNTS_CALLS_DISABLED=yes
-```
+Moov uses [Kubernetes](https://kubernetes.io/) for clustering our production services and we have [Helm charts for each application](https://github.com/moov-io/charts) in beta currently. Inside the [moov-io/infra repository we have Kubernetes manifests](https://github.com/moov-io/infra/tree/master/lib/apps) or a [Terraform module](https://github.com/moov-io/infra/tree/master/modules/paygate) which you can reference.
 
 ## Make a Transfer
 
 After confirming that the services are running correctly, there are several things needed before ACH transactions can be created/processed using PayGate.  Listed below are the steps necessary:
 
-1. [Setup a Depository](https://moov-io.github.io/paygate/#post-/depositories) for the Originator (ODFI)
-1. [Setup a Depository](https://moov-io.github.io/paygate/#post-/depositories) for the Receiver as well (RDFI)
-1. [Setup an Originator](https://moov-io.github.io/paygate/#post-/originators) with customer information
-1. [Setup a Receiver](https://moov-io.github.io/paygate/#post-/receivers) with customer information
-1. [Setup a Gateway](https://moov-io.github.io/paygate/#post-/gateways) with ODFI gateway information
-1. Then you can [create a Transfer](https://moov-io.github.io/paygate/#post-/transfers) between these two FIs
+1. TODO(adam)
 
-### X-User-ID
+## API documentation
 
-The HTTP header `X-User-ID` is required and used to isolate objects (such as `Depository`, `Originator`, `Receiver`, `Gateway`, `Transfer`) when using paygate in a multi-tenant setup. This is useful if you're managing transfers for multiple customers/users or multiple Financial Institutions. The value for this header can be a UTF-8 string, but typically it is a random alphanumeric string.
+See our [API documentation](https://moov-io.github.io/paygate/) for Moov PayGate endpoints or the [admin endpoint documentation](./admin/).
 
-## Setup FTP
+## Configuration
 
-PayGate currently requires the FTP configuration to be manually setup in the database. [See here](./ach/#uploads-of-merged-ach-files) for more information on FTP/SFTP configs. The following will setup paygate to connect to the local FTP server started by `make start-ftp-server` in the repository.
+PayGate accepts a `-config <path>` command-line argument to read a YAML file. Please [refer to our documentation on this file](./config/).
 
-### MySQL
+## Vocab
 
-MySQL is a database which applications or developers connect to over the network. This means to configure paygate's FTP and file upload configuration a developer needs to connect to the database.
+Refer to our [vocab and models page](vocab.md) for detailed definitions of PayGate terms.
 
-```
-# Connect using host, username and password for your setup
-$ mysql -h localhost:3306 -u paygate
+## Getting Help
 
-> INSERT INTO ftp_configs (routing_number, hostname, username, password) VALUES ('000000000', 'localhost:22', 'myusername', 'mypassword');
-
-> INSERT INTO cutoff_times (routing_number, cutoff, location) VALUES ('000000000', '1700', 'America/New_York');
-
-> INSERT INTO file_transfer_configs (routing_number, inbound_path, outbound_path, return_path) VALUES ('000000000', '/inbound', '/outbound', '/returns');
-```
-
-### SQLite
-
-If using the Docker Compose and sqlite (`DATABASE_TYPE=sqlite`) script above, you need to mount the `/data` volume of the `paygate` section in `docker-compose.yml` file like so:
-```
-  paygate:
-    image: moov/paygate:v0.5.0-dev
-    ports:
-      - "8082:8082"
-      - "9092:9092"
-    command: ["-http.addr", ":8082"]
-    environment:
-      ACCOUNTS_ENDPOINT: 'http://accounts:8085'
-      ACH_ENDPOINT: 'http://ach:8080'
-      FED_ENDPOINT: 'http://fed:8086'
-      CUSTOMERS_ENDPOINT: 'http://customers:8087'
-    volumes:
-      - .:/data
-    depends_on:
-      - ach
-      - accounts
-      - fed
-      - customers
-      - auth
-```
-This will attach the `/data` volume within the image to the same directory in which the `docker-compose.yml` file resides.
-
-To setup FTP, run the following commands on the now exposed `paygate.db` file, changing the dummy string values below:
-```
-# Setup credentials for sqlite3
-$ sqlite3 paygate.db "INSERT INTO ftp_configs (routing_number, hostname, username, password) VALUES ('000000000', 'localhost:22', 'myusername', 'mypassword');"
-
-# Setup cutoff times
-$ sqlite3 paygate.db "INSERT INTO cutoff_times (routing_number, cutoff, location) VALUES ('000000000', '1700', 'America/New_York');"
-
-# Setup ftp directories
-$ sqlite3 paygate.db "INSERT INTO file_transfer_configs (routing_number, inbound_path, outbound_path, return_path) VALUES ('000000000', '/inbound', '/outbound', '/returns');"
-```
-The command may need to be ran with elevated privileges, using `sudo` or another method. The database will also need to be writable.
-
-## Verify FTP configuration
-
-Paygate's admin HTTP interface offers endpoints to check these values were setup (default on port `:9092`).
-
-```
-curl -s -X GET http://localhost:9092/configs/uploads | jq .
-{
-  "cutoffTimes": [
-    {
-      "RoutingNumber": "121042882",
-      "Cutoff": 1700,
-      "Location": "America/New_York"
-    }
-  ],
-  "ftpConfigs": [
-    {
-      "RoutingNumber": "121042882",
-      "Hostname": "localhost:2121",
-      "Username": "admin",
-      "Password": "1****6"
-    }
-  ],
-  "fileTransferConfigs": [
-    {
-      "RoutingNumber": "121042882",
-      "InboundPath": "inbound/",
-      "OutboundPath": "outbound/",
-      "ReturnPath": "returned/"
-    }
-  ]
-}
-```
+ channel | info
+ ------- | -------
+ [Project Documentation](https://docs.moov.io/) | Our project documentation available online.
+ Google Group [moov-users](https://groups.google.com/forum/#!forum/moov-users)| The Moov users Google group is for contributors other people contributing to the Moov project. You can join them without a google account by sending an email to [moov-users+subscribe@googlegroups.com](mailto:moov-users+subscribe@googlegroups.com). After receiving the join-request message, you can simply reply to that to confirm the subscription.
+Twitter [@moov_io](https://twitter.com/moov_io)	| You can follow Moov.IO's Twitter feed to get updates on our project(s). You can also tweet us questions or just share blogs or stories.
+[GitHub Issue](https://github.com/moov-io) | If you are able to reproduce a problem please open a GitHub Issue under the specific project that caused the error.
+[moov-io slack](https://slack.moov.io/) | Join our slack channel (`#paygate`) to have an interactive discussion about the development of the project.
