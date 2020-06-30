@@ -97,10 +97,10 @@ nav:
     - Technology: faq/technology.md
 - Customers:
   - Getting Started: customers/index.md
-  - Account Validation: customers/account-validation.md
-  - 'Checks (KYC/AML)': customers/checks.md
-  - Disclaimers: customers/disclaimers.md
-  - Documents: customers/documents.md
+  # - Account Validation: customers/account-validation.md
+  # - 'Checks (KYC/AML)': customers/checks.md
+  # - Disclaimers: customers/disclaimers.md
+  # - Documents: customers/documents.md
 - PayGate:
   - Getting Started: paygate/index.md
 #   - ACH Operations: paygate/ach.md
