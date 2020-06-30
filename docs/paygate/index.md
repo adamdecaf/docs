@@ -1,6 +1,12 @@
 Moov PayGate is a payment gateway for sending and receiving funds from third-party financial institutions. The primary method of payment is ACH and managed with RESTful HTTP endpoints.
 
+## Usage
 
+We are currently building out hosted services for PayGate. [Contact us](mailto:support@moov.io) for more details.
+
+## API documentation
+
+See our [Hosted API documentation](https://api.moov.io/) for Moov PayGate endpoints.
 
 ## Getting Help
 

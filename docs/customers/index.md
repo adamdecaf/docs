@@ -2,7 +2,7 @@ Moov Customers focuses on verifying individuals and businesses are allowed to tr
 
 ## Usage
 
-api.moov.io
+We are currently building out hosted services for Customers. [Contact us](mailto:support@moov.io) for more details.
 
 ## API documentation
 
