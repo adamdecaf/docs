@@ -84,39 +84,27 @@ markdown_extensions:
 nav:
 - Introduction:
   - Welcome: index.md
-  - Technology: technology.md
-  - 'How can I use Moov?':
-    - Capabilities: how/capabilities.md
-    - First Party Payments: how/first-party.md
-    - SaaS Bundling Payments: how/saas-bundle-payment.md
-    - Examples:
-      - Bike Company: how/examples/bike-sales.md
-      - Game Developer: how/examples/game-developer.md
-      - HOA Vendor: how/examples/hoa.md
+  # - Registration: register.md
+  # - 'How can I use Moov?':
+  #   - Capabilities: how/capabilities.md
+  #   - First Party Payments: how/first-party.md
+  #   - SaaS Bundling Payments: how/saas-bundle-payment.md
+  #   - Examples:
+  #     - Bike Company: how/examples/bike-sales.md
+  #     - Game Developer: how/examples/game-developer.md
+  #     - HOA Vendor: how/examples/hoa.md
   - FAQ:
-    - Local Dev: faq/local-dev.md
-    - Production: faq/production.md
+    - Technology: faq/technology.md
 - Customers:
-    - Getting Started: customers/index.md
-    - Account Validation: customers/account-validation.md
-    - 'Checks (KYC/AML)': customers/checks.md
-    - Disclaimers: customers/disclaimers.md
-    - Documents: customers/documents.md
-    - Local Dev: customers/local-dev.md
+  - Getting Started: customers/index.md
+  - Account Validation: customers/account-validation.md
+  - 'Checks (KYC/AML)': customers/checks.md
+  - Disclaimers: customers/disclaimers.md
+  - Documents: customers/documents.md
 - PayGate:
   - Getting Started: paygate/index.md
-  - Concepts:
-    - ACH Operations: paygate/concepts/ach.md
-    - Advanced Routing: paygate/concepts/advanced-routing.md
-    - High Availability: paygate/concepts/ha.md
-  - Configuration: paygate/config.md
-  - Dependencies:
-    - Customers: paygate/dependencies/customers.md
-  - Local Dev: paygate/local-dev.md
-  - Admin Endpoints: paygate/admin.md
-  # - Troubleshooting: paygate/troubleshooting.md
-  # - Frequently Asked Questions: paygate/faq.md
-  - Vocab: paygate/vocab.md
+#   - ACH Operations: paygate/ach.md
+#   - Admin Endpoints: paygate/admin.md
 
 # Google analytics
 google_analytics: ['UA-118148273-1', 'moov.io']

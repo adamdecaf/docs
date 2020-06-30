@@ -1,11 +1,7 @@
 VERSION=v$(shell date -u +"%Y.%m.%d").1
 
-.PHONY: generate
-generate:
-	wget -O ./docs/paygate/config.md http://raw.githubusercontent.com/moov-io/paygate/master/docs/config.md
-
 .PHONY: build
-build: generate
+build:
 	docker build --pull -t moov/docs:$(VERSION) .
 	docker tag moov/docs:$(VERSION) moov/docs:latest
 

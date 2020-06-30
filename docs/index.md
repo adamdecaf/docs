@@ -4,25 +4,23 @@
 
 ## Moov Projects
 
-Moov projects are focused on solving a single responsibility capability in financial services. Projects can be leveraged as a RESTFul service or Golang library and are built from source into an OS specific binary and docker container. Deployment of Moov projects can be deployed as a binary on your application server, as a docker container, or leverage the our hosted API [api.moov.io](https://api.moov.io) endpoints.
+Moov projects are focused on solving a single responsibility capability in financial services. We offer RESTFul API's on [api.moov.io](https://api.moov.io) in a hosted service that developers can leverage for making payments.
 
 ### Payments
 
-Process funds with the following settlement methods:
-
-- [Moov ACH](./ach/) (including Same Day ACH) implements a NACHA compliant RESTFul API for file creation, parsing, and validation. Supports generating and parsing all Standard Entry Class (SEC) codes. ACH is the primary method of electronic money movement throughout the United States.
 - [Moov PayGate](./paygate/) provides a complete implementation of ACH origination (file creation), micro-deposits, SFTP uploading, and other features to be a complete system for ACH transfers.
-- [Moov Wire](./wire/) (domestic Fedwire) implements an interface to write files for the Fedwire Funds Service, a real-time gross settlement funds transfer system operated by the United States Federal Reserve Banks. These compatible files include routing instructions that, once received and processed, will debit the funds from the sending bank's reserve account at their Federal Reserve bank and credit the receiving bank's account. Wire transfers sent via Fedwire are completed in the same day, while some are completed instantly.
-- [Moov Image Cash Letter](./icl/) implements Image Cash Letter (ICL) files used for Check21 or Check truncation files for exchange and remote deposit in the U.S.; also known as X9 files, X9.37 files, X9.100-187
 
-### Account Creation
+#### Supporting Services
 
-Common functionality for creating funding accounts
-
+- [Moov ACH](https://github.com/moov-io/ach) (including Same Day ACH) implements a NACHA compliant RESTFul API for file creation, parsing, and validation. Supports generating and parsing all Standard Entry Class (SEC) codes. ACH is the primary method of electronic money movement throughout the United States.
 - [Moov Customers](./customers/) The Customers project focuses on solving authentic identification of humans who are legally able to hold and transfer currency within the US. Primarily this project solves Know Your Customer (KYC), Customer Identification Program (CIP), Office of Foreign Asset Control (OFAC) checks and verification workflows to comply with US federal law and ensure authentic transfers.
-- [Moov Accounts](https://github.com/moov-io/accounts) is an RESTful API implementation of an accounting General Ledger used to track monetary transfers in digital systems.
-- [Moov Watchman](./watchman/) is an HTTP API and Go library to download, parse and offer search functions over numerous trade sanction lists from the United States and European Union.
-- [Moov FED](./fed/) implements utility services for searching the United States Federal Reserve System such as ABA routing numbers, Financial Institution name lookup and Fed Wire routing information.
+- [Moov Watchman](https://github.com/moov-io/watchman) is an HTTP API and Go library to download, parse and offer search functions over numerous trade sanction lists from the United States and European Union.
+- [Moov FED](https://github.com/moov-io/fed) implements utility services for searching the United States Federal Reserve System such as ABA routing numbers, Financial Institution name lookup and Fed Wire routing information.
+
+### Future Payment Methods
+
+- [Moov Image Cash Letter](https://github.com/moov-io/imagecashletter) implements Image Cash Letter (ICL) files used for Check21 or Check truncation files for exchange and remote deposit in the U.S.; also known as X9 files, X9.37 files, X9.100-187
+- [Moov Wire](https://github.com/moov-io/wire) (domestic Fedwire) implements an interface to write files for the Fedwire Funds Service, a real-time gross settlement funds transfer system operated by the United States Federal Reserve Banks. These compatible files include routing instructions that, once received and processed, will debit the funds from the sending bank's reserve account at their Federal Reserve bank and credit the receiving bank's account. Wire transfers sent via Fedwire are completed in the same day, while some are completed instantly.
 
 ## Design Goals
 
