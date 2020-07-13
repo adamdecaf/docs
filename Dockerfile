@@ -12,8 +12,8 @@ COPY docs/ docs/
 RUN mkdocs build
 
 # Setup our load balancer image
-FROM nginx:1.17
-
+FROM nginx:1.19
+LABEL maintainer="Moov <support@moov.io>"
 USER nginx
 
 COPY nginx/nginx.conf /opt/nginx/nginx.conf
