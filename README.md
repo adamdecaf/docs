@@ -12,14 +12,15 @@ Documentation for the Moov project hosted at [docs.moov.io](https://docs.moov.io
 
 ## Building locally
 
-1. Install [MkDocs](https://www.mkdocs.org/) `pip install mkdocs`
-1. Install [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/) `pip install mkdocs-material`
+1. Install [MkDocs](https://www.mkdocs.org/): `pip install mkdocs`
+1. Install the [Material theme for MkDocs](https://squidfunk.github.io/mkdocs-material/): `pip install mkdocs-material`
 1. Run the server `mkdocs serve`
 
 ## Deploy
 
-1. `mkdocs build` will assemble HTML from the markdown files
-1. `mkdocs gh-deploy` builds HTML and pushes to GitHub's `gh-pages` branch
+1. Build the Docker image: `make build`
+1. Verify the image runs as expected: `make run`
+1. Push a new tag: `make tag`
 
 ### Docker Image
 
