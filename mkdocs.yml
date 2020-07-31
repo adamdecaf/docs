@@ -8,7 +8,7 @@ repo_name: moov-io/docs
 repo_url: https://github.com/moov-io/docs/
 
 # Copyright
-copyright: 'Copyright &copy; 2017 - 2019 Moov Authors'
+copyright: 'Copyright &copy; 2017 - 2020 Moov Authors'
 
 # Configuration
 theme:
@@ -22,12 +22,12 @@ theme:
   feature:
     tabs: true
   palette:
-    primary: pink
-    accent: indigo
+    primary: #6651A1
+    accent: #E44C35
   font:
     text: Roboto
     code: Roboto Mono
-  favicon: assets/images/favicon.ico
+  favicon: assets/images/favicon.svg
   logo:
     icon: "\uE80C"
 
