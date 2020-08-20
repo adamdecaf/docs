@@ -13,7 +13,7 @@ Moov projects are focused on solving a single responsibility capability in finan
 #### Supporting Services
 
 - [Moov ACH](https://github.com/moov-io/ach) (including Same Day ACH) implements a NACHA compliant RESTFul API for file creation, parsing, and validation. Supports generating and parsing all Standard Entry Class (SEC) codes. ACH is the primary method of electronic money movement throughout the United States.
-- [Moov Customers](./customers/) The Customers project focuses on solving authentic identification of humans who are legally able to hold and transfer currency within the US. Primarily this project solves Know Your Customer (KYC), Customer Identification Program (CIP), Office of Foreign Asset Control (OFAC) checks and verification workflows to comply with US federal law and ensure authentic transfers.
+- [Moov Customers](./customers/) The Customers project focuses on solving authentic identification of humans who are legally able to hold and transfer currency within the US. Primarily this project solves Know Your Customer (KYC), Customer Identification Program (CIP), Office of Foreign Assets Control (OFAC) checks and verification workflows to comply with US federal law and ensure authentic transfers.
 - [Moov Watchman](https://github.com/moov-io/watchman) is an HTTP API and Go library to download, parse and offer search functions over numerous trade sanction lists from the United States and European Union.
 - [Moov FED](https://github.com/moov-io/fed) implements utility services for searching the United States Federal Reserve System such as ABA routing numbers, Financial Institution name lookup and Fed Wire routing information.
 
