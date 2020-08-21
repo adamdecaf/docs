@@ -2,7 +2,7 @@ Moov uses the latest production level technologies to write and manage software.
 
 ## Operating System
 
-Moov offers two foramts for running services in production: Docker images or compiled binaries for Linux, macOS, and Windows. The supported versions of each OS are what is supported by Docker or Go and Moov makes no attempts to support older operating systems.
+Moov offers two formats for running services in production: Docker images or compiled binaries for Linux, macOS, and Windows. The supported versions of each OS are what is supported by Docker or Go and Moov makes no attempts to support older operating systems.
 
 ## Go
 
