@@ -1,4 +1,4 @@
-Moov uses the latest production level technologies to write and manage software. We believe in supporting Open Source and using the best tool for the task.
+Moov uses the latest production level technologies to write and manage software. We believe in supporting open source and using the best tool for the task.
 
 ## Operating System
 
@@ -6,7 +6,7 @@ Moov offers two formats for running services in production: Docker images or com
 
 ## Go
 
-Moov has previous experience with many programming languages and selected Go as our primary language for a few reasons.
+Moov's team has previous experience with many programming languages and selected Go as our primary language for a few reasons.
 
 - Large company and community support
     - Google has created this language and ran it in their production deployments for years
@@ -18,7 +18,7 @@ Moov has previous experience with many programming languages and selected Go as 
 
 ## Database
 
-Moov hosted services use MySQL as their primary database. This is a high-grade production system which supports replication, secure backups, high-availability, and fast queries.
+Moov's hosted services use MySQL as their primary database. This is a high-grade production system which supports replication, secure backups, high-availability, and fast queries.
 
 ### Secure Backups
 
@@ -26,4 +26,4 @@ Backup and restore of database contents is a critical component of production de
 
 ## Encryption
 
-Moov leverages encryption to protect Personally Identifiable Information (PII) data in our databases. This is not only required by various regulations but also a standard practice to protect our customers data against hackers. Our services use the popular [GoCloud.Dev](https://gocloud.dev/howto/secrets/) library to abstract over local NaCL secrets and various cloud providers (Google KMS, Amazon KMC, etc).
+Moov leverages encryption to protect Personally Identifiable Information (PII) data in our databases. This is not only required by various regulations but also a standard practice to protect our customers' data against hackers. Our services use the popular [GoCloud.Dev](https://gocloud.dev/howto/secrets/) library to abstract over local NaCL secrets and various cloud providers (Google KMS, Amazon KMC, etc).
